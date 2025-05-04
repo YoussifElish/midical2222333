@@ -1,0 +1,217 @@
+/* Home Page Specific Styles - Updated */
+
+.hero-section {
+  /* Use a gradient overlay + background image */
+  background: linear-gradient(rgba(53, 161, 163, 0.1), rgba(255, 255, 255, 0.3)), url("../../../../assets/images/hero-background-modern.jpg") no-repeat center center; /* Fixed image path */
+  background-size: cover;
+  min-height: 70vh; /* Adjust as needed */
+  padding: 5rem 0;
+  color: var(--bs-body-color); /* Default text color */
+}
+
+[data-bs-theme="dark"] .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url("../../../../assets/images/hero-background-modern.jpg") no-repeat center center; /* Fixed image path */
+    background-size: cover;
+    color: var(--bs-light); /* Light text on dark background */
+}
+
+.hero-section h1 {
+    color: var(--bs-heading-color);
+}
+
+.hero-section .highlight {
+  color: var(--bs-primary); /* Use Bootstrap primary color variable */
+}
+
+.hero-section .lead {
+    color: var(--bs-secondary-color);
+}
+
+.hero-doctor-img {
+    max-height: 500px; /* Adjust as needed */
+    object-fit: contain; /* Or cover, depending on image */
+}
+
+.search-bar-container {
+    /* Styles for the search bar block */
+    max-width: 700px; /* Limit width if needed */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-bar-container .input-group-text {
+    background-color: var(--bs-secondary-bg) !important; /* Consistent background */
+}
+
+.search-bar-container .form-control {
+    background-color: var(--bs-body-bg); /* Match page background */
+    box-shadow: none !important;
+}
+
+.search-bar-container .form-control:focus {
+    border-color: var(--bs-primary);
+}
+
+/* Quick Access Section */
+.quick-access-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--bs-border-color-translucent);
+    background-color: var(--bs-card-bg);
+    color: var(--bs-body-color);
+}
+
+.quick-access-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--bs-box-shadow-sm) !important;
+    color: var(--bs-primary);
+}
+
+.quick-access-item .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Specialties Section */
+.specialties-section h2,
+.featured-doctors h2,
+.how-it-works h2,
+.testimonials-section h2 {
+  color: var(--bs-heading-color);
+}
+
+.specialties-section p,
+.featured-doctors p,
+.how-it-works p,
+.testimonials-section p {
+  color: var(--bs-secondary-color);
+}
+
+.specialty-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-card-color);
+}
+
+.specialty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--bs-box-shadow);
+}
+
+.specialty-img-wrapper {
+    height: 180px; /* Fixed height for image container */
+    overflow: hidden;
+}
+
+.specialty-card .specialty-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.specialty-card:hover .specialty-img {
+    transform: scale(1.05);
+}
+
+.specialty-card .card-title {
+ color: var(--bs-heading-color);
+}
+
+.specialty-card .card-text {
+ color: var(--bs-secondary-color);
+}
+
+/* Featured Doctors */
+.doctor-card {
+    background-color: var(--bs-card-bg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--bs-box-shadow);
+}
+
+.doctor-card .doctor-img {
+    height: 220px;
+    object-fit: cover;
+}
+
+.doctor-card .card-title {
+    color: var(--bs-heading-color);
+}
+
+/* How it Works Section */
+.step-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-card-color);
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--bs-box-shadow);
+}
+
+.step-number-circle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bs-primary-bg-subtle);
+  color: var(--bs-primary);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 2px solid var(--bs-primary);
+}
+
+.step-card .icon-container {
+  color: var(--bs-primary);
+}
+
+.step-card h3 {
+  color: var(--bs-heading-color);
+}
+
+.step-card p {
+  color: var(--bs-secondary-color);
+}
+
+/* Testimonials Section */
+.testimonial-card {
+  min-height: 220px; /* Ensure cards have similar height */
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-card-color);
+}
+
+.testimonial-card .review-text {
+  color: var(--bs-secondary-color);
+}
+
+.testimonial-card .reviewer-name {
+  color: var(--bs-heading-color);
+}
+
+.testimonial-card .quote-icon {
+    opacity: 0.6;
+}
+
+/* Ensure Owl Carousel background is appropriate */
+/* [data-bs-theme="dark"] .owl-carousel .owl-stage-outer { */
+  /* Add background if needed, or ensure cards cover */
+/* } */
+
+/* Adjustments for bg-light replacement */
+.specialties-section,
+.how-it-works {
+  background-color: var(--bs-tertiary-bg);
+}
+
+

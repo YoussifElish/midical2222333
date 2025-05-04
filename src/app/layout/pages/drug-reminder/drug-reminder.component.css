@@ -1,0 +1,108 @@
+/* Drug Reminder Page Specific Styles - Updated */
+
+/* Use Bootstrap variables for consistency */
+.drug-reminder-container .card {
+    background-color: var(--bs-card-bg);
+    border: 1px solid var(--bs-border-color);
+}
+
+.drug-reminder-container .card-header {
+    /* Styles applied via Bootstrap classes (bg-primary, text-white) */
+}
+
+.drug-reminder-container h2 {
+    /* Style applied via Bootstrap class (h4) */
+}
+
+/* Search Section Styling */
+.search-section .form-label {
+    color: var(--bs-body-color);
+}
+
+.search-section .input-group .form-control {
+    /* Standard Bootstrap form control */
+}
+
+.search-section .input-group .input-group-text {
+    background-color: var(--bs-tertiary-bg);
+    border-color: var(--bs-border-color);
+    color: var(--bs-secondary-color);
+}
+
+.search-section .spinner-border {
+    color: var(--bs-primary);
+}
+
+/* Search Results List */
+.search-results-list {
+    /* Uses Bootstrap list-group styles */
+    max-height: 250px; /* Adjust as needed */
+    overflow-y: auto;
+    position: absolute; /* Position below input */
+    z-index: 1000; /* Ensure it's above other content */
+    width: calc(100% - 2rem); /* Match input width within card padding */
+    margin-top: -1px; /* Overlap border slightly */
+}
+
+.search-results-list .list-group-item {
+    /* Uses Bootstrap list-group-item styles */
+    cursor: pointer;
+}
+
+.search-results-list .list-group-item:hover {
+    background-color: var(--bs-list-group-hover-bg);
+}
+
+.search-results-list .drug-name {
+    color: var(--bs-list-group-color);
+}
+
+.search-results-list .drug-dosage {
+    color: var(--bs-secondary-color);
+}
+
+/* Reminder Form Section */
+.reminder-form-section h3 {
+  color: var(--bs-heading-color);
+}
+
+.reminder-form-section .btn-outline-secondary {
+    /* Standard Bootstrap button */
+}
+
+/* Form Styling */
+.reminder-form-section .form-floating > .form-control {
+    /* Standard Bootstrap floating label input */
+}
+
+.reminder-form-section .form-floating > label {
+    color: var(--bs-secondary-color);
+}
+
+/* Submit Button */
+.reminder-form-section .btn-success {
+  /* Standard Bootstrap success button */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* Status/Error Messages */
+.reminder-form-section .alert {
+    /* Standard Bootstrap alert styles */
+}
+
+/* Cursor pointer utility */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Remove old styles if they conflict */
+/* .drug-reminder-container { ... old styles ... } */
+/* .search-input { ... } */
+/* .search-icon { ... } */
+/* .loading-spinner { ... } */
+/* .result-item { ... } */
+/* .clear-button { ... } */
+/* .submit-button { ... } */
+/* .error-message { ... } */
+

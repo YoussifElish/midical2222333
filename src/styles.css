@@ -1,0 +1,231 @@
+/* Global Variables (Light Mode Defaults) */
+:root {
+  --bs-body-font-family: 'Encode Sans Expanded', sans-serif; /* Example font */
+
+  /* Light Theme Colors (Using Bootstrap 5.3+ CSS variables where possible) */
+  --bs-primary: #35A1A3; /* Existing teal */
+  --bs-primary-rgb: 53, 161, 163;
+  --bs-secondary: #6c757d; /* Default Bootstrap secondary */
+  --bs-secondary-rgb: 108, 117, 125;
+  --bs-light: #f8f9fa; /* Default Bootstrap light */
+  --bs-dark: #212529; /* Default Bootstrap dark */
+
+  --bs-body-color: #212529;
+  --bs-body-bg: #ffffff;
+  --bs-secondary-color: rgba(33, 37, 41, 0.75);
+  --bs-secondary-bg: #e9ecef;
+  --bs-tertiary-color: rgba(33, 37, 41, 0.5);
+  --bs-tertiary-bg: #f8f9fa;
+
+  --bs-border-color: #dee2e6;
+  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+
+  --bs-heading-color: inherit;
+  --bs-link-color: var(--bs-primary);
+  --bs-link-color-rgb: var(--bs-primary-rgb);
+  --bs-link-hover-color: color-mix(in srgb, var(--bs-primary) 80%, black);
+
+  --bs-code-color: #d63384;
+
+  /* Custom Variables (if needed beyond Bootstrap) */
+  --custom-highlight-color: var(--bs-primary);
+  --custom-footer-icon-color: var(--bs-primary);
+}
+
+/* Dark Mode Overrides (Leveraging Bootstrap's data-bs-theme="dark") */
+[data-bs-theme="dark"] {
+  /* Override Bootstrap dark theme variables for customization */
+  --bs-primary: #4fd1c5; /* Brighter teal for dark mode */
+  --bs-primary-rgb: 79, 209, 197;
+  --bs-secondary: #adb5bd;
+  --bs-secondary-rgb: 173, 181, 189;
+  --bs-light: #495057;
+  --bs-dark: #dee2e6;
+
+  --bs-body-color: #dee2e6; /* Light text */
+  --bs-body-bg: #1a202c; /* Dark blue-grey background */
+  --bs-secondary-color: rgba(222, 226, 230, 0.75);
+  --bs-secondary-bg: #343a40;
+  --bs-tertiary-color: rgba(222, 226, 230, 0.5);
+  --bs-tertiary-bg: #2c3034; /* Slightly lighter dark */
+
+  --bs-border-color: #495057; /* Darker grey border */
+  --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
+
+  --bs-heading-color: inherit;
+  --bs-link-color: var(--bs-primary);
+  --bs-link-color-rgb: var(--bs-primary-rgb);
+  --bs-link-hover-color: color-mix(in srgb, var(--bs-primary) 80%, white);
+
+  --bs-code-color: #f06595;
+
+  /* Custom Variable Overrides for Dark Mode */
+  --custom-highlight-color: var(--bs-primary);
+  --custom-footer-icon-color: var(--bs-primary);
+
+  /* Ensure specific elements inherit correctly */
+  color-scheme: dark;
+
+  .card {
+    --bs-card-bg: var(--bs-tertiary-bg);
+    --bs-card-border-color: var(--bs-border-color);
+    --bs-card-color: var(--bs-body-color);
+  }
+
+  .form-control,
+  .form-select {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+  }
+
+  .form-control::placeholder {
+    color: var(--bs-tertiary-color);
+  }
+
+  .btn-primary {
+    --bs-btn-color: #000;
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 90%, white);
+    --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 90%, white);
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: color-mix(in srgb, var(--bs-primary) 80%, white);
+    --bs-btn-active-border-color: color-mix(in srgb, var(--bs-primary) 80%, white);
+  }
+
+  .btn-outline-primary {
+      --bs-btn-color: var(--bs-primary);
+      --bs-btn-border-color: var(--bs-primary);
+      --bs-btn-hover-color: #000;
+      --bs-btn-hover-bg: var(--bs-primary);
+      --bs-btn-hover-border-color: var(--bs-primary);
+      --bs-btn-active-color: #000;
+      --bs-btn-active-bg: var(--bs-primary);
+      --bs-btn-active-border-color: var(--bs-primary);
+  }
+
+  .alert-danger {
+      --bs-alert-color: #f1aeb5;
+      --bs-alert-bg: #58151c;
+      --bs-alert-border-color: #a12d3b;
+  }
+  .alert-success {
+      --bs-alert-color: #a3cfbb;
+      --bs-alert-bg: #14482d;
+      --bs-alert-border-color: #297d4f;
+  }
+
+  .nav-tabs .nav-link {
+      color: var(--bs-secondary-color);
+      border-bottom-color: transparent;
+  }
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-link:hover {
+      color: var(--bs-primary);
+      border-bottom-color: var(--bs-primary);
+      background-color: transparent;
+  }
+
+  .list-group-item {
+      background-color: var(--bs-tertiary-bg);
+      border-color: var(--bs-border-color);
+  }
+
+  /* Footer specific adjustments if needed */
+  footer {
+    background-color: var(--bs-tertiary-bg);
+    border-top: 1px solid var(--bs-border-color);
+  }
+
+  footer a {
+    color: var(--bs-body-color);
+  }
+
+  footer a:hover {
+    color: var(--bs-primary);
+  }
+
+  footer .h5 {
+    color: var(--bs-heading-color);
+  }
+
+  footer .social-links i,
+  footer .contact-info i {
+    color: var(--custom-footer-icon-color);
+  }
+
+  footer .social-links i:hover,
+  footer .contact-info i:hover {
+    color: color-mix(in srgb, var(--custom-footer-icon-color) 80%, white);
+  }
+
+}
+
+/* Apply base background and text color */
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: var(--bs-body-font-family);
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Keep existing color utility classes if needed, but prefer Bootstrap classes */
+.color-1 {
+  color: var(--custom-footer-icon-color);
+}
+.color-2 {
+  color: var(--bs-primary); /* Or a specific heading color variable */
+}
+.color-3 {
+  color: var(--bs-secondary-color);
+}
+.color-4 {
+  color: var(--bs-primary); /* Or a specific card title color variable */
+}
+
+/* Dark mode toggle icon styling */
+.dark-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-secondary-color);
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s, background-color 0.3s, color 0.3s;
+  border: 1px solid var(--bs-border-color);
+}
+
+.dark-icon:hover {
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-body-color);
+  transform: scale(1.1);
+}
+
+.dark-icon i {
+  font-size: 25px;
+}
+
+/* Ensure html has height for sticky footer if needed */
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
+/* Add any other global styles below */
+

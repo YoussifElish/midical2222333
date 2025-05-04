@@ -1,0 +1,116 @@
+/* Doctor Search Page Specific Styles - Updated */
+
+.doctor-search-page {
+    /* Add overall page padding if needed */
+}
+
+.page-header h1 {
+    color: var(--bs-heading-color);
+}
+
+.page-header p {
+    color: var(--bs-secondary-color);
+}
+
+.search-filter-bar .card {
+    background-color: var(--bs-card-bg);
+    border: 1px solid var(--bs-border-color);
+}
+
+.search-filter-bar .form-label {
+    color: var(--bs-secondary-color);
+}
+
+.search-filter-bar .input-group .form-control,
+.search-filter-bar .input-group .form-select {
+    /* Standard Bootstrap styles */
+}
+
+.search-filter-bar .input-group .input-group-text {
+    background-color: var(--bs-tertiary-bg);
+    border-color: var(--bs-border-color);
+    color: var(--bs-secondary-color);
+}
+
+.search-filter-bar .btn-primary {
+    /* Standard Bootstrap button */
+}
+
+.doctor-card {
+  /* Card takes full height via d-flex align-items-stretch on col */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--bs-box-shadow-lg) !important;
+}
+
+.doctor-image {
+  object-fit: cover;
+  /* Height is controlled by row/col structure */
+}
+
+.doctor-card .card-body {
+  padding: 1rem; /* Adjust padding as needed */
+}
+
+.doctor-card .card-title {
+  color: var(--bs-heading-color);
+}
+
+.doctor-card .text-primary {
+  color: var(--bs-primary-text-emphasis) !important;
+}
+
+.doctor-card .text-muted {
+  color: var(--bs-secondary-color) !important;
+}
+
+.rating {
+  line-height: 1;
+}
+
+.rating .fa-star,
+.rating .fa-star-half-alt {
+  color: var(--bs-warning);
+}
+
+.rating .text-muted {
+  font-size: 0.85em;
+}
+
+.doctor-card .btn-primary {
+  font-size: 0.85rem; /* Smaller button text */
+  padding: 0.4rem 0.8rem; /* Adjust padding */
+}
+
+/* Loading spinner and text use theme colors */
+.loading-container .spinner-border {
+  /* Styles applied inline or via Bootstrap classes */
+}
+
+.loading-container p {
+  color: var(--bs-secondary-color);
+}
+
+/* Alert messages use theme colors */
+.alert-danger,
+.alert-info {
+  /* Uses Bootstrap variables defined in styles.css or Bootstrap defaults */
+}
+
+/* Ensure image takes full height in the column */
+@media (min-width: 576px) {
+    .doctor-card .doctor-image {
+        border-top-left-radius: var(--bs-card-inner-border-radius);
+        border-bottom-left-radius: var(--bs-card-inner-border-radius);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+/* Remove old styles if they conflict */
+

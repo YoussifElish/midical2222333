@@ -1,0 +1,37 @@
+/* Signup Info Page Specific Styles - Updated */
+
+/* Inherits general .auth-section styles from login/signup */
+
+.role-card {
+    background-color: var(--bs-body-bg); /* Use body background for contrast */
+    border: 1px solid var(--bs-border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.role-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--bs-box-shadow);
+    border-color: var(--bs-primary);
+}
+
+.role-card .icon-wrapper {
+    /* Icons already have color */
+}
+
+.role-card h5 {
+    color: var(--bs-heading-color);
+}
+
+.role-card p {
+    color: var(--bs-secondary-color);
+}
+
+/* Ensure buttons inside cards are visible */
+.role-card .btn {
+    /* Styles are applied directly */
+}
+
+/* Remove old styles if they conflict */
+/* #Signupinfo { ... } */
+/* .buttoncolor { ... } */
+

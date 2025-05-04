@@ -1,0 +1,102 @@
+ 
+
+nav {
+    z-index: 1000;
+ }
+ 
+ a{
+   color: var(--nav-links-color);
+ }
+  .navIcon{
+   background-image: url("./../../../../assets/logo.png");
+ background-size: cover;
+ height: 40px;
+ width:95px;
+  }
+  
+ @media (max-width: 649px) {
+   .search-icon{
+     right: 170px;
+   }
+ }
+ 
+ @media (max-width: 578px){
+   .search-icon{
+     right: 130px;
+   }
+ }  
+  
+ 
+ .navcolor{
+   background-color: hsla(180, 54%, 16%, 0.854) ;
+   backdrop-filter: blur(50px);
+  }
+  .NavLinkColor{
+   color: white;
+   transition: all 2s ;
+ 
+  }
+  .NavLinkColor :hover{
+   color:  hsla(180, 54%, 16%, 0.854);
+   background-color: white;
+  }
+  .activeLink{
+   color:  hsla(180, 54%, 16%, 0.854); }
+ 
+ 
+ 
+   /* ------------- */
+   .pure-moving-border {
+     background-color: transparent;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+  
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Moving animated border */
+  .pure-moving-border::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border: 2px solid white;
+    border-radius: 10px;
+    z-index: -1;
+    animation: dashmove 4s linear infinite;
+    mask-image: linear-gradient(90deg, transparent 0%, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 50%, transparent 100%);
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover Effects */
+  .pure-moving-border:hover {
+    transform: scale(1.05); /* يكبر بسيط */
+    box-shadow: 0 0 15px white; /* يلمع حوالين الزرار */
+  }
+  
+  /* Speed up animation on hover */
+  .pure-moving-border:hover::before {
+    animation-duration: 2s; /* خلي الدوران أسرع */
+    background-color: var(--works-text-color );
+  }
+  
+  /* Animation Keyframes */
+  @keyframes dashmove {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
+  

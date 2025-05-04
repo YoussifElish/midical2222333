@@ -1,0 +1,61 @@
+/* Drug Details Page Specific Styles - Updated */
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 0.9rem;
+}
+.breadcrumb-item a {
+  text-decoration: none;
+  color: var(--bs-primary);
+}
+.breadcrumb-item.active {
+  color: var(--bs-secondary-color);
+}
+
+/* Drug Detail Image */
+.drug-detail-image {
+  width: 100%;
+  max-height: 350px; /* Limit image height */
+  object-fit: contain; /* Show the whole image */
+  background-color: var(--bs-tertiary-bg); /* Light background */
+  padding: 1rem;
+  border-bottom: 1px solid var(--bs-border-color-translucent);
+}
+
+/* Left Column Card */
+.sticky-top .card {
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+/* Right Column Sections */
+.col-lg-8 section h5 {
+  color: var(--bs-heading-color);
+  font-size: 1.1rem;
+}
+
+.col-lg-8 section h5 i {
+  width: 20px; /* Ensure icons align */
+}
+
+.col-lg-8 section p {
+  color: var(--bs-secondary-color);
+}
+
+/* Loading and Error States */
+.loading-container .spinner-border {
+  color: var(--bs-primary);
+}
+
+.loading-container p {
+  color: var(--bs-secondary-color);
+}
+
+/* Ensure icons have consistent width */
+.fa-file-lines,
+.fa-triangle-exclamation,
+.fa-notes-medical,
+.fa-prescription-bottle-medical {
+  width: 1.2em; /* Adjust as needed for alignment */
+  text-align: center;
+}
+

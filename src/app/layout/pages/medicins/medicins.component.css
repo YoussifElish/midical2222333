@@ -1,0 +1,106 @@
+/* Medicines Page Specific Styles - Updated */
+
+/* Header Section */
+.header-section h1 {
+  color: var(--bs-heading-color);
+}
+
+.header-section .lead {
+  color: var(--bs-secondary-color);
+}
+
+.header-section .input-group-text {
+  border-right: 0;
+}
+
+.header-section .form-control {
+  border-left: 0;
+}
+
+/* Drug Card Styling */
+.drug-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+.drug-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--bs-box-shadow-lg) !important;
+}
+
+.drug-image-link {
+  display: block;
+  background-color: var(--bs-tertiary-bg); /* Light background for image area */
+  padding: 0.5rem;
+}
+
+.drug-image {
+  height: 180px; /* Adjust height as needed */
+  width: 100%;
+  object-fit: contain; /* Use contain to show the whole image */
+  transition: transform 0.3s ease;
+}
+
+.drug-card:hover .drug-image {
+  transform: scale(1.05);
+}
+
+.drug-name a {
+  color: var(--bs-heading-color);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.drug-name a:hover {
+  color: var(--bs-primary);
+}
+
+.drug-description {
+  color: var(--bs-secondary-color);
+  line-height: 1.5;
+}
+
+/* Pagination Styling (Keep existing or use global styles) */
+.pagination .page-link {
+  color: var(--bs-primary);
+  background-color: var(--bs-pagination-bg);
+  border-color: var(--bs-pagination-border-color);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pagination .page-link:hover {
+  color: var(--bs-pagination-hover-color);
+  background-color: var(--bs-pagination-hover-bg);
+  border-color: var(--bs-pagination-hover-border-color);
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--bs-pagination-disabled-color);
+  background-color: var(--bs-pagination-disabled-bg);
+  border-color: var(--bs-pagination-disabled-border-color);
+}
+
+.pagination .page-item.active .page-link {
+  color: var(--bs-pagination-active-color);
+  background-color: var(--bs-pagination-active-bg);
+  border-color: var(--bs-pagination-active-border-color);
+  font-weight: bold;
+}
+
+/* Loading and No Drugs Styling (Keep existing) */
+.loading-container .spinner-border,
+.no-drugs-container i {
+  color: var(--bs-primary);
+}
+
+.loading-container p,
+.no-drugs-container p {
+  color: var(--bs-secondary-color);
+}
+
+/* Default Medicine Image Placeholder */
+img[src="assets/images/default-medicine.jpg"] {
+  /* Optional: Add specific styling for the placeholder */
+  background-color: var(--bs-secondary-bg);
+}
+

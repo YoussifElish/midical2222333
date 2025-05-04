@@ -1,0 +1,70 @@
+/* Login Page Specific Styles - Updated */
+
+.auth-section {
+  /* Use a subtle gradient or a clean background color */
+  background-color: var(--bs-tertiary-bg); /* Light grey background */
+  /* Or a subtle gradient:
+  background-image: linear-gradient(to bottom right, var(--bs-primary-bg-subtle), var(--bs-light));
+  */
+  min-height: calc(100vh - 100px); /* Adjust based on navbar/footer height if they are fixed */
+}
+
+[data-bs-theme="dark"] .auth-section {
+    background-color: var(--bs-body-bg); /* Dark background */
+}
+
+.auth-section .card {
+    background-color: var(--bs-card-bg);
+    border: 1px solid var(--bs-border-color-translucent);
+}
+
+.auth-section .card-body {
+    /* Add sufficient padding */
+}
+
+.auth-section h3 {
+    color: var(--bs-heading-color);
+}
+
+.auth-section .form-control {
+  /* Use standard Bootstrap form control styling, potentially customize border-radius */
+  border-radius: var(--bs-border-radius); /* Standard radius */
+}
+
+.auth-section .form-control:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+.auth-section .form-floating > label {
+    /* Ensure label color is appropriate */
+    color: var(--bs-secondary-color);
+}
+
+.auth-section .form-floating > .form-control:focus ~ label,
+.auth-section .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    /* Adjust focused/filled label style if needed */
+    opacity: .65;
+    transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+}
+
+.auth-section .btn-primary {
+  /* Use standard Bootstrap primary button styling */
+  /* Customize padding or font-weight if desired */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.auth-section .text-muted a {
+    color: var(--bs-primary);
+}
+
+.auth-section .text-muted a:hover {
+    text-decoration: underline !important;
+}
+
+/* Remove old styles if they conflict */
+/* .LoginSection { ... } */
+/* .custom-card { ... } */
+/* .btn-custom { ... } */
+

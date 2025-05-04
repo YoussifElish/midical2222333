@@ -1,0 +1,28 @@
+/* Unauthorized/Error Page Styles */
+
+.error-page {
+    min-height: calc(100vh - 150px); /* Adjust based on header/footer height */
+    background-color: var(--bs-body-bg);
+}
+
+.error-content h1 {
+    font-size: 3rem; /* Adjust as needed */
+    color: var(--bs-danger);
+}
+
+[data-bs-theme="dark"] .error-content h1 {
+     color: var(--bs-danger-text-emphasis);
+}
+
+.error-content .lead {
+    color: var(--bs-secondary-color);
+}
+
+.error-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Specific for Unauthorized */
+/* No specific styles needed beyond general error page styles for now */
+

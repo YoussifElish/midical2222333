@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <h2>Add New Article</h2>
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+
+    <!-- Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" id="title" class="form-control" formControlName="title"
+             [ngClass]="{ 'is-invalid': articleForm.get('title')?.invalid && articleForm.get('title')?.touched }">
+      <div *ngIf="articleForm.get('title')?.invalid && articleForm.get('title')?.touched" class="invalid-feedback">
+        Title is required.
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="mb-3">
+      <label for="summary" class="form-label">Summary</label>
+      <textarea id="summary" class="form-control" formControlName="summary" rows="3"
+                [ngClass]="{ 'is-invalid': articleForm.get('summary')?.invalid && articleForm.get('summary')?.touched }"></textarea>
+      <div *ngIf="articleForm.get('summary')?.invalid && articleForm.get('summary')?.touched" class="invalid-feedback">
+        Summary is required.
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" class="form-select" formControlName="category"
+              [ngClass]="{ 'is-invalid': articleForm.get('category')?.invalid && articleForm.get('category')?.touched }">
+        <option [ngValue]="null" disabled>Select a category</option>
+        <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+      </select>
+      <div *ngIf="articleForm.get('category')?.invalid && articleForm.get('category')?.touched" class="invalid-feedback">
+        Category is required.
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="mb-3">
+      <label for="tags" class="form-label">Tags (comma-separated)</label>
+      <input type="text" id="tags" class="form-control" formControlName="tags">
+      <div *ngIf="articleForm.get('tags')?.invalid && articleForm.get('tags')?.touched" class="invalid-feedback">
+        Tags is required.
+      </div>
+    </div>
+
+    <!-- Content (TinyMCE Integrated) -->
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <editor
+        formControlName="content"
+        [init]="tinymceConfig"
+      ></editor>
+      <div *ngIf="articleForm.get('content')?.invalid && articleForm.get('content')?.touched" class="text-danger small">
+        Content is required.
+      </div>
+    </div>
+
+    <!-- Image Upload -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Cover Image</label>
+      <input type="file" id="image" class="form-control" (change)="onFileSelected($event)" accept="image/*"
+             [ngClass]="{ 'is-invalid': articleForm.get('image')?.invalid && articleForm.get('image')?.touched }">
+      <div *ngIf="articleForm.get('image')?.invalid && articleForm.get('image')?.touched" class="invalid-feedback">
+        Cover image is required.
+      </div>
+      <!-- Optional: Image preview -->
+      <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Image Preview" class="img-thumbnail mt-2" style="max-height: 200px;">
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2" [disabled]="articleForm.invalid">Submit Article</button>
+  </form>
+</div>

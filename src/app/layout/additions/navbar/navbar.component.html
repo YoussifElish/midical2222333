@@ -1,0 +1,207 @@
+<nav class="navbar navbar-expand-lg px-4 px-lg-5 py-3 position-sticky top-0 end-0 start-0 shadow-sm bg-white" [ngClass]="darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'">
+  <div class="container-fluid">
+    <!-- Brand Logo -->
+    <a class="navbar-brand d-flex align-items-center me-lg-4" routerLink="/home">
+      <!-- Use a slightly larger logo if available, or adjust styling -->
+      <img src="assets/logo.png" alt="CureFusion Logo" height="35">
+      <!-- Optional: Keep or remove the text name based on desired look -->
+      <!-- <span class="ms-2 fw-bold fs-5 d-none d-sm-inline">CureFusion</span> -->
+    </a>
+
+    <!-- Navbar Toggler -->
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- Main Navigation Links (Visible when logged in) -->
+      <ul *ngIf="isLogin" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/doctors" routerLinkActive="active">Find Doctors</a>
+        </li>
+
+        <!-- Medication Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="medicationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Medication
+          </a>
+          <ul class="dropdown-menu shadow-sm border-0 mt-lg-2" aria-labelledby="medicationDropdown">
+            <li><a class="dropdown-item" routerLink="/Medicines" routerLinkActive="active">Medicine Encyclopedia</a></li>
+            <li><a class="dropdown-item" routerLink="/drug-reminder" routerLinkActive="active">Drug Reminder</a></li>
+             <li *ngIf="userRole === 'Patient'"><a class="dropdown-item" routerLink="/Add-drug" routerLinkActive="active">Add My Drug</a></li>
+          </ul>
+        </li>
+
+        <!-- Resources Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Resources
+          </a>
+          <ul class="dropdown-menu shadow-sm border-0 mt-lg-2" aria-labelledby="resourcesDropdown">
+            <li><a class="dropdown-item" routerLink="/article" routerLinkActive="active">Health Articles</a></li>
+             <li *ngIf="userRole === 'Doctor'"><a class="dropdown-item" routerLink="/article/add" routerLinkActive="active">Add Article</a></li>
+            <li><a class="dropdown-item" routerLink="/Research" routerLinkActive="active">Medical Research</a></li>
+          </ul>
+        </li>
+
+        <!-- More Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            More
+          </a>
+          <ul class="dropdown-menu shadow-sm border-0 mt-lg-2" aria-labelledby="moreDropdown">
+            <li><a class="dropdown-item" routerLink="/Careers" routerLinkActive="active">Careers</a></li>
+            <li><a class="dropdown-item" routerLink="/Contact_Us" routerLinkActive="active">Contact Us</a></li>
+            <li><a class="dropdown-item" routerLink="/Commitment" routerLinkActive="active">Our Commitment</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Spacer for logged-in users to push profile to the right -->
+      <div *ngIf="isLogin" class="flex-grow-1"></div>
+
+      <!-- Login/Signup Buttons (Visible when logged out) -->
+      <div class="d-flex align-items-center ms-lg-auto" *ngIf="!isLogin">
+         <a class="nav-link me-3" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+         <a class="nav-link me-3" routerLink="/doctors" routerLinkActive="active">Find Doctors</a>
+         <a class="nav-link me-3" routerLink="/article" routerLinkActive="active">Articles</a>
+        <a class="btn btn-outline-primary rounded-pill me-2 px-3 py-1" routerLink="/login">Login</a>
+        <a class="btn btn-primary rounded-pill px-3 py-1" routerLink="/signupinfo">Sign Up</a>
+      </div>
+
+      <!-- Profile Dropdown (Visible when logged in) -->
+      <div class="nav-item dropdown" *ngIf="isLogin">
+        <a
+          class="nav-link dropdown-toggle d-flex align-items-center"
+          href="#"
+          id="profileDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            [src]="profileImageUrl || 'assets/images/default-avatar.svg'"
+            alt="Profile"
+            class="profile-icon rounded-circle me-2"
+            onerror="this.src='assets/images/default-avatar.svg'"
+          />
+          <span class="d-none d-lg-inline fw-medium">
+            {{ userFullName ? (userFullName.length > 15 ? (userFullName | slice:0:15) + '...' : userFullName) : 'Account' }}
+          </span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-lg-2" aria-labelledby="profileDropdown">
+          <li><h6 class="dropdown-header text-muted small">{{ userFullName || 'User Account' }}</h6></li>
+          <li><a class="dropdown-item" routerLink="/profile" routerLinkActive="active"><i class="fas fa-user-circle fa-fw me-2 text-muted"></i>Profile</a></li>
+          <!-- Add other relevant links like Settings, Appointments based on role -->
+          <li *ngIf="userRole === 'Patient'"><a class="dropdown-item" routerLink="/patient-appointment/{{userId}}"><i class="fas fa-calendar-check fa-fw me-2 text-muted"></i>My Appointments</a></li>
+           <li *ngIf="userRole === 'Doctor'"><a class="dropdown-item" routerLink="/doctor-appointments/{{userId}}"><i class="fas fa-calendar-alt fa-fw me-2 text-muted"></i>Appointments</a></li>
+          <li><hr class="dropdown-divider my-1"></li>
+          <li><button class="dropdown-item text-danger" (click)="logout()"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</button></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Add Custom CSS for Navbar -->
+<style>
+  .navbar {
+    z-index: 1030; /* Ensure navbar stays on top */
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    /* Add subtle transition */
+  }
+  .navbar-brand img {
+    height: 35px; /* Slightly larger logo */
+  }
+  .nav-item {
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+  }
+  .nav-link {
+    /* Use Bootstrap's variable or a custom one */
+    color: var(--bs-nav-link-color, var(--bs-secondary-color));
+    font-weight: 500;
+    padding: 0.6rem 0.9rem; /* Adjust padding */
+    border-radius: var(--bs-border-radius-pill); /* Rounded effect on hover */
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--bs-primary); /* Primary color on hover/active */
+    background-color: var(--bs-tertiary-bg); /* Subtle background on hover/active */
+  }
+
+  /* Style dropdown toggle to match other links */
+  .dropdown-toggle::after {
+      margin-left: 0.4em; /* Space out the arrow */
+  }
+
+  .dropdown-menu {
+    font-size: 0.95rem;
+    border-radius: var(--bs-border-radius-lg); /* Softer corners */
+    margin-top: 0.5rem; /* Add space between nav and dropdown */
+  }
+  .dropdown-item {
+     padding: 0.6rem 1.2rem; /* More padding */
+     transition: background-color 0.2s ease, color 0.2s ease;
+     color: var(--bs-body-color);
+  }
+  .dropdown-item i {
+    width: 1.3em; /* Align icons */
+    color: var(--bs-secondary-color);
+    transition: color 0.2s ease;
+  }
+   .dropdown-item:hover, .dropdown-item:focus {
+     background-color: var(--bs-tertiary-bg);
+     color: var(--bs-primary);
+   }
+   .dropdown-item:hover i, .dropdown-item:focus i {
+       color: var(--bs-primary);
+   }
+   .dropdown-item:active {
+     background-color: var(--bs-secondary-bg);
+     color: var(--bs-body-color);
+   }
+   .dropdown-item.active {
+       font-weight: 600;
+       color: var(--bs-primary);
+       background-color: transparent; /* Avoid double background */
+   }
+
+  .profile-icon {
+    width: 36px; /* Slightly larger profile icon */
+    height: 36px;
+    object-fit: cover;
+    border: 1px solid var(--bs-border-color);
+  }
+
+  /* Ensure dropdown menu aligns well on smaller screens if needed */
+  @media (max-width: 991.98px) {
+    .navbar-nav .nav-link {
+        padding: 0.8rem 1rem;
+        border-radius: var(--bs-border-radius);
+    }
+    .dropdown-menu {
+        margin-top: 0.25rem;
+        box-shadow: none;
+        border: 1px solid var(--bs-border-color-translucent);
+    }
+    .nav-link.active {
+        background-color: var(--bs-secondary-bg);
+    }
+  }
+
+  /* Style for login/signup buttons when logged out */
+  .navbar .btn {
+      font-weight: 500;
+      font-size: 0.9rem;
+  }
+
+</style>
+

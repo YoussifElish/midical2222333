@@ -1,0 +1,75 @@
+<section class="auth-section d-flex align-items-center justify-content-center py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7 col-sm-9">
+        <div class="card shadow-lg border-0 rounded-lg overflow-hidden" data-aos="fade-up">
+          <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+              <a class="navbar-brand d-inline-block mb-3" routerLink="/home">
+                 <img src="assets/logo.png" alt="CureFusion Logo" height="35">
+              </a>
+              <h3 class="fw-bold mb-1">Welcome Back!</h3>
+              <p class="text-muted small">Login to access your account.</p>
+            </div>
+
+            <form [formGroup]="loginform" (ngSubmit)="submitlogin()">
+              <!-- Error Message -->
+              <div *ngIf="errmsg" class="alert alert-danger d-flex align-items-center p-2 small mb-3" role="alert">
+                 <i class="fas fa-exclamation-triangle me-2"></i>
+                 <div>{{ errmsg }}</div>
+              </div>
+
+              <!-- Email Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email Address" [ngClass]="{'is-invalid': loginform.get('email')?.invalid && loginform.get('email')?.touched}"/>
+                <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
+                <div *ngIf="loginform.get('email')?.invalid && loginform.get('email')?.touched" class="invalid-feedback small">
+                  <span *ngIf="loginform.get('email')?.errors?.['required']">Email is required.</span>
+                  <span *ngIf="loginform.get('email')?.errors?.['email']">Please enter a valid email address.</span>
+                </div>
+              </div>
+
+              <!-- Password Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" [ngClass]="{'is-invalid': loginform.get('password')?.invalid && loginform.get('password')?.touched}"/>
+                <label for="password"><i class="fas fa-lock me-2 text-muted"></i> Password</label>
+                 <div *ngIf="loginform.get('password')?.invalid && loginform.get('password')?.touched" class="invalid-feedback small">
+                  <span *ngIf="loginform.get('password')?.errors?.['required']">Password is required.</span>
+                  <span *ngIf="loginform.get('password')?.errors?.['pattern']">
+                    Password needs 8+ chars, upper/lower case, number, symbol.
+                  </span>
+                </div>
+              </div>
+
+              <!-- Forgot Password Link -->
+              <div class="text-end mb-3">
+                  <a routerLink="/ForgotPassword" class="text-muted small text-decoration-none">Forgot Password?</a>
+              </div>
+
+              <!-- Submit Button -->
+              <button [disabled]="loginform.invalid || spinner" class="btn btn-primary btn-lg w-100 rounded-pill">
+                <span *ngIf="spinner" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span *ngIf="spinner">Logging in...</span>
+                <span *ngIf="!spinner">Login</span>
+              </button>
+            </form>
+
+            <!-- Sign Up Link -->
+            <div class="text-center mt-4">
+              <p class="text-muted small mb-0">
+                Don't have an account?
+                <a routerLink="/signupinfo" class="fw-medium text-decoration-none ms-1">Sign Up Now</a>
+              </p>
+               <p class="text-muted small mt-2">
+                Are you a Doctor?
+                <a routerLink="/doctorlogin" class="fw-medium text-decoration-none ms-1">Login Here</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

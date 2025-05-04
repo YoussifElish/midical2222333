@@ -1,0 +1,146 @@
+<div class="container py-5">
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb bg-light p-2 rounded-3">
+      <li class="breadcrumb-item"><a routerLink="/home" class="text-primary">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/article" class="text-primary">Articles</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ (article$ | async)?.title || 'Article Details' }}</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <!-- Main Content: Article Details -->
+    <div class="col-lg-8">
+      <div *ngIf="article$ | async as article; else loadingOrError" class="article-detail-content card shadow-sm border-0 p-4">
+        <!-- Action Buttons (Back, Edit, Delete) -->
+        <div class="mb-4 d-flex justify-content-between align-items-center">
+          <a routerLink="/article" class="btn btn-outline-primary btn-sm"><i class="fas fa-arrow-left me-1"></i> Back to Articles</a>
+          <div *ngIf="canEditDelete$ | async">
+            <a [routerLink]="['/article/edit', articleId]" class="btn btn-outline-primary btn-sm me-2"><i class="fas fa-pencil-alt me-1"></i> Edit</a>
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteArticle()"><i class="fas fa-trash-alt me-1"></i> Delete</button>
+          </div>
+        </div>
+
+        <!-- Article Header -->
+        <header class="mb-4">
+          <h1 class="article-title mb-3">{{ article.title }}</h1>
+          <hr class="my-3 w-25 border-primary">
+          <!-- Metadata -->
+          <div class="blog-meta d-flex align-items-center text-muted small mb-3">
+            <span *ngIf="article.category !== undefined" class="me-3">
+              <span class="badge bg-primary">{{ getCategoryName(article.category) }}</span>
+            </span>
+            <span *ngIf="article.createdAt" class="me-3">
+              <i class="fas fa-calendar-alt me-1"></i> {{ article.createdAt | date:'mediumDate' }}
+            </span>
+            <span *ngIf="article.authorName">
+              <i class="fas fa-user me-1"></i> By {{ article.authorName }}
+            </span>
+          </div>
+        </header>
+
+        <!-- Article Image -->
+        <div *ngIf="article.imageUrl" class="mb-4 article-image-container text-center">
+          <img [src]="article.imageUrl" class="img-fluid rounded-3 shadow-sm article-image" [alt]="article.title">
+        </div>
+
+        <!-- Article Content -->
+        <section class="article-body">{{ article.content }}</section>
+
+        <!-- Tags -->
+        <div *ngIf="article.tags && article.tags.length > 0" class="mt-4 pt-3 border-top tag-cloud">
+          <h6 class="small text-muted mb-2">Tags:</h6>
+          <span *ngFor="let tag of article.tags" class="tag-link badge bg-primary me-1">{{ tag }}</span>
+        </div>
+
+        <!-- About Author -->
+        <div *ngIf="article.authorName" class="mt-5 p-4 rounded-3 bg-light shadow-sm">
+          <h5 class="mb-3 text-primary">About the Author</h5>
+          <div class="d-flex align-items-center">
+            <img src="assets/images/default-avatar.png" [alt]="article.authorName" class="rounded-circle me-3 author-avatar">
+            <div>
+              <h6 class="fw-bold mb-0">{{ article.authorName }}</h6>
+              <p class="small text-muted mb-0">Author bio information will be displayed here.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comments Section Placeholder -->
+        <div class="mt-5">
+          <h4 class="mb-4 text-primary">Comments</h4>
+          <div class="card p-3 text-muted">Comments functionality will be added here.</div>
+        </div>
+      </div>
+
+      <!-- Loading/Error State -->
+      <ng-template #loadingOrError>
+        <div *ngIf="!(article$ | async); else errorState" class="text-center py-5">
+          <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-3 text-body-secondary">Loading article details...</p>
+        </div>
+        <ng-template #errorState>
+          <div class="alert alert-danger text-center">
+            <i class="fas fa-exclamation-triangle me-2"></i> Failed to load article details. Please try again later.
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <aside class="sidebar sticky-top" style="top: 20px;">
+        <!-- Search Widget -->
+        <div class="widget search-widget card shadow-sm border-0 mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="h6 mb-0">Search</h5>
+          </div>
+          <div class="card-body">
+            <div class="input-group">
+              <input type="text" class="form-control form-control-sm" placeholder="Search articles..." #searchInput>
+              <button class="btn btn-primary btn-sm" type="button" disabled><i class="fas fa-magnifying-glass"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Widget -->
+        <div class="widget categories-widget card shadow-sm border-0 mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="h6 mb-0">Categories</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0 border-0 category-item">
+                <a href="javascript:void(0)" class="text-decoration-none text-primary">All Categories</a>
+              </li>
+              <li *ngFor="let category of ArticleCategory | keyvalue" class="list-group-item d-flex justify-content-between align-items-center px-0 border-0 category-item">
+                <a href="javascript:void(0)" class="text-decoration-none text-primary">{{ category.value }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tags Widget -->
+        <div class="widget tags-widget card shadow-sm border-0 mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="h6 mb-0">Tags</h5>
+          </div>
+          <div class="card-body tag-cloud">
+            <p class="text-muted small">Popular tags will be displayed here.</p>
+          </div>
+        </div>
+
+        <!-- Latest News Widget -->
+        <div class="widget latest-news-widget card shadow-sm border-0 mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="h6 mb-0">Latest News</h5>
+          </div>
+          <div class="card-body">
+            <p class="text-muted small">Latest news functionality to be added.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+
+.contact-cover{
+    background-image:url(./../../../../assets/images/contact-image.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+     padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* ---------------- */
+ #Appointment2 p::after{
+    content: "";
+    animation: header-animation;
+    animation-duration:9s;
+    animation-iteration-count: infinite;
+    
+  }
+  .word2{
+    color: white;
+    font-family: "Encode Sans Expanded", sans-serif;
+    font-weight: 200;
+    font-size: xx-large;
+    font-style: normal;
+  }
+@keyframes header-animation {
+    1% { content: "|"; }
+    2% { content: "C|"; }
+    3% { content: "Co|"; }
+    4% { content: "Con|"; }
+    5% { content: "Cont|"; }
+    6% { content: "Conta|"; }
+    7% { content: "Contac|"; }
+    8% { content: "Contact|"; }
+    9% { content: "Contact |"; }
+    10% { content: "Contact W|"; }
+    11% { content: "Contact Wi|"; }
+    12% { content: "Contact Wit|"; }
+    13% { content: "Contact With|"; }
+    14% { content: "Contact With |"; }
+    15% { content: "Contact With U|"; }
+    16% { content: "Contact With Us|"; }
+    17% { content: "Contact With Us|"; }
+    18% { content: "Contact With Us|"; }
+    19% { content: "Contact With Us|"; }
+    20% { content: "Contact With Us|"; }
+    21% { content: "Contact With Us|"; }
+    22% { content: "Contact With Us|"; }
+    23% { content: "Contact With Us|"; }
+    24% { content: "Contact With Us|"; }
+    25% { content: "Contact With Us|"; }
+    26% { content: "Contact With Us|"; }
+    27% { content: "Contact With Us|"; }
+    28% { content: "Contact With Us|"; }
+    29% { content: "Contact With Us|"; }
+    30% { content: "Contact With Us|"; }
+    31% { content: "Contact With U|"; }
+    32% { content: "Contact With |"; }
+    33% { content: "Contact With|"; }
+    34% { content: "Contact Wit|"; }
+    35% { content: "Contact Wi|"; }
+    36% { content: "Contact W|"; }
+    37% { content: "Contact |"; }
+    38% { content: "Contact|"; }
+    39% { content: "Contac|"; }
+    40% { content: "Conta|"; }
+    41% { content: "Cont|"; }
+    42% { content: "Con|"; }
+    43% { content: "Co|"; }
+    44% { content: "C|"; }
+    45% { content: "|"; }
+    46% { content: "|"; }
+    47% { content: "|"; }
+    48% { content: "|"; }
+    49% { content: "|"; }
+    50% { content: "|"; }
+    51% { content: "|"; }
+    52% { content: "C|"; }
+    53% { content: "Co|"; }
+    54% { content: "Con|"; }
+    55% { content: "Cont|"; }
+    56% { content: "Conta|"; }
+    57% { content: "Contac|"; }
+    58% { content: "Contact|"; }
+    59% { content: "Contact |"; }
+    60% { content: "Contact W|"; }
+    61% { content: "Contact Wi|"; }
+    62% { content: "Contact Wit|"; }
+    63% { content: "Contact With|"; }
+    64% { content: "Contact With |"; }
+    65% { content: "Contact With U|"; }
+    66% { content: "Contact With Us|"; }
+    67% { content: "Contact With Us|"; }
+    68% { content: "Contact With Us|"; }
+    69% { content: "Contact With Us|"; }
+    70% { content: "Contact With Us|"; }
+    71% { content: "Contact With Us|"; }
+    72% { content: "Contact With Us|"; }
+    73% { content: "Contact With Us|"; }
+    74% { content: "Contact With Us|"; }
+    75% { content: "Contact With Us|"; }
+    76% { content: "Contact With U|"; }
+    77% { content: "Contact With |"; }
+    78% { content: "Contact With|"; }
+    79% { content: "Contact Wit|"; }
+    80% { content: "Contact Wi|"; }
+    81% { content: "Contact W|"; }
+    82% { content: "Contact |"; }
+    83% { content: "Contact|"; }
+    84% { content: "Contac|"; }
+    85% { content: "Conta|"; }
+    86% { content: "Cont|"; }
+    87% { content: "Con|"; }
+    88% { content: "Co|"; }
+    89% { content: "C|"; }
+    90% { content: "|"; }
+    91% { content: "|"; }
+    92% { content: "|"; }
+    93% { content: "|"; }
+    94% { content: "|"; }
+    95% { content: "|"; }
+    96% { content: "|"; }
+    97% { content: "|"; }
+    98% { content: "|"; }
+    99% { content: "|"; }
+    100% { content: "|"; }
+  }
+  .inputColor{
+    background-color:#00000040;
+  }
+  .inputColor::placeholder{
+    color:whitesmoke;
+   }
+  button {
+    background: linear-gradient(to right, #6c63ff, #a0d7e7);
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+   }
+  
+  button:hover {
+    background: linear-gradient(to right,#5a56e0 ,  #8dc8d9 );
+  }
+
+i{
+    width: 20px;
+  
+}

@@ -1,0 +1,355 @@
+<section class="home-page">
+
+  <!-- Hero Section -->
+  <header class="hero-section d-flex align-items-center mb-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Text Content -->
+        <div class="col-lg-7 col-md-12 text-center text-lg-start mb-4 mb-lg-0" data-aos="fade-right">
+          <h1 class="display-4 fw-bold mb-3">Discover Health: Find Your Trusted <span class="highlight">Doctors Today</span></h1>
+          <p class="lead mb-4">Access expert physicians and surgeons, advanced technologies, and top-quality facilities right here.</p>
+          <!-- Search Bar -->
+          <div class="search-bar-container bg-white p-3 p-md-4 rounded shadow-sm mt-4">
+            <form class="row g-2 align-items-center">
+              <div class="col-md-5">
+                <div class="input-group input-group-lg">
+                  <span class="input-group-text bg-light border-0"><i class="fas fa-search text-muted"></i></span>
+                  <input type="text" class="form-control border-0 ps-2" placeholder="Search doctors, clinics...">
+                </div>
+              </div>
+              <div class="col-md-4">
+                 <div class="input-group input-group-lg">
+                  <span class="input-group-text bg-light border-0"><i class="fas fa-map-marker-alt text-muted"></i></span>
+                  <input type="text" class="form-control border-0 ps-2" placeholder="Location">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-primary btn-lg w-100" type="submit">Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Image (Optional - can be added if needed) -->
+        <div class="col-lg-5 d-none d-lg-block" data-aos="fade-left">
+           <img src="./assets/images/doctor-hero.png" alt="Doctor" class="img-fluid hero-doctor-img">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quick Access Icons (Inspired by Doccure) -->
+  <section class="quick-access py-4">
+      <div class="container">
+          <div class="row g-3 justify-content-center">
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center" data-aos="fade-up">
+                  <a routerLink="/doctors" class="quick-access-item card card-body shadow-sm text-decoration-none">
+                      <div class="icon-wrapper bg-primary-subtle text-primary rounded-circle mx-auto mb-2">
+                          <i class="fas fa-stethoscope fa-lg"></i>
+                      </div>
+                      <span class="fw-medium small">Find Doctors</span>
+                  </a>
+              </div>
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center" data-aos="fade-up" data-aos-delay="100">
+                  <a routerLink="/Medicines" class="quick-access-item card card-body shadow-sm text-decoration-none">
+                      <div class="icon-wrapper bg-success-subtle text-success rounded-circle mx-auto mb-2">
+                          <i class="fas fa-pills fa-lg"></i>
+                      </div>
+                      <span class="fw-medium small">Medicines</span>
+                  </a>
+              </div>
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
+                  <a routerLink="/drug-reminder" class="quick-access-item card card-body shadow-sm text-decoration-none">
+                      <div class="icon-wrapper bg-info-subtle text-info rounded-circle mx-auto mb-2">
+                          <i class="fas fa-clock fa-lg"></i>
+                      </div>
+                      <span class="fw-medium small">Drug Reminder</span>
+                  </a>
+              </div>
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center" data-aos="fade-up" data-aos-delay="300">
+                  <a routerLink="/article" class="quick-access-item card card-body shadow-sm text-decoration-none">
+                      <div class="icon-wrapper bg-warning-subtle text-warning rounded-circle mx-auto mb-2">
+                          <i class="fas fa-notes-medical fa-lg"></i>
+                      </div>
+                      <span class="fw-medium small">Health Articles</span>
+                  </a>
+              </div>
+               <div class="col-6 col-sm-4 col-md-3 col-lg-2 text-center" data-aos="fade-up" data-aos-delay="400">
+                  <a routerLink="/profile" class="quick-access-item card card-body shadow-sm text-decoration-none">
+                      <div class="icon-wrapper bg-danger-subtle text-danger rounded-circle mx-auto mb-2">
+                          <i class="fas fa-user-circle fa-lg"></i>
+                      </div>
+                      <span class="fw-medium small">My Profile</span>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Clinic & Specialities Section -->
+  <section class="specialties-section py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+          <h2 class="fw-bold">Clinic & Specialities</h2>
+          <p class="text-muted w-75 mx-auto">Access to expert physicians and surgeons, advanced technologies and top-quality surgery facilities right here.</p>
+      </div>
+      <div class="row g-4">
+        <!-- Repeat this structure for other specialties -->
+        <div class="col-md-6 col-lg-3" data-aos="fade-up">
+          <div class="specialty-card card h-100 shadow-sm text-center overflow-hidden">
+            <div class="specialty-img-wrapper">
+                <img src="assets/images/1.jpg" class="card-img-top specialty-img" alt="Gynecological consultation">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title fw-semibold fs-6">Gynecology</h5>
+              <p class="card-text small text-muted mb-3">Consultations for bacterial vaginosis, contraception, cystitis, irregular menstruation, etc.</p>
+              <a routerLink="/doctors" [queryParams]="{ specialty: 'Gynecology' }" class="btn btn-outline-primary btn-sm stretched-link">Find Doctors</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="specialty-card card h-100 shadow-sm text-center overflow-hidden">
+             <div class="specialty-img-wrapper">
+                <img src="assets/images/2.jpg" class="card-img-top specialty-img" alt="Children's healthcare">
+             </div>
+            <div class="card-body">
+              <h5 class="card-title fw-semibold fs-6">Pediatrics</h5>
+              <p class="card-text small text-muted mb-3">Care for diarrhea, urinary tract infections, constipation, stomach issues, headaches, etc.</p>
+              <a routerLink="/doctors" [queryParams]="{ specialty: 'Pediatrics' }" class="btn btn-outline-primary btn-sm stretched-link">Find Doctors</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="specialty-card card h-100 shadow-sm text-center overflow-hidden">
+             <div class="specialty-img-wrapper">
+                <img src="assets/images/3.jpg" class="card-img-top specialty-img" alt="ENT consultation">
+             </div>
+            <div class="card-body">
+              <h5 class="card-title fw-semibold fs-6">ENT</h5>
+              <p class="card-text small text-muted mb-3">Treatment for sinusitis, cough, otitis, sore throat, allergies, etc.</p>
+              <a routerLink="/doctors" [queryParams]="{ specialty: 'ENT' }" class="btn btn-outline-primary btn-sm stretched-link">Find Doctors</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="specialty-card card h-100 shadow-sm text-center overflow-hidden">
+             <div class="specialty-img-wrapper">
+                 <img src="assets/images/4.jpg" class="card-img-top specialty-img" alt="Skin diseases">
+             </div>
+            <div class="card-body">
+              <h5 class="card-title fw-semibold fs-6">Dermatology</h5>
+              <p class="card-text small text-muted mb-3">Help with dermatitis, psoriasis, acne, hair loss, eczema, etc.</p>
+              <a routerLink="/doctors" [queryParams]="{ specialty: 'Dermatology' }" class="btn btn-outline-primary btn-sm stretched-link">Find Doctors</a>
+            </div>
+          </div>
+        </div>
+        <!-- Add more specialties as needed -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Doctors Section (NEW) -->
+  <section class="featured-doctors py-5">
+      <div class="container">
+          <div class="section-header text-center mb-5" data-aos="fade-up">
+              <h2 class="fw-bold">Our Highlighted Doctors</h2>
+              <p class="text-muted w-75 mx-auto">Meet some of our highly rated and experienced healthcare professionals.</p>
+          </div>
+          <div class="row g-4">
+              <!-- Placeholder Doctor Card 1 -->
+              <div class="col-md-6 col-lg-3" data-aos="fade-up">
+                  <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
+                      <img src="assets/images/doc-placeholder-1.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder One">
+                      <div class="card-body">
+                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder One</h5>
+                          <p class="text-primary small fw-medium mb-2">Cardiologist</p>
+                          <div class="ratings mb-2 text-warning small">
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star-half-alt"></i>
+                              <span class="text-muted ms-1">(123 Reviews)</span>
+                          </div>
+                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> New York, USA</p>
+                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
+                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
+                      </div>
+                  </div>
+              </div>
+              <!-- Placeholder Doctor Card 2 -->
+              <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                   <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
+                      <img src="assets/images/doc-placeholder-2.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder Two">
+                      <div class="card-body">
+                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder Two</h5>
+                          <p class="text-primary small fw-medium mb-2">Dermatologist</p>
+                           <div class="ratings mb-2 text-warning small">
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <span class="text-muted ms-1">(98 Reviews)</span>
+                          </div>
+                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> London, UK</p>
+                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
+                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
+                      </div>
+                  </div>
+              </div>
+              <!-- Placeholder Doctor Card 3 -->
+              <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                   <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
+                      <img src="assets/images/doc-placeholder-3.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder Three">
+                      <div class="card-body">
+                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder Three</h5>
+                          <p class="text-primary small fw-medium mb-2">Pediatrician</p>
+                           <div class="ratings mb-2 text-warning small">
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="far fa-star"></i>
+                              <span class="text-muted ms-1">(75 Reviews)</span>
+                          </div>
+                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> Sydney, AU</p>
+                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
+                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
+                      </div>
+                  </div>
+              </div>
+              <!-- Placeholder Doctor Card 4 -->
+              <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                   <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
+                      <img src="assets/images/doc-placeholder-4.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder Four">
+                      <div class="card-body">
+                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder Four</h5>
+                          <p class="text-primary small fw-medium mb-2">Neurologist</p>
+                           <div class="ratings mb-2 text-warning small">
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star-half-alt"></i>
+                              <span class="text-muted ms-1">(150 Reviews)</span>
+                          </div>
+                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> Paris, FR</p>
+                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
+                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="text-center mt-5" data-aos="fade-up">
+              <a routerLink="/doctors" class="btn btn-outline-primary btn-lg">View All Doctors</a>
+          </div>
+      </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section class="how-it-works py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+          <h2 class="fw-bold">How It Works</h2>
+          <p class="text-muted w-75 mx-auto">Discover, book, and experience personalized healthcare effortlessly in 3 simple steps.</p>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-4 mb-4" data-aos="fade-up">
+          <div class="step-card card card-body h-100 p-4 border-0 shadow-sm">
+            <div class="step-number-circle mb-3">1</div>
+            <div class="icon-container text-primary mb-3"><i class="fas fa-magnifying-glass fa-3x"></i></div>
+            <h3 class="fs-5 fw-semibold mb-2">Search Doctor</h3>
+            <p class="text-muted small">Discover skilled doctors based on specialization and location.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="150">
+          <div class="step-card card card-body h-100 p-4 border-0 shadow-sm">
+            <div class="step-number-circle mb-3">2</div>
+            <div class="icon-container text-primary mb-3"><i class="fas fa-calendar-check fa-3x"></i></div>
+            <h3 class="fs-5 fw-semibold mb-2">Book Appointment</h3>
+            <p class="text-muted small">Effortlessly book appointments at your convenience.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="step-card card card-body h-100 p-4 border-0 shadow-sm">
+            <div class="step-number-circle mb-3">3</div>
+            <div class="icon-container text-primary mb-3"><i class="fas fa-hand-holding-medical fa-3x"></i></div>
+            <h3 class="fs-5 fw-semibold mb-2">Get Solution</h3>
+            <p class="text-muted small">Receive personalized healthcare advice & treatment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section py-5">
+    <div class="container">
+      <div class="section-header text-center mb-5" data-aos="fade-up">
+          <h2 class="fw-bold">What Our Patients Say</h2>
+          <p class="text-center text-muted w-75 mx-auto">Real experiences from users about our telehealth services.</p>
+      </div>
+      <div data-aos="fade-up">
+        <owl-carousel-o [options]="customOptions">
+          <!-- Repeat ng-template for each testimonial -->
+          <ng-template carouselSlide>
+            <div class="testimonial-card card border-0 shadow-sm mx-2">
+              <div class="card-body p-4">
+                 <div class="quote-icon text-primary fs-2 mb-3"><i class="fas fa-quote-left"></i></div>
+                <p class="review-text fst-italic text-muted mb-4">"I was hesitant... but after trying the service and communicating with the doctor, I felt very comfortable. Highly recommended!"</p>
+                <div class="reviewer-info d-flex align-items-center">
+                  <img src="./assets/images/11.jpg" class="reviewer-img rounded-circle me-3" alt="E.E" style="width: 50px; height: 50px;">
+                  <div>
+                    <h6 class="reviewer-name fw-semibold mb-0">E.E</h6>
+                    <div class="text-warning small">
+                      <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template carouselSlide>
+             <div class="testimonial-card card border-0 shadow-sm mx-2">
+              <div class="card-body p-4">
+                 <div class="quote-icon text-primary fs-2 mb-3"><i class="fas fa-quote-left"></i></div>
+                <p class="review-text fst-italic text-muted mb-4">"It made it easy for me to have regular follow-ups with the doctor after doing tests or taking prescribed medications."</p>
+                <div class="reviewer-info d-flex align-items-center">
+                  <img src="./assets/images/22.jpg" class="reviewer-img rounded-circle me-3" alt="A.B" style="width: 50px; height: 50px;">
+                  <div>
+                    <h6 class="reviewer-name fw-semibold mb-0">A.B</h6>
+                    <div class="text-warning small">
+                      <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+           <ng-template carouselSlide>
+             <div class="testimonial-card card border-0 shadow-sm mx-2">
+              <div class="card-body p-4">
+                 <div class="quote-icon text-primary fs-2 mb-3"><i class="fas fa-quote-left"></i></div>
+                <p class="review-text fst-italic text-muted mb-4">"Thank you! The treatment experience is easier with doctor recommendations and accurate, high-quality answers."</p>
+                <div class="reviewer-info d-flex align-items-center">
+                  <img src="./assets/images/33.jpg" class="reviewer-img rounded-circle me-3" alt="S.M" style="width: 50px; height: 50px;">
+                  <div>
+                    <h6 class="reviewer-name fw-semibold mb-0">S.M</h6>
+                    <div class="text-warning small">
+                      <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <!-- Add more ng-template slides as needed -->
+        </owl-carousel-o>
+      </div>
+    </div>
+  </section>
+
+  <!-- Removed Statistics and Video sections for brevity and focus, can be added back if needed -->
+
+</section>
+

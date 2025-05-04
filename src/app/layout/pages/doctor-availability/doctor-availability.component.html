@@ -1,0 +1,142 @@
+<div class="container mt-4">
+  <h4>Manage Your Availability</h4>
+
+  <!-- Add Availability Form -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-light">
+      Add New Availability Slot
+    </div>
+    <div class="card-body">
+      <form [formGroup]="availabilityForm" (ngSubmit)="addAvailability()">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" id="date" class="form-control" formControlName="date">
+            <div *ngIf="availabilityForm.get('date')?.invalid && (availabilityForm.get('date')?.dirty || availabilityForm.get('date')?.touched)" class="text-danger small mt-1">
+              Date is required.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="from" class="form-label">From</label>
+            <input type="time" id="from" class="form-control" formControlName="from">
+            <div *ngIf="availabilityForm.get('from')?.invalid && (availabilityForm.get('from')?.dirty || availabilityForm.get('from')?.touched)" class="text-danger small mt-1">
+              Start time is required.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="to" class="form-label">To</label>
+            <input type="time" id="to" class="form-control" formControlName="to">
+            <div *ngIf="availabilityForm.get('to')?.invalid && (availabilityForm.get('to')?.dirty || availabilityForm.get('to')?.touched)" class="text-danger small mt-1">
+              End time is required.
+            </div>
+            <div *ngIf="availabilityForm.errors?.['invalidTimeRange'] && availabilityForm.get('to')?.touched" class="text-danger small mt-1">
+              End time must be after start time.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="slotDurationInMinutes" class="form-label">Slot Duration (Minutes)</label>
+            <input type="number" id="slotDurationInMinutes" class="form-control" formControlName="slotDurationInMinutes" min="1">
+            <div *ngIf="availabilityForm.get('slotDurationInMinutes')?.invalid && (availabilityForm.get('slotDurationInMinutes')?.dirty || availabilityForm.get('slotDurationInMinutes')?.touched)" class="text-danger small mt-1">
+              Slot duration must be at least 1 minute.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="pricePerSlot" class="form-label">Price per Slot</label>
+            <input type="number" id="pricePerSlot" class="form-control" formControlName="pricePerSlot" min="0">
+            <div *ngIf="availabilityForm.get('pricePerSlot')?.invalid && (availabilityForm.get('pricePerSlot')?.dirty || availabilityForm.get('pricePerSlot')?.touched)" class="text-danger small mt-1">
+              Price must be a non-negative number.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="sessionMode" class="form-label">Session Mode</label>
+            <select id="sessionMode" class="form-control" formControlName="sessionMode">
+              <option value="1">Video</option>
+              <option value="2">Audio</option>
+            </select>
+            <div *ngIf="availabilityForm.get('sessionMode')?.invalid && (availabilityForm.get('sessionMode')?.dirty || availabilityForm.get('sessionMode')?.touched)" class="text-danger small mt-1">
+              Session mode is required.
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading || availabilityForm.invalid">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+          {{ isLoading ? "Adding..." : "Add Availability" }}
+        </button>
+      </form>
+      <div *ngIf="errorMessage && !isLoading" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+    </div>
+  </div>
+
+  <!-- List of Availabilities -->
+  <h5>Current Availability Slots</h5>
+  <div *ngIf="isLoading && availabilities.length === 0" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage && availabilities.length === 0" class="alert alert-warning">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && availabilities.length === 0 && !errorMessage" class="alert alert-info">
+    You have no availability slots defined yet.
+  </div>
+
+  <div *ngIf="availabilities.length > 0" class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Slot Duration</th>
+          <th>Price per Slot</th>
+          <th>Session Mode</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slot of availabilities">
+          <td>{{ formatDate(slot.date) }}</td>
+          <td>{{ slot.from }}</td>
+          <td>{{ slot.to }}</td>
+          <td>{{ slot.slotDurationInMinutes }} min</td>
+          <td>{{ slot.pricePerSlot }}</td>
+          <td>{{ slot.sessionMode === 1 ? 'In-Person' : 'Online' }}</td>
+          <td>
+            <button class="btn btn-info btn-sm me-2" (click)="showDetails(slot)" data-bs-toggle="modal" data-bs-target="#availabilityDetailsModal">
+              <i class="fas fa-eye"></i> Details
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="prepareRemoveAvailability(slot)" [disabled]="isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+              <i class="fas fa-trash-alt"></i> Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Availability Details Modal -->
+  <div class="modal fade" id="availabilityDetailsModal" tabindex="-1" aria-labelledby="availabilityDetailsModalLabel" data-bs-backdrop="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="availabilityDetailsModalLabel">Availability Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeDetailsModal()"></button>
+        </div>
+        <div class="modal-body" *ngIf="availabilityDetails">
+          <p><strong>Date:</strong> {{ formatDate(availabilityDetails.date) }}</p>
+          <p><strong>From:</strong> {{ availabilityDetails.from }}</p>
+          <p><strong>To:</strong> {{ availabilityDetails.to }}</p>
+          <p><strong>Slot Duration:</strong> {{ availabilityDetails.slotDurationInMinutes }} minutes</p>
+          <p><strong>Price per Slot:</strong> {{ availabilityDetails.pricePerSlot }}</p>
+          <p><strong>Session Mode:</strong> {{ availabilityDetails.sessionMode === 1 ? 'In-Person' : 'Online' }}</p>
+          <p><strong>ID:</strong> {{ availabilityDetails.id || 'N/A' }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeDetailsModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

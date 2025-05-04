@@ -1,0 +1,108 @@
+<section class="auth-section d-flex align-items-center justify-content-center py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0 rounded-lg overflow-hidden" data-aos="fade-up">
+          <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+              <a class="navbar-brand d-inline-block mb-3" routerLink="/home">
+                 <img src="assets/logo.png" alt="CureFusion Logo" height="35">
+              </a>
+              <h3 class="fw-bold mb-1">Create Doctor Account</h3>
+              <p class="text-muted small">Fill in the details below to register as a healthcare provider.</p>
+            </div>
+
+            <!-- TODO: Replace placeholder inputs with actual form group and validation -->
+            <form>
+              <!-- Error Message Placeholder -->
+              <!-- <div *ngIf="errormsg" class="alert alert-danger d-flex align-items-center p-2 small mb-3" role="alert">
+                 <i class="fas fa-exclamation-triangle me-2"></i>
+                 <div>{{ errormsg }}</div>
+              </div> -->
+
+              <!-- First & Last Name -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name"/>
+                    <label for="firstName"><i class="fas fa-user me-2 text-muted"></i> First Name</label>
+                    <!-- Add validation feedback -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name"/>
+                    <label for="lastName"><i class="fas fa-user me-2 text-muted"></i> Last Name</label>
+                     <!-- Add validation feedback -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Email Input -->
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Email Address"/>
+                <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
+                <!-- Add validation feedback -->
+              </div>
+
+              <!-- Phone Input -->
+              <div class="form-floating mb-3">
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number"/>
+                <label for="phoneNumber"><i class="fas fa-phone me-2 text-muted"></i> Phone Number</label>
+                 <!-- Add validation feedback -->
+              </div>
+
+              <!-- Specialty Input (Example - Needs actual implementation) -->
+              <div class="form-floating mb-3">
+                 <select class="form-select" id="specialty" aria-label="Select Specialty">
+                    <option selected disabled value="">Select Specialty...</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Neurology">Neurology</option>
+                    <!-- Add other specialties -->
+                  </select>
+                <label for="specialty"><i class="fas fa-stethoscope me-2 text-muted"></i> Specialty</label>
+                 <!-- Add validation feedback -->
+              </div>
+
+              <!-- Password Input -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Password"/>
+                <label for="password"><i class="fas fa-lock me-2 text-muted"></i> Password</label>
+                 <!-- Add validation feedback -->
+              </div>
+
+              <!-- Confirm Password Input -->
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"/>
+                <label for="confirmPassword"><i class="fas fa-lock me-2 text-muted"></i> Confirm Password</label>
+                 <!-- Add validation feedback -->
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill mt-3">
+                <!-- Add spinner logic if needed -->
+                <span>Sign Up as Doctor</span>
+              </button>
+            </form>
+
+            <!-- Login Link -->
+            <div class="text-center mt-4">
+              <p class="text-muted small mb-0">
+                Already have an account?
+                <a routerLink="/doctorlogin" class="fw-medium text-decoration-none ms-1">Login Now</a>
+              </p>
+               <p class="text-muted small mt-2">
+                Not a Doctor?
+                <a routerLink="/signup" class="fw-medium text-decoration-none ms-1">Sign Up as Patient</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

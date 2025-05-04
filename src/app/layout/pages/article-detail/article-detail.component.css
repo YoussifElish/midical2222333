@@ -1,0 +1,45 @@
+/* Add styles for your article detail component here */
+.article-detail-container {
+  max-width: 900px; /* Adjust max-width as needed */
+  margin: auto;
+}
+
+.article-image-container img {
+  max-height: 450px; /* Limit image height */
+  width: auto; /* Maintain aspect ratio */
+  max-width: 100%;
+  object-fit: cover; /* Cover the area, might crop */
+}
+
+.article-content {
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+.article-content p {
+  margin-bottom: 1.5rem;
+}
+
+.display-5 {
+    font-weight: 500;
+}
+
+/* Add styles for badges if needed */
+.badge {
+    font-size: 0.9em;
+}
+
+/* Style for back button */
+.btn-outline-secondary {
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-outline-secondary i {
+    margin-right: 0.5rem;
+}
+
+/* Add Bootstrap Icons CSS if not already included globally */
+/* @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"); */
+
+

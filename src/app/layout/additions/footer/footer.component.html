@@ -1,0 +1,141 @@
+<footer class="footer pt-5 pb-4 mt-auto" [ngClass]="darkMode ? 'bg-dark text-light' : 'bg-light text-dark'">
+  <div class="container">
+    <div class="row gy-4">
+
+      <!-- About/Brand Column -->
+      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+        <a class="navbar-brand d-flex align-items-center mb-3" routerLink="/home">
+          <img src="assets/logo.png" alt="CureFusion Logo" height="30">
+          <span class="ms-2 fw-bold fs-5" [ngClass]="darkMode ? 'text-light' : 'text-dark'">CureFusion</span>
+        </a>
+        <p class="text-muted small" [ngClass]="darkMode ? 'text-white-50' : 'text-muted'">
+          Providing access to expert physicians, advanced technologies, and quality healthcare services.
+        </p>
+        <!-- Social Links -->
+        <div class="social-links mt-3">
+          <a href="#" class="text-decoration-none me-3" [ngClass]="darkMode ? 'text-white-50' : 'text-muted'" title="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+          <a href="#" class="text-decoration-none me-3" [ngClass]="darkMode ? 'text-white-50' : 'text-muted'" title="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#" class="text-decoration-none me-3" [ngClass]="darkMode ? 'text-white-50' : 'text-muted'" title="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-decoration-none" [ngClass]="darkMode ? 'text-white-50' : 'text-muted'" title="LinkedIn"><i class="fab fa-linkedin-in fa-lg"></i></a>
+        </div>
+      </div>
+
+      <!-- For Patients Column -->
+      <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+        <h5 class="h6 mb-3 fw-semibold">For Patients</h5>
+        <ul class="list-unstyled small">
+          <li class="mb-2"><a routerLink="/doctors" class="footer-link"><i class="fas fa-angle-right me-1"></i>Search for Doctors</a></li>
+          <li class="mb-2"><a routerLink="/login" class="footer-link"><i class="fas fa-angle-right me-1"></i>Login</a></li>
+          <li class="mb-2"><a routerLink="/signupinfo" class="footer-link"><i class="fas fa-angle-right me-1"></i>Register</a></li>
+          <li class="mb-2"><a routerLink="/profile" class="footer-link"><i class="fas fa-angle-right me-1"></i>Patient Dashboard</a></li>
+          <li class="mb-2"><a routerLink="/Medicines" class="footer-link"><i class="fas fa-angle-right me-1"></i>Medicine Info</a></li>
+          <li class="mb-2"><a routerLink="/drug-reminder" class="footer-link"><i class="fas fa-angle-right me-1"></i>Drug Reminder</a></li>
+        </ul>
+      </div>
+
+      <!-- For Doctors Column -->
+      <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+        <h5 class="h6 mb-3 fw-semibold">For Doctors</h5>
+        <ul class="list-unstyled small">
+          <li class="mb-2"><a routerLink="/doctorlogin" class="footer-link"><i class="fas fa-angle-right me-1"></i>Doctor Login</a></li>
+          <li class="mb-2"><a routerLink="/doctorsignup" class="footer-link"><i class="fas fa-angle-right me-1"></i>Doctor Register</a></li>
+          <li class="mb-2"><a routerLink="/profile" class="footer-link"><i class="fas fa-angle-right me-1"></i>Doctor Dashboard</a></li>
+          <!-- Add link to doctor availability if applicable -->
+          <li class="mb-2"><a routerLink="/article/add" class="footer-link"><i class="fas fa-angle-right me-1"></i>Add Article</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources Column -->
+      <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+        <h5 class="h6 mb-3 fw-semibold">Resources</h5>
+        <ul class="list-unstyled small">
+          <li class="mb-2"><a routerLink="/article" class="footer-link"><i class="fas fa-angle-right me-1"></i>Health Articles</a></li>
+          <li class="mb-2"><a routerLink="/Research" class="footer-link"><i class="fas fa-angle-right me-1"></i>Medical Research</a></li>
+          <li class="mb-2"><a routerLink="/Careers" class="footer-link"><i class="fas fa-angle-right me-1"></i>Careers</a></li>
+          <li class="mb-2"><a routerLink="/Commitment" class="footer-link"><i class="fas fa-angle-right me-1"></i>Our Commitment</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Us Column -->
+      <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+        <h5 class="h6 mb-3 fw-semibold">Contact Us</h5>
+        <ul class="list-unstyled small contact-info">
+          <li class="d-flex align-items-start mb-2">
+            <i class="fas fa-map-marker-alt fa-fw me-2 mt-1" [ngClass]="darkMode ? 'text-primary' : 'text-primary'"></i>
+            <span>123 Health St,<br>Medical City, MC 45678</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fas fa-phone-alt fa-fw me-2" [ngClass]="darkMode ? 'text-primary' : 'text-primary'"></i>
+            <a href="tel:+1234567890" class="footer-link">+1 234 567 890</a>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fas fa-envelope fa-fw me-2" [ngClass]="darkMode ? 'text-primary' : 'text-primary'"></i>
+            <a href="mailto:info&#64;curefusion.com" class="footer-link">infocurefusion.com</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <hr [ngClass]="darkMode ? 'border-secondary' : 'border-light'">
+    <div class="text-center text-muted small pt-3" [ngClass]="darkMode ? 'text-white-50' : 'text-muted'">
+      &copy; {{ currentYear }} CureFusion. All Rights Reserved.
+      <a href="#" class="footer-link ms-3">Privacy Policy</a>
+      <a href="#" class="footer-link ms-3">Terms of Service</a>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+.footer {
+  /* Use Bootstrap variables for background */
+  background-color: var(--bs-tertiary-bg);
+  border-top: 1px solid var(--bs-border-color-translucent);
+  font-size: 0.9rem;
+}
+
+.footer h5 {
+  color: var(--bs-heading-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.95rem;
+}
+
+.footer-link {
+  color: var(--bs-secondary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--bs-primary);
+  text-decoration: none;
+}
+
+.footer-link i {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+.contact-info i {
+  /* Use primary color for contact icons */
+  color: var(--bs-primary);
+}
+
+.social-links a {
+  transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+  color: var(--bs-primary);
+}
+
+/* Dark mode specific overrides if needed beyond variables */
+[data-bs-theme="dark"] .footer {
+   /* Already handled by bg-dark text-light potentially */
+}
+
+</style>
+

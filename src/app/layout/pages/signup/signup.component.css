@@ -1,0 +1,19 @@
+/* Signup Page Specific Styles - Updated */
+
+/* Inherits general .auth-section styles from login/signup */
+
+/* Specific adjustments for signup if needed */
+.auth-section .card {
+    /* Potentially slightly wider card for signup form */
+}
+
+/* Ensure date input placeholder text is visible */
+.auth-section .form-control[type="date"]:not(:placeholder-shown) {
+    color: var(--bs-body-color) !important; /* Override text-muted if needed when date is selected */
+}
+
+/* Remove old styles if they conflict */
+/* .LoginSection { ... } */
+/* .custom-card { ... } */
+/* .btn-custom { ... } */
+

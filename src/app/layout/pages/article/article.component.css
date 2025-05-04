@@ -1,0 +1,165 @@
+/* Article Page Specific Styles - Updated for Grid/Sidebar Layout */
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 0.9rem;
+}
+.breadcrumb-item a {
+  text-decoration: none;
+  color: var(--bs-primary);
+}
+.breadcrumb-item.active {
+  color: var(--bs-secondary-color);
+}
+
+/* Main Content Area */
+.blog-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--bs-box-shadow-lg) !important;
+}
+
+.blog-image img {
+  height: 220px; /* Consistent image height */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-image img {
+  transform: scale(1.05);
+}
+
+.category-badge .badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.blog-meta {
+  color: var(--bs-secondary-color);
+}
+
+.blog-meta i {
+  color: var(--bs-primary);
+}
+
+.blog-title a {
+  color: var(--bs-heading-color);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.blog-title a:hover {
+  color: var(--bs-primary);
+}
+
+.blog-card .badge.text-bg-secondary {
+  font-size: 0.75rem;
+  background-color: var(--bs-secondary-bg-subtle) !important;
+  color: var(--bs-secondary-color) !important;
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+/* Sidebar Styles */
+.sidebar .widget {
+  border: 1px solid var(--bs-border-color-translucent);
+}
+
+.sidebar .widget .card-header {
+  border-bottom: 1px solid var(--bs-border-color-translucent);
+  padding: 0.75rem 1rem;
+}
+
+.sidebar .widget .card-header h5 {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--bs-heading-color);
+}
+
+.sidebar .widget .card-body {
+  padding: 1rem;
+}
+
+/* Categories Widget */
+.categories-widget .list-group-item {
+  padding: 0.5rem 0; /* Adjust padding */
+}
+
+.categories-widget .list-group-item a {
+  color: var(--bs-body-color);
+  transition: color 0.2s ease;
+}
+
+.categories-widget .list-group-item a:hover,
+.categories-widget .list-group-item a.active {
+  color: var(--bs-primary);
+  font-weight: 500;
+}
+
+/* Tags Widget */
+.tag-cloud .tag-link {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  margin: 0.2rem;
+  background-color: var(--bs-tertiary-bg);
+  color: var(--bs-secondary-color);
+  border-radius: var(--bs-border-radius-sm);
+  font-size: 0.8rem;
+  text-decoration: none;
+  border: 1px solid var(--bs-border-color-translucent);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tag-cloud .tag-link:hover {
+  background-color: var(--bs-primary);
+  color: var(--bs-light);
+  border-color: var(--bs-primary);
+}
+
+/* Pagination Styling (Keep existing) */
+.pagination .page-link {
+  color: var(--bs-primary);
+  background-color: var(--bs-pagination-bg);
+  border-color: var(--bs-pagination-border-color);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pagination .page-link:hover {
+  color: var(--bs-pagination-hover-color);
+  background-color: var(--bs-pagination-hover-bg);
+  border-color: var(--bs-pagination-hover-border-color);
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--bs-pagination-disabled-color);
+  background-color: var(--bs-pagination-disabled-bg);
+  border-color: var(--bs-pagination-disabled-border-color);
+}
+
+.pagination .page-item.active .page-link {
+  color: var(--bs-pagination-active-color);
+  background-color: var(--bs-pagination-active-bg);
+  border-color: var(--bs-pagination-active-border-color);
+  font-weight: bold;
+}
+
+/* Loading and No Articles Styling (Keep existing) */
+.loading-container .spinner-border,
+.no-articles-container i {
+  color: var(--bs-primary);
+}
+
+.loading-container p,
+.no-articles-container p {
+  color: var(--bs-secondary-color);
+}
+
+/* Default Article Image Placeholder */
+img[src="assets/images/default-article.jpg"] {
+  /* Optional: Add specific styling for the placeholder */
+  background-color: var(--bs-secondary-bg);
+}
+

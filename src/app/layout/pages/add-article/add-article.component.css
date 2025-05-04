@@ -1,0 +1,16 @@
+/* Add component styles here */
+.img-thumbnail {
+  max-height: 200px; /* Limit preview image height */
+  margin-top: 1rem;
+}
+
+.invalid-feedback,
+.text-danger {
+    display: block; /* Ensure validation messages are always shown when invalid */
+}
+
+/* Style TinyMCE container if needed */
+#tinymce-editor-container {
+    margin-top: 0.5rem;
+}
+

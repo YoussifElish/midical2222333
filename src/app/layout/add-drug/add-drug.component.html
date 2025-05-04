@@ -1,0 +1,142 @@
+ 
+<div class="container mt-5">
+    <h2>Add New Drug</h2>
+    <form [formGroup]="addDrugForm" (ngSubmit)="PostDrug()" >
+        @if (errormsg) {
+            <div class="alert alert-danger m-0 p-0 ">
+                <p class="p-0m-0">{{"errormsg"}}</p>
+            </div>
+        }
+      <!-- Dosage -->
+      <div class="mb-3">
+        <label for="Dosage" class="form-label">Dosage </label>
+        <input type="text" id="Dosage" class="form-control" formControlName="Dosage"
+                >
+                @if (addDrugForm.get('Dosage')?.errors&&addDrugForm.get('Dosage')?.touched) {
+                    <div  class="alert alert-danger p-0 m-0">
+                         @if (addDrugForm.get('Dosage')?.errors?.['required']) {
+                             <p class="p-1 m-0"> Dosage Is Requierd</p>
+        
+                            }
+                     
+            
+         
+                    </div>
+                }
+      </div>
+      
+         <!-- Name -->
+      <div class="mb-3">
+        <label for="Name" class="form-label"> Drug Name </label>
+        <input type="text" id="Name" class="form-control" formControlName="Name"
+                >
+                @if (addDrugForm.get('Name')?.errors&&addDrugForm.get('Name')?.touched) {
+                    <div  class="alert alert-danger p-0 m-0">
+                         @if (addDrugForm.get('Name')?.errors?.['required']) {
+                             <p class="p-1 m-0"> Name Is Requierd</p>
+        
+                            }
+                     
+            
+         
+                    </div>
+                }
+      </div>
+       
+      
+         <!-- SideEffect -->
+      <div class="mb-3">
+        <label for="SideEffect" class="form-label">SideEffect </label>
+        <input type="text" id="SideEffect" class="form-control" formControlName="SideEffect"
+                >
+                @if (addDrugForm.get('SideEffect')?.errors&&addDrugForm.get('SideEffect')?.touched) {
+                    <div  class="alert alert-danger p-0 m-0">
+                         @if (addDrugForm.get('SideEffect')?.errors?.['required']) {
+                             <p class="p-1 m-0"> SideEffect Is Requierd</p>
+        
+                            }
+                     
+            
+         
+                    </div>
+                }
+      </div>
+       
+      
+         <!-- Interaction -->
+      <div class="mb-3">
+        <label for="Interaction" class="form-label">Interaction </label>
+        <input type="text" id="Interaction" class="form-control" formControlName="Interaction"
+                >
+                @if (addDrugForm.get('Interaction')?.errors&&addDrugForm.get('Interaction')?.touched) {
+                    <div  class="alert alert-danger p-0 m-0">
+                         @if (addDrugForm.get('Interaction')?.errors?.['required']) {
+                             <p class="p-1 m-0"> Interaction Is Requierd</p>
+        
+                            }
+                     
+            
+         
+                    </div>
+                }
+      </div>
+       
+      
+         <!-- Description -->
+      <div class="mb-3">
+        <label for="Description" class="form-label">Description </label>
+        <input type="text" id="Description" class="form-control" formControlName="Description"
+                >
+                @if (addDrugForm.get('Description')?.errors&&addDrugForm.get('Description')?.touched) {
+                    <div  class="alert alert-danger p-0 m-0">
+                         @if (addDrugForm.get('Description')?.errors?.['required']) {
+                             <p class="p-1 m-0"> Description Is Requierd</p>
+        
+                            }
+                     
+            
+         
+                    </div>
+                }
+      </div>
+       
+ 
+  
+ 
+      <!-- Image Upload -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Cover Image</label>
+        <input type="file" id="image" class="form-control"  formControlName="Image"  (change)="onFileSelected($event)" accept="image/*"
+                >
+                @if (addDrugForm.get('Image')?.errors&&addDrugForm.get('Image')?.touched) {
+                    <div  class="alert alert-danger p-0 m-0">
+                         @if (addDrugForm.get('Image')?.errors?.['required']) {
+                             <p class="p-1 m-0"> Image Is Requierd</p>
+        
+                            }
+ 
+                    </div>
+                }
+        <!-- Optional: Image preview -->
+        <!-- <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Image Preview" class="img-thumbnail mt-2" style="max-height: 200px;"> -->
+      </div>
+ 
+
+      <button [disabled]="addDrugForm.invalid"  class="btn btn-primary mb-2"   >
+        @if (spinner) {
+            <span><i class="fa fa-spin fa-spinner"></i></span>
+        }
+        @else {
+            <span>Post Drug</span>
+        }
+    </button>
+
+
+
+
+
+    </form>
+  </div>
+
+ 
+  

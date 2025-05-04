@@ -1,0 +1,134 @@
+/* Doctor Appointments Page Styles - Updated */
+
+.page-header h1 {
+    color: var(--bs-heading-color);
+}
+
+.page-header p {
+    color: var(--bs-secondary-color);
+}
+
+.card {
+    background-color: var(--bs-card-bg);
+    border: 1px solid var(--bs-border-color);
+}
+
+.card-header {
+    background-color: var(--bs-tertiary-bg);
+    border-bottom: 1px solid var(--bs-border-color);
+}
+
+.card-header h2 {
+    color: var(--bs-heading-color);
+}
+
+.table {
+    /* Use Bootstrap table variables */
+    --bs-table-color: var(--bs-body-color);
+    --bs-table-bg: var(--bs-card-bg); /* Match card background */
+    --bs-table-border-color: var(--bs-border-color);
+    --bs-table-striped-color: var(--bs-body-color);
+    --bs-table-striped-bg: var(--bs-secondary-bg);
+    --bs-table-hover-color: var(--bs-body-color);
+    --bs-table-hover-bg: var(--bs-tertiary-bg);
+}
+
+.table thead {
+    /* Use Bootstrap table-light class */
+}
+
+.table th {
+    color: var(--bs-secondary-color);
+    font-weight: 500;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table .badge {
+    font-size: 0.8em;
+    padding: 0.4em 0.6em;
+}
+
+/* Define badge colors based on status */
+.badge.bg-success-subtle {
+    color: var(--bs-success-text-emphasis);
+    background-color: var(--bs-success-bg-subtle) !important;
+    border: 1px solid var(--bs-success-border-subtle);
+}
+
+.badge.bg-warning-subtle {
+    color: var(--bs-warning-text-emphasis);
+    background-color: var(--bs-warning-bg-subtle) !important;
+    border: 1px solid var(--bs-warning-border-subtle);
+}
+
+.badge.bg-danger-subtle {
+    color: var(--bs-danger-text-emphasis);
+    background-color: var(--bs-danger-bg-subtle) !important;
+    border: 1px solid var(--bs-danger-border-subtle);
+}
+
+.badge.bg-secondary-subtle {
+    color: var(--bs-secondary-text-emphasis);
+    background-color: var(--bs-secondary-bg-subtle) !important;
+    border: 1px solid var(--bs-secondary-border-subtle);
+}
+
+.table .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Modal Styles */
+.modal-content {
+    background-color: var(--bs-modal-bg);
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+}
+
+.modal-header {
+    background-color: var(--bs-tertiary-bg);
+    border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+}
+
+.modal-header .modal-title {
+    color: var(--bs-modal-title-color);
+}
+
+.modal-body {
+    color: var(--bs-modal-color);
+}
+
+.modal-body h6 {
+    color: var(--bs-secondary-color);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.modal-footer {
+    background-color: var(--bs-tertiary-bg);
+    border-top: var(--bs-modal-footer-border-width) solid var(--bs-modal-footer-border-color);
+}
+
+/* Loading and Error States */
+.loading-container .spinner-border {
+  /* Styles applied inline or via Bootstrap classes */
+}
+
+.loading-container p {
+  color: var(--bs-secondary-color);
+}
+
+.alert-danger,
+.alert-info {
+  /* Uses Bootstrap variables defined in styles.css or Bootstrap defaults */
+}
+
+/* Remove old styles if they conflict */
+/* .appointments-container { ... } */
+/* .appointment-slots-container { ... } */
+/* .appointment-slots .list-group-item { ... } */
+/* .booking-section { ... } */
+

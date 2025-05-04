@@ -1,0 +1,90 @@
+<div class="container mt-5">
+  <h2>Edit Article</h2>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <form *ngIf="!isLoading && !errorMessage" [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+
+    <!-- Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" id="title" class="form-control" formControlName="title"
+             [ngClass]="{ 'is-invalid': articleForm.get('title')?.invalid && articleForm.get('title')?.touched }">
+      <div *ngIf="articleForm.get('title')?.invalid && articleForm.get('title')?.touched" class="invalid-feedback">
+        Title is required.
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="mb-3">
+      <label for="summary" class="form-label">Summary</label>
+      <textarea id="summary" class="form-control" formControlName="summary" rows="3"
+                [ngClass]="{ 'is-invalid': articleForm.get('summary')?.invalid && articleForm.get('summary')?.touched }"></textarea>
+      <div *ngIf="articleForm.get('summary')?.invalid && articleForm.get('summary')?.touched" class="invalid-feedback">
+        Summary is required.
+      </div>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" class="form-select" formControlName="category"
+              [ngClass]="{ 'is-invalid': articleForm.get('category')?.invalid && articleForm.get('category')?.touched }">
+        <option [ngValue]="null" disabled>Select a category</option>
+        <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+      </select>
+      <div *ngIf="articleForm.get('category')?.invalid && articleForm.get('category')?.touched" class="invalid-feedback">
+        Category is required.
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="mb-3">
+      <label for="tags" class="form-label">Tags (comma-separated)</label>
+      <input type="text" id="tags" class="form-control" formControlName="tags">
+    </div>
+
+    <!-- Content (TinyMCE Integrated) -->
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <editor apiKey="ie3vm60z5ph0zx26fpdtetesh93yyaklk5xblq8dj3kkwd8t"
+        formControlName="content"
+        [init]="tinymceConfig"
+      ></editor>
+       <div *ngIf="articleForm.get('content')?.invalid && articleForm.get('content')?.touched" class="text-danger small">
+        Content is required.
+      </div>
+    </div>
+
+    <!-- Image Upload -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Cover Image (Optional: Replace existing)</label>
+      <input type="file" id="image" class="form-control" (change)="onFileSelected($event)" accept="image/*">
+      <!-- Image preview -->
+      <div *ngIf="selectedFile" class="mt-2">
+        <p>New image preview:</p>
+        <img [src]="createObjectURL(selectedFile)" alt="New Image Preview" class="img-thumbnail" style="max-height: 200px;">
+      </div>
+       <div *ngIf="!selectedFile && existingImageUrl" class="mt-2">
+         <p>Current image:</p>
+        <img [src]="existingImageUrl" alt="Current Image" class="img-thumbnail" style="max-height: 200px;">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="articleForm.invalid || isSubmitting">
+      <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      {{ isSubmitting ? 'Updating...' : 'Update Article' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="router.navigate(['/article', articleId])">Cancel</button>
+
+  </form>
+</div>
+

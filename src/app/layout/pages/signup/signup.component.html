@@ -1,0 +1,121 @@
+<section class="auth-section d-flex align-items-center justify-content-center py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0 rounded-lg overflow-hidden" data-aos="fade-up">
+          <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+              <a class="navbar-brand d-inline-block mb-3" routerLink="/home">
+                 <img src="assets/logo.png" alt="CureFusion Logo" height="35">
+              </a>
+              <h3 class="fw-bold mb-1">Create Patient Account</h3>
+              <p class="text-muted small">Fill in the details below to register.</p>
+            </div>
+
+            <form [formGroup]="signupForm" (ngSubmit)="submitsignup()">
+              <!-- Error Message -->
+              <div *ngIf="errormsg" class="alert alert-danger d-flex align-items-center p-2 small mb-3" role="alert">
+                 <i class="fas fa-exclamation-triangle me-2"></i>
+                 <div>{{ errormsg }}</div>
+              </div>
+
+              <!-- First & Last Name -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input formControlName="firstName" type="text" class="form-control" id="firstName" placeholder="First Name" [ngClass]="{'is-invalid': signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched}"/>
+                    <label for="firstName"><i class="fas fa-user me-2 text-muted"></i> First Name</label>
+                    <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="invalid-feedback small">
+                      <span *ngIf="signupForm.get('firstName')?.errors?.['required']">First name is required.</span>
+                      <span *ngIf="signupForm.get('firstName')?.errors?.['minlength']">Min length is 3.</span>
+                      <span *ngIf="signupForm.get('firstName')?.errors?.['maxlength']">Max length is 8.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name" [ngClass]="{'is-invalid': signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched}"/>
+                    <label for="lastName"><i class="fas fa-user me-2 text-muted"></i> Last Name</label>
+                     <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="invalid-feedback small">
+                      <span *ngIf="signupForm.get('lastName')?.errors?.['required']">Last name is required.</span>
+                      <span *ngIf="signupForm.get('lastName')?.errors?.['minlength']">Min length is 3.</span>
+                      <span *ngIf="signupForm.get('lastName')?.errors?.['maxlength']">Max length is 8.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Email Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email Address" [ngClass]="{'is-invalid': signupForm.get('email')?.invalid && signupForm.get('email')?.touched}"/>
+                <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
+                <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="invalid-feedback small">
+                  <span *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</span>
+                  <span *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email address.</span>
+                </div>
+              </div>
+
+              <!-- Phone Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="phoneNumber" type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" [ngClass]="{'is-invalid': signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched}"/>
+                <label for="phoneNumber"><i class="fas fa-phone me-2 text-muted"></i> Phone Number</label>
+                 <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched" class="invalid-feedback small">
+                  <span *ngIf="signupForm.get('phoneNumber')?.errors?.['required']">Phone number is required.</span>
+                  <span *ngIf="signupForm.get('phoneNumber')?.errors?.['pattern']">Please enter a valid phone number.</span>
+                </div>
+              </div>
+
+              <!-- Date of Birth Input -->
+               <div class="form-floating mb-3">
+                <input formControlName="dob" type="date" class="form-control text-muted" id="dob" placeholder="Date of Birth" [ngClass]="{'is-invalid': signupForm.get('dob')?.invalid && signupForm.get('dob')?.touched}"/>
+                <label for="dob"><i class="fas fa-calendar-alt me-2 text-muted"></i> Date of Birth</label>
+                 <div *ngIf="signupForm.get('dob')?.invalid && signupForm.get('dob')?.touched" class="invalid-feedback small">
+                  <span *ngIf="signupForm.get('dob')?.errors?.['required']">Date of Birth is required.</span>
+                </div>
+              </div>
+
+              <!-- Password Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" [ngClass]="{'is-invalid': signupForm.get('password')?.invalid && signupForm.get('password')?.touched}"/>
+                <label for="password"><i class="fas fa-lock me-2 text-muted"></i> Password</label>
+                 <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="invalid-feedback small">
+                  <span *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</span>
+                  <span *ngIf="signupForm.get('password')?.errors?.['pattern']">
+                    Password needs 8+ chars, upper/lower case, number, symbol.
+                  </span>
+                </div>
+              </div>
+
+              <!-- Confirm Password Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="confirmPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" [ngClass]="{'is-invalid': signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched}"/>
+                <label for="confirmPassword"><i class="fas fa-lock me-2 text-muted"></i> Confirm Password</label>
+                 <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="invalid-feedback small">
+                  <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</span>
+                  <span *ngIf="signupForm.get('confirmPassword')?.errors?.['mismatch']">Passwords do not match.</span>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button [disabled]="signupForm.invalid || spinner" class="btn btn-primary btn-lg w-100 rounded-pill mt-3">
+                <span *ngIf="spinner" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span *ngIf="spinner">Creating Account...</span>
+                <span *ngIf="!spinner">Sign Up</span>
+              </button>
+            </form>
+
+            <!-- Login Link -->
+            <div class="text-center mt-4">
+              <p class="text-muted small mb-0">
+                Already have an account?
+                <a routerLink="/login" class="fw-medium text-decoration-none ms-1">Login Now</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

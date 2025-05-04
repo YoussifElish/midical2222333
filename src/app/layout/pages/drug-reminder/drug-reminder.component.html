@@ -1,0 +1,103 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9">
+      <div class="card shadow-sm border-0" data-aos="fade-up">
+        <div class="card-header bg-primary text-white">
+          <h2 class="h4 mb-0 text-center"><i class="fas fa-bell me-2"></i>Set Drug Reminder</h2>
+        </div>
+        <div class="card-body p-4">
+
+          <!-- Drug Search Section -->
+          <div class="search-section mb-4">
+            <label for="drug-search" class="form-label fw-medium">Search for Drug:</label>
+            <div class="input-group mb-2">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+              <input
+                id="drug-search"
+                type="text"
+                placeholder="Type drug name (e.g., Aspirin)"
+                [formControl]="searchControl"
+                class="form-control"
+                aria-label="Search for drug"
+              />
+              <div *ngIf="isLoading" class="spinner-border spinner-border-sm ms-2 align-self-center" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+
+            <ul *ngIf="searchResults$ | async as results" class="list-group search-results-list shadow-sm">
+              <li *ngIf="results.length === 0 && searchControl.value && !isLoading" class="list-group-item text-muted text-center small">No drugs found matching "{{ searchControl.value }}".</li>
+              <li *ngFor="let drug of results" (click)="selectDrug(drug)" class="list-group-item list-group-item-action d-flex align-items-center cursor-pointer">
+                <!-- Placeholder Icon -->
+                <i class="fas fa-pills text-primary me-3 fa-lg"></i>
+                <div>
+                    <span class="drug-name fw-medium">{{ drug.name }}</span>
+                    <small class="drug-dosage text-muted d-block">{{ drug.dosage }}</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Selected Drug & Reminder Form Section -->
+          <div *ngIf="selectedDrug" class="reminder-form-section mt-4 pt-4 border-top">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h5 mb-0">Set Reminder for: <span class="text-primary fw-semibold">{{ selectedDrug.name }}</span></h3>
+                <button (click)="clearSelection()" class="btn btn-sm btn-outline-secondary">Change Drug</button>
+            </div>
+
+            <form [formGroup]="reminderForm" (ngSubmit)="onSubmitReminder()">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input id="startDate" type="datetime-local" formControlName="startDate" class="form-control" placeholder="Start Date" [ngClass]="{'is-invalid': reminderForm.get('startDate')?.invalid && reminderForm.get('startDate')?.touched}" required>
+                    <label for="startDate">Start Date & Time</label>
+                    <div *ngIf="reminderForm.get('startDate')?.invalid && reminderForm.get('startDate')?.touched" class="invalid-feedback small">
+                      Start date is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input id="endDate" type="datetime-local" formControlName="endDate" class="form-control" placeholder="End Date" [ngClass]="{'is-invalid': reminderForm.get('endDate')?.invalid && reminderForm.get('endDate')?.touched}" required>
+                    <label for="endDate">End Date & Time</label>
+                    <div *ngIf="reminderForm.get('endDate')?.invalid && reminderForm.get('endDate')?.touched" class="invalid-feedback small">
+                      End date is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input id="repeatIntervalMinutes" type="number" formControlName="repeatIntervalMinutes" min="1" class="form-control" placeholder="Remind every (minutes)" [ngClass]="{'is-invalid': reminderForm.get('repeatIntervalMinutes')?.invalid && reminderForm.get('repeatIntervalMinutes')?.touched}" required>
+                <label for="repeatIntervalMinutes">Remind me every (minutes)</label>
+                <div *ngIf="reminderForm.get('repeatIntervalMinutes')?.invalid && reminderForm.get('repeatIntervalMinutes')?.touched" class="invalid-feedback small">
+                  Please enter a valid interval (minimum 1 minute).
+                </div>
+              </div>
+
+              <button type="submit" [disabled]="reminderForm.invalid || !selectedDrug || !userId || isSubmitting" class="btn btn-success w-100 btn-lg rounded-pill">
+                <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                {{ isSubmitting ? 'Setting Reminder...' : 'Set Reminder' }}
+              </button>
+
+              <p *ngIf="!userId && selectedDrug" class="alert alert-warning small p-2 mt-3 text-center">User information not found. Cannot set reminder.</p>
+
+              <!-- Submission Status Message -->
+              <div *ngIf="submitStatus" [ngClass]="{'alert-success': submitStatus.success, 'alert-danger': !submitStatus.success}" class="alert small p-2 mt-3 text-center" role="alert">
+                {{ submitStatus.message }}
+              </div>
+
+            </form>
+          </div>
+
+           <!-- Placeholder if no drug is selected -->
+           <div *ngIf="!selectedDrug" class="text-center text-muted mt-4 pt-4 border-top">
+               <p><i class="fas fa-search me-1"></i> Please search and select a drug above to set a reminder.</p>
+           </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
