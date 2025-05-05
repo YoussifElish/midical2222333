@@ -1,15 +1,15 @@
 import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router
-} from "./chunk-CM2FFG2J.js";
-import {
   animate,
   state,
   style,
   transition,
   trigger
 } from "./chunk-SNZQTJAI.js";
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router
+} from "./chunk-CM2FFG2J.js";
 import "./chunk-INLX5TJ5.js";
 import "./chunk-FVVJYGBG.js";
 import {
@@ -83,11 +83,11 @@ import {
   ɵɵsanitizeUrl,
   ɵɵtemplate
 } from "./chunk-RVDBUSZB.js";
-import "./chunk-LFVCTHGI.js";
 import {
   fromEvent,
   merge
 } from "./chunk-4RMHXXWK.js";
+import "./chunk-LFVCTHGI.js";
 import {
   Subject,
   delay,

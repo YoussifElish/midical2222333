@@ -32,10 +32,10 @@ import {
   ɵɵdefineNgModule,
   ɵɵdirectiveInject
 } from "./chunk-RVDBUSZB.js";
-import "./chunk-LFVCTHGI.js";
 import {
   fromEvent
 } from "./chunk-4RMHXXWK.js";
+import "./chunk-LFVCTHGI.js";
 import {
   BehaviorSubject,
   Subject,

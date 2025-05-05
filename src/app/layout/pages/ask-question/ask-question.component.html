@@ -1,0 +1,40 @@
+<div class="container mt-4 mb-5">
+  <h2>Ask a New Question</h2>
+
+  <div class="card shadow-sm mt-4">
+    <div class="card-body">
+      <form (ngSubmit)="submitQuestion()" #questionForm="ngForm">
+        <div class="mb-3">
+          <label for="questionTitle" class="form-label">Question Title</label>
+          <input type="text" class="form-control" id="questionTitle" name="questionTitle" required [(ngModel)]="newQuestion.title" #title="ngModel">
+          <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger mt-1">
+            <small *ngIf="title.errors?.['required']">Question title is required.</small> <!-- Fixed: Changed .required to ['required'] -->
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="questionBody" class="form-label">Question Body</label>
+          <textarea class="form-control" id="questionBody" name="questionBody" rows="8" required [(ngModel)]="newQuestion.content" #body="ngModel"></textarea>
+          <div *ngIf="body.invalid && (body.dirty || body.touched)" class="text-danger mt-1">
+            <small *ngIf="body.errors?.['required']">Question body is required.</small> <!-- Fixed: Changed .required to ['required'] -->
+          </div>
+        </div>
+
+        <!-- Optional: Add tags/category input here if needed -->
+
+        <button type="submit" class="btn btn-primary" [disabled]="!questionForm.form.valid || isSubmitting">
+          {{ isSubmitting ? "Submitting..." : "Submit Question" }}
+        </button>
+
+        <div *ngIf="submitError" class="alert alert-danger mt-3">
+          {{ submitError }}
+        </div>
+
+        <div *ngIf="submitSuccess" class="alert alert-success mt-3">
+          Question submitted successfully! Redirecting...
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

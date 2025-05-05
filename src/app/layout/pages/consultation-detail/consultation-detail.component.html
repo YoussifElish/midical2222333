@@ -1,0 +1,116 @@
+<div class="container mt-4 mb-5">
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Question Details -->
+  <div *ngIf="!isLoading && !error && question">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title color-2">{{ question.title || 'No Title' }}</h2>
+        <p class="card-text text-muted mb-2">
+          Asked by {{ question.userName || 'Anonymous' }} on {{ question.createdIn | date:'medium' }}
+        </p>
+        <p class="card-text">{{ question.content }}</p>
+        <div class="d-flex justify-content-end align-items-center">
+          <button
+            class="btn btn-sm btn-outline-success me-2"
+            (click)="voteQuestion(question.id, 'up')"
+            [disabled]="votingQuestion === question.id"
+          >
+            <fa-icon [icon]="faThumbsUp"></fa-icon> {{ question.upvotes || 0 }}
+          </button>
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="voteQuestion(question.id, 'down')"
+            [disabled]="votingQuestion === question.id"
+          >
+            <fa-icon [icon]="faThumbsDown"></fa-icon> {{ question.downvotes || 0 }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <h4>Answers ({{ question.answerCount || 0 }})</h4>
+
+    <!-- Answer List -->
+    <div *ngIf="question.answers && question.answers.length > 0">
+      <div *ngFor="let answer of question.answers" class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <p class="card-text text-muted mb-2">
+            Answered by {{ answer.userName || 'Doctor' }} on {{ answer.createdIn | date:'medium' }}
+          </p>
+          <p class="card-text">{{ answer.content }}</p>
+          <div class="d-flex justify-content-end align-items-center">
+            <button
+              class="btn btn-sm btn-outline-success me-2"
+              (click)="voteAnswer(answer.id, 'up')"
+              [disabled]="votingAnswer === answer.id"
+            >
+              <fa-icon [icon]="faThumbsUp"></fa-icon> {{ answer.upvotes || 0 }}
+            </button>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="voteAnswer(answer.id, 'down')"
+              [disabled]="votingAnswer === answer.id"
+            >
+              <fa-icon [icon]="faThumbsDown"></fa-icon> {{ answer.downvotes || 0 }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Answers Message -->
+    <div *ngIf="!question.answers || question.answers.length === 0" class="text-center text-muted mt-4">
+      <p>No answers yet. Be the first to provide one!</p>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Add Answer Form -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Provide an Answer</h5>
+        <form (ngSubmit)="submitAnswer()" #answerForm="ngForm">
+          <div class="mb-3">
+            <label for="answerBody" class="form-label">Your Answer</label>
+            <textarea
+              class="form-control"
+              id="answerBody"
+              name="answerBody"
+              rows="5"
+              required
+              [(ngModel)]="newAnswer.content"
+              #body="ngModel"
+              [disabled]="submittingAnswer || !question"
+            ></textarea>
+            <div *ngIf="body.invalid && (body.dirty || body.touched)" class="text-danger mt-1">
+              <small *ngIf="body.errors?.['required']">Answer body is required.</small>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!answerForm.form.valid || submittingAnswer || !question"
+          >
+            {{ submittingAnswer ? 'Submitting...' : 'Submit Answer' }}
+          </button>
+          <div *ngIf="answerError" class="alert alert-danger mt-3">
+            {{ answerError }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
