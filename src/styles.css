@@ -1,4 +1,6 @@
 /* Global Variables (Light Mode Defaults) */
+
+
 :root {
   --bs-body-font-family: 'Encode Sans Expanded', sans-serif; /* Example font */
 
@@ -229,3 +231,4 @@ main {
 
 /* Add any other global styles below */
 
+/* Import angular-calendar CSS */

@@ -7,14 +7,26 @@ import { HttpClientModule, provideHttpClient, withFetch, withInterceptors, HTTP_
 import { provideAnimations, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor'; // Import the interceptor
 
+// Import for angular-calendar
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), // Recommended for Angular v17+
     provideRouter(routes, withViewTransitions()),
     provideClientHydration(),
-    provideAnimations(),
+    provideAnimations(), // Ensures BrowserAnimationsModule is provided
     provideHttpClient(withFetch()), // Use withFetch or remove if not needed, but keep provideHttpClient
-    importProvidersFrom(RouterModule, BrowserAnimationsModule, HttpClientModule),
+    importProvidersFrom(
+      RouterModule, 
+      // BrowserAnimationsModule, // Already effectively provided by provideAnimations()
+      HttpClientModule,
+      CalendarModule.forRoot({ // Add CalendarModule with forRoot here
+        provide: DateAdapter,
+        useFactory: adapterFactory,
+      })
+    ),
     // Provide the interceptor
     {
       provide: HTTP_INTERCEPTORS,
