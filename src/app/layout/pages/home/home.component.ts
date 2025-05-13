@@ -2,16 +2,20 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {  CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import  AOS from 'aos';
+import { SliderComponent } from '../../additions/slider/slider.component';
+  
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule,RouterLink,],
+  imports: [CarouselModule,RouterLink,SliderComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
-})
+  styleUrl: './home.component.css',
+ })
+
 export class HomeComponent implements OnInit {
+ 
 
   customOptions: OwlOptions = {
     loop: true,

@@ -1,0 +1,50 @@
+.slider-container {
+  position: relative;
+  width: 100%;
+height: 100%; /* Fill parent (header) */
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+object-fit: cover; /* Ensure images fill the slide */
+}
+
+header.hero-section {
+  position: relative;
+  background: none !important;
+}
+.owl-carousel .owl-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+header.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+header.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+  z-index: 1;
+}
