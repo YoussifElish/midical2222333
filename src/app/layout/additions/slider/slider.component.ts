@@ -13,8 +13,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class SliderComponent {
   slides = [
     { image: './../../../../assets/images/try2.jpg', alt: 'Slide 1' },
-    { image: './../../../../assets/images/try2.jpg', alt: 'Slide 2' },
-    { image: './../../../../assets/images/try2.jpg', alt: 'Slide 3' }
+    { image: './../../../../assets/images/hero-background-modern.jpg', alt: 'Slide 2' },
+    { image: './../../../../assets/images/home01.jpg', alt: 'Slide 3' }
   ];
 
   carouselOptions: OwlOptions = {

@@ -20,40 +20,37 @@
                  <div>{{ errormsg }}</div>
               </div> -->
 
-              <!-- First & Last Name -->
+              <!-- First & Bio  -->
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name"/>
-                    <label for="firstName"><i class="fas fa-user me-2 text-muted"></i> First Name</label>
+                    <input type="text" class="form-control" id="First Name" placeholder="First Name"/>
+                    <label for="First Name"><i class="fas fa-user me-2 text-muted"></i> First Name</label>
                     <!-- Add validation feedback -->
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name"/>
-                    <label for="lastName"><i class="fas fa-user me-2 text-muted"></i> Last Name</label>
-                     <!-- Add validation feedback -->
+                    <input type="text" class="form-control" id="Last Name" placeholder="Last Name"/>
+                    <label for="Last Name"><i class="fas fa-user me-2 text-muted"></i> Last Name</label>
+                    <!-- Add validation feedback -->
                   </div>
                 </div>
+               
               </div>
 
-              <!-- Email Input -->
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" placeholder="Email Address"/>
-                <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
-                <!-- Add validation feedback -->
-              </div>
+              <!-- Email & Specialty-->
 
-              <!-- Phone Input -->
-              <div class="form-floating mb-3">
-                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number"/>
-                <label for="phoneNumber"><i class="fas fa-phone me-2 text-muted"></i> Phone Number</label>
-                 <!-- Add validation feedback -->
-              </div>
-
-              <!-- Specialty Input (Example - Needs actual implementation) -->
-              <div class="form-floating mb-3">
+                   <div class="row g-3 mb-3">
+                <div class="col-md-6">
+               
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="Email Address"/>
+                    <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
+                    <!-- Add validation feedback -->
+                  </div>
+                </div>
+                   <div class="form-floating col-md-6   mb-3">
                  <select class="form-select" id="specialty" aria-label="Select Specialty">
                     <option selected disabled value="">Select Specialty...</option>
                     <option value="Cardiology">Cardiology</option>
@@ -65,21 +62,69 @@
                 <label for="specialty"><i class="fas fa-stethoscope me-2 text-muted"></i> Specialty</label>
                  <!-- Add validation feedback -->
               </div>
-
-              <!-- Password Input -->
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" placeholder="Password"/>
-                <label for="password"><i class="fas fa-lock me-2 text-muted"></i> Password</label>
-                 <!-- Add validation feedback -->
               </div>
 
+
+
+              <!-- DOB & Years Of Experience-->
+
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="date" class="form-control" id="Date" placeholder="DOB"/>
+                    <label for="DOB"><i class="fa-solid fa-calendar"></i> DOB</label>
+                    <!-- Add validation feedback -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="number" class="form-control" id="Years" placeholder="Years Of Experience"/>
+                    <label for="Years"><i class="fa-solid fa-calendar-check"></i> Years Of Experience</label>
+                     <!-- Add validation feedback -->
+                  </div>
+                </div>
+              </div>
+          
+
+              <!-- Password &  Profile Image -->
+               <div class="row g-3 mb-3  align-items-center">
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="Password" placeholder="Password"/>
+                    <label for="Password"><i class="fa-solid fa-lock"></i> Password</label>
+                    <!-- Add validation feedback -->
+                  </div>
+                </div>
+
+
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="Confirm Password" placeholder="Confirm Password"/>
+                    <label for="Confirm Password"><i class="fa-solid fa-lock"></i> Confirm Password</label>
+                    <!-- Add validation feedback -->
+                  </div>
+                </div>
+
+                
+              </div>
+              
               <!-- Confirm Password Input -->
-              <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"/>
-                <label for="confirmPassword"><i class="fas fa-lock me-2 text-muted"></i> Confirm Password</label>
-                 <!-- Add validation feedback -->
-              </div>
+                <div class="row g-3 mb-3 align-items-center">
+                <div class="col-md-6">
 
+                  <div class="mb-3">
+                  <label for="image" class="form-label">Cover Image</label>
+                  <input type="file" id="image" class="form-control"  >
+                  </div>
+                </div>
+                <div class="col-md-6">
+
+                  <div class="mb-3">
+                  <label for="image" class="form-label">Certificate Image</label>
+                  <input type="file" id="image" class="form-control"  >
+                  </div>
+                </div>
+              </div>
               <!-- Submit Button -->
               <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill mt-3">
                 <!-- Add spinner logic if needed -->
