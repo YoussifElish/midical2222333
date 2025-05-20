@@ -10,3 +10,4 @@ export interface signupdata extends logindata{
     "email": "string",
     "password": "string"
   }
+ 

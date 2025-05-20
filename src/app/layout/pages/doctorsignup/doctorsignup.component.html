@@ -13,27 +13,42 @@
             </div>
 
             <!-- TODO: Replace placeholder inputs with actual form group and validation -->
-            <form>
+            <form [formGroup]="doctorSignupForm" (ngSubmit)="docSignup()">
               <!-- Error Message Placeholder -->
               <!-- <div *ngIf="errormsg" class="alert alert-danger d-flex align-items-center p-2 small mb-3" role="alert">
                  <i class="fas fa-exclamation-triangle me-2"></i>
                  <div>{{ errormsg }}</div>
               </div> -->
 
-              <!-- First & Bio  -->
+              <!-- First & Last Name  -->
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="First Name" placeholder="First Name"/>
+                    <input formControlName="FirstName" type="text" class="form-control" id="First Name" placeholder="First Name"/>
                     <label for="First Name"><i class="fas fa-user me-2 text-muted"></i> First Name</label>
+                    @if (doctorSignupForm.get('FirstName')?.errors&&doctorSignupForm.get('FirstName')?.touched) {
+
+                      @if(doctorSignupForm.get('FirstName')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
                     <!-- Add validation feedback -->
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="Last Name" placeholder="Last Name"/>
+                    <input formControlName="LastName"  type="text" class="form-control" id="Last Name" placeholder="Last Name"/>
                     <label for="Last Name"><i class="fas fa-user me-2 text-muted"></i> Last Name</label>
-                    <!-- Add validation feedback -->
+                   @if (doctorSignupForm.get('LastName')?.errors&&doctorSignupForm.get('LastName')?.touched) {
+
+                      @if(doctorSignupForm.get('LastName')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
                   </div>
                 </div>
                
@@ -45,19 +60,33 @@
                 <div class="col-md-6">
                
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" placeholder="Email Address"/>
+                    <input formControlName="Email" type="email" class="form-control" id="email" placeholder="Email Address"/>
                     <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
-                    <!-- Add validation feedback -->
+                       @if (doctorSignupForm.get('Email')?.errors&&doctorSignupForm.get('Email')?.touched) {
+
+                      @if(doctorSignupForm.get('Email')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
                   </div>
                 </div>
                    <div class="form-floating col-md-6   mb-3">
-                 <select class="form-select" id="specialty" aria-label="Select Specialty">
+                 <select formControlName="Specialization" class="form-select" id="specialty" aria-label="Select Specialty">
                     <option selected disabled value="">Select Specialty...</option>
                     <option value="Cardiology">Cardiology</option>
                     <option value="Dermatology">Dermatology</option>
                     <option value="Pediatrics">Pediatrics</option>
                     <option value="Neurology">Neurology</option>
-                    <!-- Add other specialties -->
+                    @if (doctorSignupForm.get('Specialization')?.errors&&doctorSignupForm.get('Specialization')?.touched) {
+
+                      @if(doctorSignupForm.get('Specialization')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
                   </select>
                 <label for="specialty"><i class="fas fa-stethoscope me-2 text-muted"></i> Specialty</label>
                  <!-- Add validation feedback -->
@@ -71,16 +100,30 @@
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="date" class="form-control" id="Date" placeholder="DOB"/>
+                    <input formControlName="DOB" type="date" class="form-control" id="Date" placeholder="DOB"/>
                     <label for="DOB"><i class="fa-solid fa-calendar"></i> DOB</label>
-                    <!-- Add validation feedback -->
+                   @if (doctorSignupForm.get('DOB')?.errors&&doctorSignupForm.get('DOB')?.touched) {
+
+                      @if(doctorSignupForm.get('DOB')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="number" class="form-control" id="Years" placeholder="Years Of Experience"/>
+                    <input formControlName="YearsOfExperience" type="number" class="form-control" id="Years" placeholder="Years Of Experience"/>
                     <label for="Years"><i class="fa-solid fa-calendar-check"></i> Years Of Experience</label>
-                     <!-- Add validation feedback -->
+                   @if (doctorSignupForm.get('YearsOfExperience')?.errors&&doctorSignupForm.get('YearsOfExperience')?.touched) {
+
+                      @if(doctorSignupForm.get('YearsOfExperience')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
                   </div>
                 </div>
               </div>
@@ -90,45 +133,76 @@
                <div class="row g-3 mb-3  align-items-center">
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="password" class="form-control" id="Password" placeholder="Password"/>
+                    <input formControlName="Password" type="password" class="form-control" id="Password" placeholder="Password"/>
                     <label for="Password"><i class="fa-solid fa-lock"></i> Password</label>
-                    <!-- Add validation feedback -->
+                      @if (doctorSignupForm.get('Password')?.errors&&doctorSignupForm.get('Password')?.touched) {
+
+                      @if(doctorSignupForm.get('Password')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
                   </div>
                 </div>
 
 
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="password" class="form-control" id="Confirm Password" placeholder="Confirm Password"/>
-                    <label for="Confirm Password"><i class="fa-solid fa-lock"></i> Confirm Password</label>
-                    <!-- Add validation feedback -->
-                  </div>
-                </div>
+                
 
                 
               </div>
               
+               <div class="row g-3 mb-3">
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input formControlName="Bio" type="text" class="form-control" id="Bio" placeholder="Bio"/>
+                    <label for="Bio"><i class="fas fa-user me-2 text-muted"></i> Bio </label>
+                    @if (doctorSignupForm.get('Bio')?.errors&&doctorSignupForm.get('Bio')?.touched) {
+
+                      @if(doctorSignupForm.get('Bio')?.errors?.['required']){
+                        <div class="alert alert-danger ">
+                          <p>First Name</p>
+                        </div>
+                      }
+                    }
+                  </div>
+                </div>
+             
+               
+              </div>
+
               <!-- Confirm Password Input -->
                 <div class="row g-3 mb-3 align-items-center">
                 <div class="col-md-6">
 
                   <div class="mb-3">
                   <label for="image" class="form-label">Cover Image</label>
-                  <input type="file" id="image" class="form-control"  >
+                  <input (change)="onFileChange($event,'ProfileImage')" type="file" id="image" class="form-control"  >
                   </div>
                 </div>
                 <div class="col-md-6">
 
                   <div class="mb-3">
                   <label for="image" class="form-label">Certificate Image</label>
-                  <input type="file" id="image" class="form-control"  >
+                  <input (change)="onFileChange($event,'CertificateImage')" type="file" id="image" class="form-control"  >
                   </div>
                 </div>
               </div>
+
+
+
+
+
+
               <!-- Submit Button -->
-              <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill mt-3">
-                <!-- Add spinner logic if needed -->
+              <button   class="btn btn-primary btn-lg w-100 rounded-pill mt-3">
+               @if (Spiner) {
+                Loading....
+               }
+               @else {
                 <span>Sign Up as Doctor</span>
+
+               }
               </button>
             </form>
 

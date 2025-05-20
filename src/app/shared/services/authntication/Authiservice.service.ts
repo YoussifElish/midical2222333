@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { signupdata, logindata } from '../../interfaces/data';
+import { signupdata, logindata,  } from '../../interfaces/data';
 import { Environment } from '../../../base/Environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators'; // <-- Add this import
+import { tap } from 'rxjs/operators';  
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class Authiserviceservice {
 
   signup(data: signupdata): Observable<any> {
     return this._HttpClient.post(`${Environment.baseurl}/Auth/Register`, data);
+  }
+
+  Doctorsignup(data: FormData ): Observable<any> {
+    return this._HttpClient.post(`${Environment.baseurl}/Auth/register-as-doctor`, data ,{responseType:'text'});
   }
 
   login(data: logindata): Observable<any> {

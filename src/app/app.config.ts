@@ -10,9 +10,12 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor'; // Imp
 // Import for angular-calendar
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
+
   providers: [
+    provideToastr(), 
     provideZoneChangeDetection({ eventCoalescing: true }), // Recommended for Angular v17+
     provideRouter(routes, withViewTransitions()),
     provideClientHydration(),

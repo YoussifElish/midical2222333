@@ -6,8 +6,7 @@ import { SignupinfoComponent } from './layout/additions/signupinfo/signupinfo.co
 import { ContactUsComponent } from './layout/pages/contact-us/contact-us.component';
 import { ReSearchComponent } from './layout/pages/re-search/re-search.component';
 import { Routes } from '@angular/router';
-import { EditorModule } from '@tinymce/tinymce-angular';
-import { HomeComponent } from './layout/pages/home/home.component';
+ import { HomeComponent } from './layout/pages/home/home.component';
 import { LoginComponent } from './layout/pages/login/login.component';
 import { CareersComponent } from './layout/pages/careers/careers.component';
 import { CommitmentComponent } from './layout/pages/commitment/commitment.component';
