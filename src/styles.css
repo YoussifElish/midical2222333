@@ -216,7 +216,13 @@ body {
 main {
   flex: 1;
 }
+ 
+input::placeholder {
+  color: #999;
+}
 
-/* Add any other global styles below */
-
-/* Import angular-calendar CSS */  
+@media (prefers-color-scheme: dark) {
+  input::placeholder {
+    color: transparent;
+  }
+}

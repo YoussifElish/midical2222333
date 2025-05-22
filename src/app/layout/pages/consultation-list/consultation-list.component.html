@@ -23,7 +23,7 @@
   <div *ngIf="!isLoading && !error && questions.length > 0" class="question-list">
     <div *ngFor="let question of questions" class="question-card-wrapper mb-4">
       <a [routerLink]="['/consultations', question.id]" 
-         class="question-card d-block bg-white rounded-3 shadow-sm text-decoration-none text-dark position-relative">
+         class="question-card d-block  rounded-3 shadow-sm text-decoration-none text-dark position-relative">
         
         <!-- Category Tag -->
         <div class="category-tag position-absolute top-0 start-0 mt-2">

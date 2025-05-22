@@ -21,7 +21,7 @@
 
               <!-- Email Input -->
               <div class="form-floating mb-3">
-                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email Address" [ngClass]="{'is-invalid': loginform.get('email')?.invalid && loginform.get('email')?.touched}"/>
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="'"  [ngClass]="{'is-invalid': loginform.get('email')?.invalid && loginform.get('email')?.touched}"/>
                 <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
                 <div *ngIf="loginform.get('email')?.invalid && loginform.get('email')?.touched" class="invalid-feedback small">
                   <span *ngIf="loginform.get('email')?.errors?.['required']">Email is required.</span>
@@ -31,7 +31,7 @@
 
               <!-- Password Input -->
               <div class="form-floating mb-3">
-                <input formControlName="password" type="password" class="form-control" id="password" placeholder="Password" [ngClass]="{'is-invalid': loginform.get('password')?.invalid && loginform.get('password')?.touched}"/>
+                <input formControlName="password" type="password" class="form-control" id="password" placeholder="'" [ngClass]="{'is-invalid': loginform.get('password')?.invalid && loginform.get('password')?.touched}"/>
                 <label for="password"><i class="fas fa-lock me-2 text-muted"></i> Password</label>
                  <div *ngIf="loginform.get('password')?.invalid && loginform.get('password')?.touched" class="invalid-feedback small">
                   <span *ngIf="loginform.get('password')?.errors?.['required']">Password is required.</span>
