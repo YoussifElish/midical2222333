@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { signupdata, logindata,  } from '../../interfaces/data';
+import { signupdata, logindata, ForgetPass, ResetPass,  } from '../../interfaces/data';
 import { Environment } from '../../../base/Environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
@@ -21,6 +21,14 @@ export class Authiserviceservice {
 
   signup(data: signupdata): Observable<any> {
     return this._HttpClient.post(`${Environment.baseurl}/Auth/Register`, data);
+  }
+
+  ForgetPass(data: ForgetPass): Observable<any> {
+    return this._HttpClient.post(`${Environment.baseurl}/Auth/forget-password`, data);
+  }
+  
+  ResetPass(data: ResetPass): Observable<any> {
+    return this._HttpClient.post(`${Environment.baseurl}/Auth/reset-password`, data);
   }
 
   Doctorsignup(data: FormData ): Observable<any> {

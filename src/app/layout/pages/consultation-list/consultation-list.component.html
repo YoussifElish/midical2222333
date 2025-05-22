@@ -1,42 +1,91 @@
 <div class="container mt-4 mb-5">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Medical Consultations</h2>
-    <button class="btn btn-primary" routerLink="/consultations/ask">Ask a New Question</button>
+    <h2 class="fw-bold text-primary">Medical Consultations</h2>
+    <button class="btn btn-primary rounded-pill px-4 shadow-sm" routerLink="/consultations/ask">
+      <i class="fas fa-plus-circle me-2"></i>Ask a New Question
+    </button>
   </div>
 
   <!-- Loading Indicator -->
-  <div *ngIf="isLoading" class="text-center">
-    <div class="spinner-border text-primary" role="status">
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
       <span class="visually-hidden">Loading...</span>
     </div>
+    <p class="mt-3 text-muted">Loading questions...</p>
   </div>
 
   <!-- Error Message -->
-  <div *ngIf="error" class="alert alert-danger">
-    {{ error }}
+  <div *ngIf="error" class="alert alert-danger shadow-sm">
+    <i class="fas fa-exclamation-triangle me-2"></i>{{ error }}
   </div>
 
   <!-- Question List -->
-  <div *ngIf="!isLoading && !error && questions.length > 0" class="list-group">
-    <!-- Corrected: Ensure the <a> tag is properly structured -->
-    <a *ngFor="let question of questions" [routerLink]="['/consultations', question.id]" class="list-group-item list-group-item-action flex-column align-items-start mb-3 shadow-sm border rounded">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1 color-2">{{ question.title }}</h5>
-        <small class="text-muted">{{ question.createdIn| date:":short" }}</small>
-      </div>
-      <p class="mb-1">{{ question.content | slice:0:150 }}{{ question.content.length > 150 ? "..." : "" }}</p>
-      <small class="text-muted">Asked by: {{ question.userName }}</small>
-      <div class="d-flex justify-content-end mt-2">
-        <span class="badge bg-light text-dark me-2"><i class="fas fa-thumbs-up text-success"></i> {{ question.upvotes || 0 }}</span>
-        <span class="badge bg-light text-dark"><i class="fas fa-thumbs-down text-danger"></i> {{ question.downvotes || 0 }}</span>
-      </div>
-    </a> <!-- Closing tag now correctly matches the opening tag on line 22 -->
+  <div *ngIf="!isLoading && !error && questions.length > 0" class="question-list">
+    <div *ngFor="let question of questions" class="question-card-wrapper mb-4">
+      <a [routerLink]="['/consultations', question.id]" 
+         class="question-card d-block bg-white rounded-3 shadow-sm text-decoration-none text-dark position-relative">
+        
+        <!-- Category Tag -->
+        <div class="category-tag position-absolute top-0 start-0 mt-2">
+          <span class="badge bg-info text-white px-3 py-2 rounded-end">Medical</span>
+        </div>
+        
+        <div class="card-body p-4">
+          <div class="row">
+            <!-- User Avatar -->
+            <div class="col-auto pe-0">
+              <div class="avatar-container">
+                <div class="rounded-circle bg-light text-primary d-flex align-items-center justify-content-center" 
+                     style="width: 50px; height: 50px; overflow: hidden;">
+                  <i class="fas fa-user-circle fa-2x"></i>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col">
+              <!-- Question Header -->
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0 fw-bold text-primary">{{ question.title }}</h5>
+                <span class="badge bg-light text-muted rounded-pill px-3 py-2 small">
+                  <i class="far fa-clock me-1"></i>{{ question.createdIn | date:":short" }}
+                </span>
+              </div>
+              
+              <!-- Question Content -->
+              <p class="mb-3 text-dark">{{ question.content | slice:0:150 }}{{ question.content.length > 150 ? "..." : "" }}</p>
+              
+              <!-- Question Footer -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="user-info d-flex align-items-center">
+                  <i class="fas fa-user-md text-secondary me-2"></i>
+                  <span class="text-muted small">Asked by: <span class="fw-medium">{{ question.userName }}</span></span>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                  <span class="badge bg-light rounded-pill px-3 py-2 me-2 d-flex align-items-center">
+                    <i class="fas fa-thumbs-up text-success me-1"></i>
+                    <span>{{ question.upvotes || 0 }}</span>
+                  </span>
+                  <span class="badge bg-light rounded-pill px-3 py-2 d-flex align-items-center">
+                    <i class="fas fa-thumbs-down text-danger me-1"></i>
+                    <span>{{ question.downvotes || 0 }}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 
   <!-- No Questions Message -->
-  <div *ngIf="!isLoading && !error && questions.length === 0" class="text-center text-muted mt-5">
-    <p>No questions have been asked yet. Be the first!</p>
+  <div *ngIf="!isLoading && !error && questions.length === 0" class="text-center my-5 py-5 bg-light rounded-3 shadow-sm">
+    <i class="fas fa-question-circle text-muted fa-3x mb-3"></i>
+    <h4 class="text-muted">No questions have been asked yet</h4>
+    <p class="text-muted mb-4">Be the first to ask a medical question!</p>
+    <button class="btn btn-primary rounded-pill px-4" routerLink="/consultations/ask">
+      <i class="fas fa-plus-circle me-2"></i>Ask a Question
+    </button>
   </div>
-
 </div>
-

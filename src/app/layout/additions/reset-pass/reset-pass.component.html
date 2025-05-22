@@ -1,39 +1,70 @@
-<section id="ResetPass" class="ResetPass">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-5 custom-card" data-aos="zoom-in">
-                <div class="text-center">
-                    <img src="./assets/images/forgotpass.jpg" class="text-center" width="200px" height="200px" alt="">
+<section class="auth-section d-flex align-items-center justify-content-center py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7 col-sm-9">
+        <div class="card shadow-lg border-0 rounded-lg overflow-hidden" data-aos="fade-up">
+          <div class="card-body p-4 p-md-5">
+            <div class="text-center mb-4">
+              <a class="navbar-brand d-inline-block mb-3" routerLink="/home">
+                 <img src="assets/images/resetpass.png"   alt="ForgetpassLogo" height="200">
+              </a>
+              <h3 class="fw-bold mb-1">Reset Password?</h3>
+       
+            </div>
 
-                </div>
-                <h6 class="text-center text-black fw-bold">Reset Password?</h6>
-   
-                <div class="form-floating mb-3 text-black">
-                    <input type="password" class="form-control" id="password" placeholder="EX: Muhamed@gmail.com">
-                    <label for="password"><i class="fa-solid fa-envelope "></i> Enter New Password?</label>
-                </div>
-   
-                <div class="form-floating mb-3 text-black">
-                    <input type="password" class="form-control" id="password" placeholder="EX: Muhamed@gmail.com">
-                    <label for="password"><i class="fa-solid fa-envelope "></i> Re-enter New Password</label>
-                </div>
-                <div class="OTPcontainer">
+            <form [formGroup]="resetPassForm"  (ngSubmit)="resetPass()"  >
+
+                  <div *ngIf="errmsg" class="alert alert-danger d-flex align-items-center p-2 small mb-3" role="alert">
+                 <i class="fas fa-exclamation-triangle me-2"></i>
+                 <div>{{ errmsg }}</div>
+              </div>
+
+<!-- otp input -->
+             <div class="OTPcontainer">
+                    <span class="fa-bold me-2 text-start">OTP Number</span>
                 <div id="inputs" class="inputs  justify-content-center d-flex gap-3 mb-2">
-                    <input class="input  OTPinput "  type="text" 
-                        inputmode="numeric" maxlength="1" />
-                    <input class="input  OTPinput  " type="text" 
-                        inputmode="numeric" maxlength="1" />
-                    <input class="input  OTPinput " type="text" 
-                        inputmode="numeric" maxlength="1" />
-                    <input class="input  OTPinput " type="text" 
-                        inputmode="numeric" maxlength="1" />
+                  
+                    <input  formControlName="code" class="input w-100 OTPinput" type="text" inputmode="numeric" maxlength="6" pattern="\d{6}" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+/>
                 </div>
-            </div>
-   
-                <button class="btn btn-custom" routerLink="">Submit</button>
-  
-            
-            </div>
+              
+                </div>
+ 
+              <!-- Email Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Email Address" [ngClass]="{'is-invalid': resetPassForm.get('email')?.invalid && resetPassForm.get('email')?.touched}"/>
+                <label for="email"><i class="fas fa-envelope me-2 text-muted"></i> Email Address</label>
+                <div *ngIf="resetPassForm.get('email')?.invalid && resetPassForm.get('email')?.touched" class="invalid-feedback small">
+                  <span *ngIf="resetPassForm.get('email')?.errors?.['required']">Email is required.</span>
+                  <span *ngIf="resetPassForm.get('email')?.errors?.['email']">Please enter a valid email address.</span>
+                </div>
+              </div>
+              <!-- Passord Input -->
+              <div class="form-floating mb-3">
+                <input formControlName="newPassword" type="password" class="form-control" id="newPassword" placeholder="New Password" [ngClass]="{'is-invalid': resetPassForm.get('newPassword')?.invalid && resetPassForm.get('newPassword')?.touched}"/>
+                <label for="newPassword"><i class="fas fa-lock me-2 text-muted"></i> New Password</label>
+                <div *ngIf="resetPassForm.get('newPassword')?.invalid && resetPassForm.get('newPassword')?.touched" class="invalid-feedback small">
+                  <span *ngIf="resetPassForm.get('newPassword')?.errors?.['required']">New Password is required.</span>
+                  <span *ngIf="resetPassForm.get('newPassword')?.errors?.['pattern']">Please enter a valid Password.</span>
+                </div>
+              </div>
+              <!-- Submit Button -->
+                  <button   class="btn btn-primary btn-lg w-100 rounded-pill mt-3">
+               @if (Spiner) {
+              <i class="fa-solid fa-spinner fa-spin"></i>
+               }
+               @else {
+                <span>Reset My Password</span>
+
+               }
+              </button>
+            </form>
+
+      
+
+          </div>
         </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>

@@ -1,4 +1,4 @@
-export interface signupdata extends logindata{
+export interface signupdata extends logindata ,ForgetPass{
     "confirmPassword": "string",
     "firstName": "string",
     "lastName": "string",
@@ -6,8 +6,16 @@ export interface signupdata extends logindata{
     "dob": "2025-04-27"
   }
 
-  export interface logindata{
-    "email": "string",
+  export interface logindata extends ForgetPass{
+   
     "password": "string"
   }
  
+  export interface ForgetPass{
+ "email": "string",
+  }
+
+  export interface ResetPass extends ForgetPass {
+  "code": "string"
+  "newPassword": "string"
+}

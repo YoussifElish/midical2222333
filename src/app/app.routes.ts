@@ -1,7 +1,6 @@
 import { AddDrugComponent } from './layout/add-drug/add-drug.component';
 import { ArticleComponent } from './layout/pages/article/article.component';
 import { DoctorsignupComponent } from './layout/pages/doctorsignup/doctorsignup.component';
-import { DoctorloginComponent } from './layout/pages/doctorlogin/doctorlogin.component';
 import { SignupinfoComponent } from './layout/additions/signupinfo/signupinfo.component';
 import { ContactUsComponent } from './layout/pages/contact-us/contact-us.component';
 import { ReSearchComponent } from './layout/pages/re-search/re-search.component';
@@ -51,15 +50,12 @@ export const routes: Routes = [
   {path: 'article/edit/:id' , component: EditArticleComponent, canActivate: [RoleAuthGuard] }, // Protected edit article
   {path: 'article/:id' , component: ArticleDetailComponent },
 
-  // Consultation Routes (Consider adding canActivate guards if needed)
-  {path: 'consultations', component: ConsultationListComponent },
+   {path: 'consultations', component: ConsultationListComponent },
   {path: 'consultations/ask', component: AskQuestionComponent /*, canActivate: [RoleAuthGuard] */ }, // Protect if only logged-in users can ask
   {path: 'consultations/:id', component: ConsultationDetailComponent },
-
   {path: 'ForgotPassword' , component: ForgotPasswordComponent  },
   {path: 'resetPass' , component:ResetPassComponent},
   {path: 'signupinfo' , component:SignupinfoComponent},
-  {path: 'doctorlogin' , component:DoctorloginComponent},
   {path: 'doctorsignup' , component:DoctorsignupComponent},
   {path: 'Add-drug' , component:AddDrugComponent},
 
