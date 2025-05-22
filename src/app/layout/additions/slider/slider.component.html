@@ -1,4 +1,5 @@
-<div class="slider-container">
+<div class="slider-container position-relative">
+  <!-- Carousel -->
   <owl-carousel-o [options]="carouselOptions">
     <ng-container *ngFor="let slide of slides">
       <ng-template carouselSlide>
@@ -8,4 +9,18 @@
       </ng-template>
     </ng-container>
   </owl-carousel-o>
+
+  <!-- Overlayed Text Content -->
+  <div class="slider-overlay-text container h-100 position-absolute top-0 start-50 translate-middle-x d-flex align-items-center">
+    <div class="row align-items-center w-100">
+      <div class="col-lg-7 col-md-12 text-center text-lg-start mb-4 mb-lg-0" data-aos="fade-right">
+        <h1 class="display-4 fw-bold mb-3 text-white">
+          Discover Health: Find Your Trusted <span class="highlight">Doctors Today</span>
+        </h1>
+        <p class="lead mb-4 text-white">
+          Access expert physicians and surgeons, advanced technologies, and top-quality facilities right here.
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
