@@ -117,98 +117,50 @@
   </section>
 
   <!-- Featured Doctors Section (NEW) -->
-  <section class="featured-doctors py-5">
+  <section class="featured-doctors py-5 doctors-grid"  *ngIf="!isLoading && !error && doctors.length > 0">
       <div class="container">
           <div class="section-header text-center mb-5" data-aos="fade-up">
               <h2 class="fw-bold">Our Highlighted Doctors</h2>
               <p class="text-muted w-75 mx-auto">Meet some of our highly rated and experienced healthcare professionals.</p>
           </div>
-          <div class="row g-4">
-              <!-- Placeholder Doctor Card 1 -->
-              <div class="col-md-6 col-lg-3" data-aos="fade-up">
-                  <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
-                      <img src="assets/images/doc-placeholder-1.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder One">
-                      <div class="card-body">
-                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder One</h5>
-                          <p class="text-primary small fw-medium mb-2">Cardiologist</p>
-                          <div class="ratings mb-2 text-warning small">
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star-half-alt"></i>
-                              <span class="text-muted ms-1">(123 Reviews)</span>
-                          </div>
-                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> New York, USA</p>
-                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
-                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
-                      </div>
-                  </div>
-              </div>
-              <!-- Placeholder Doctor Card 2 -->
-              <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                   <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
-                      <img src="assets/images/doc-placeholder-2.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder Two">
-                      <div class="card-body">
-                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder Two</h5>
-                          <p class="text-primary small fw-medium mb-2">Dermatologist</p>
-                           <div class="ratings mb-2 text-warning small">
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <span class="text-muted ms-1">(98 Reviews)</span>
-                          </div>
-                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> London, UK</p>
-                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
-                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
-                      </div>
-                  </div>
-              </div>
-              <!-- Placeholder Doctor Card 3 -->
-              <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                   <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
-                      <img src="assets/images/doc-placeholder-3.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder Three">
-                      <div class="card-body">
-                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder Three</h5>
-                          <p class="text-primary small fw-medium mb-2">Pediatrician</p>
-                           <div class="ratings mb-2 text-warning small">
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="far fa-star"></i>
-                              <span class="text-muted ms-1">(75 Reviews)</span>
-                          </div>
-                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> Sydney, AU</p>
-                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
-                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
-                      </div>
-                  </div>
-              </div>
-              <!-- Placeholder Doctor Card 4 -->
-              <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                   <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
-                      <img src="assets/images/doc-placeholder-4.jpg" class="card-img-top doctor-img" alt="Dr. Placeholder Four">
-                      <div class="card-body">
-                          <h5 class="card-title fw-semibold fs-6 mb-1">Dr. Placeholder Four</h5>
-                          <p class="text-primary small fw-medium mb-2">Neurologist</p>
-                           <div class="ratings mb-2 text-warning small">
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star"></i>
-                              <i class="fas fa-star-half-alt"></i>
-                              <span class="text-muted ms-1">(150 Reviews)</span>
-                          </div>
-                          <p class="text-muted small mb-3"><i class="fas fa-map-marker-alt me-1"></i> Paris, FR</p>
-                          <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
-                          <a href="#" class="btn btn-sm btn-primary px-3 ms-2">Book Now</a>
-                      </div>
-                  </div>
-              </div>
-          </div>
+      <div class="row g-4">
+  <div *ngFor="let doctor of doctors" class="col-md-6 col-lg-3" data-aos="fade-up">
+    <div class="doctor-card card h-100 shadow-sm text-center border-0 overflow-hidden">
+      <img
+        [src]="doctor.profileImagePath || 'assets/images/default-doctor-avatar.png'"
+        class="card-img-top doctor-img"
+        alt="{{ doctor.doctorName || 'Doctor' }} Profile Image"
+        onerror="this.src='assets/images/default-doctor-avatar.png'"
+      />
+      <div class="card-body">
+        <h5 class="card-title fw-semibold fs-6 mb-1">{{ doctor.doctorName || 'N/A' }}</h5>
+        <p class="text-primary small fw-medium mb-2">{{ doctor.specialization || 'N/A' }}</p>
+
+        <!-- Rating -->
+        <div class="ratings mb-2 text-warning small" *ngIf="doctor.rating !== undefined">
+          <i class="fas fa-star" *ngFor="let i of [1,2,3,4,5]" 
+             [class.text-warning]="i <= doctor.rating"
+             [class.text-muted]="i > doctor.rating">
+          </i>
+          <span class="text-muted ms-1" *ngIf="doctor.totalReviews !== undefined">
+            ({{ doctor.totalReviews }} Reviews)
+          </span>
+        </div>
+
+        <!-- Optional Location or Bio -->
+        <p class="text-muted small mb-3" *ngIf="doctor.bio">
+         <i class="fa-solid fa-circle-info"></i> {{ doctor.bio }}
+        </p>
+
+        <!-- Action Buttons -->
+        <a href="#" class="btn btn-sm btn-outline-primary px-3">View Profile</a>
+        <button class="btn btn-sm btn-primary px-3 ms-2" (click)="viewDoctorAppointments(doctor.id, doctor.doctorName)">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
           <div class="text-center mt-5" data-aos="fade-up">
               <a routerLink="/doctors" class="btn btn-outline-primary btn-lg">View All Doctors</a>
           </div>
