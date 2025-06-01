@@ -1,3 +1,4 @@
+import { HospitalComponent } from './layout/pages/hospital/hospital.component';
 import { AddDrugComponent } from './layout/add-drug/add-drug.component';
 import { ArticleComponent } from './layout/pages/article/article.component';
 import { DoctorsignupComponent } from './layout/pages/doctorsignup/doctorsignup.component';
@@ -16,15 +17,15 @@ import { ResetPassComponent } from './layout/additions/reset-pass/reset-pass.com
 import { ArticleDetailComponent } from './layout/pages/article-detail/article-detail.component';
 import { DoctorSearchComponent } from './layout/pages/doctor-search/doctor-search.component';
 import { DoctorAppointmentsComponent } from './layout/pages/doctor-appointments/doctor-appointments.component';
-import { AddArticleComponent } from './layout/pages/add-article/add-article.component'; // Import AddArticleComponent
-import { EditArticleComponent } from './layout/pages/edit-article/edit-article.component'; // Import EditArticleComponent
-import { RoleAuthGuard } from './shared/guards/role-auth.guard'; // RoleAuthGuard is already imported
-import { DrugReminderComponent } from './layout/pages/drug-reminder/drug-reminder.component'; // Import the new component
+import { AddArticleComponent } from './layout/pages/add-article/add-article.component';  
+import { EditArticleComponent } from './layout/pages/edit-article/edit-article.component';  
+import { RoleAuthGuard } from './shared/guards/role-auth.guard';  
+import { DrugReminderComponent } from './layout/pages/drug-reminder/drug-reminder.component';  
 import { DrugDetailsComponent } from './layout/additions/drug-details/drug-details.component';
-import { ProfileComponent } from './layout/pages/profile/profile.component'; // Import ProfileComponent
+import { ProfileComponent } from './layout/pages/profile/profile.component';  
 import { patientAppointmentsComponent } from './layout/pages/patient-appointment/patient-appointment.component';
 
-// Import the new consultation components
+ 
 import { ConsultationListComponent } from './layout/pages/consultation-list/consultation-list.component';
 import { ConsultationDetailComponent } from './layout/pages/consultation-detail/consultation-detail.component';
 import { AskQuestionComponent } from './layout/pages/ask-question/ask-question.component';
@@ -58,6 +59,7 @@ export const routes: Routes = [
   {path: 'signupinfo' , component:SignupinfoComponent},
   {path: 'doctorsignup' , component:DoctorsignupComponent},
   {path: 'Add-drug' , component:AddDrugComponent},
+  {path: 'hospital' , component:HospitalComponent},
 
 
 ];
