@@ -17,3 +17,8 @@ input[type="text"] {
   left: 10px;
   top: 10px;
  }
+
+
+ #hospital input::placeholder {
+  color: #999;
+}
