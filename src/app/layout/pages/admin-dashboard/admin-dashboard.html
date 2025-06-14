@@ -1,0 +1,244 @@
+<div class="admin-dashboard">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <div class="header-content">
+      <div class="header-text">
+        <h1 class="dashboard-title">
+          <i class="fas fa-tachometer-alt"></i>
+          Admin Dashboard
+        </h1>
+        <p class="dashboard-subtitle">Welcome to CureFusion Administrative Control Panel</p>
+      </div>
+      <div class="header-actions">
+        <button class="refresh-btn" (click)="refreshStats()" [disabled]="loading">
+          <i class="fas fa-sync-alt" [class.spinning]="loading"></i>
+          Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h3>Loading Dashboard</h3>
+      <p>Please wait while we fetch the latest statistics...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-card">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>Something went wrong</h3>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="refreshStats()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div *ngIf="dashboardStats && !loading && !error" class="dashboard-content">
+    <!-- Key Metrics -->
+    <div class="metrics-section">
+      <h2 class="section-title">
+        <i class="fas fa-chart-line"></i>
+        Key Metrics
+      </h2>
+      <div class="metrics-grid">
+        <div class="metric-card doctors-metric">
+          <div class="metric-header">
+            <div class="metric-icon">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div class="metric-trend positive">
+              <i class="fas fa-arrow-up"></i>
+              <span>+12%</span>
+            </div>
+          </div>
+          <div class="metric-content">
+            <h3 class="metric-number">{{ dashboardStats.totalDoctors }}</h3>
+            <p class="metric-label">Total Doctors</p>
+            <p class="metric-description">Active medical professionals</p>
+          </div>
+          <div class="metric-action">
+            <a routerLink="/admin/doctors" class="action-link">
+              View All Doctors
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="metric-card pending-metric">
+          <div class="metric-header">
+            <div class="metric-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="metric-trend warning">
+              <i class="fas fa-exclamation"></i>
+              <span>Pending</span>
+            </div>
+          </div>
+          <div class="metric-content">
+            <h3 class="metric-number">{{ dashboardStats.pendingDoctors }}</h3>
+            <p class="metric-label">Pending Approvals</p>
+            <p class="metric-description">Doctors awaiting verification</p>
+          </div>
+          <div class="metric-action">
+            <a routerLink="/admin/pending-doctors" class="action-link urgent">
+              Review Applications
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="metric-card patients-metric">
+          <div class="metric-header">
+            <div class="metric-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="metric-trend positive">
+              <i class="fas fa-arrow-up"></i>
+              <span>+8%</span>
+            </div>
+          </div>
+          <div class="metric-content">
+            <h3 class="metric-number">{{ dashboardStats.totalPatients }}</h3>
+            <p class="metric-label">Total Patients</p>
+            <p class="metric-description">Registered users</p>
+          </div>
+          <div class="metric-action">
+            <a routerLink="/admin/patients" class="action-link">
+              Manage Patients
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="metric-card appointments-metric">
+          <div class="metric-header">
+            <div class="metric-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <div class="metric-trend positive">
+              <i class="fas fa-arrow-up"></i>
+              <span>+15%</span>
+            </div>
+          </div>
+          <div class="metric-content">
+            <h3 class="metric-number">{{ dashboardStats.totalAppointments }}</h3>
+            <p class="metric-label">Total Appointments</p>
+            <p class="metric-description">Scheduled consultations</p>
+          </div>
+          <div class="metric-action">
+            <a routerLink="/admin/appointments" class="action-link">
+              View Schedule
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="actions-section">
+      <h2 class="section-title">
+        <i class="fas fa-bolt"></i>
+        Quick Actions
+      </h2>
+      <div class="actions-grid">
+        <div class="action-card priority-high">
+          <div class="action-icon">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <div class="action-content">
+            <h3>Review Pending Doctors</h3>
+            <p>{{ dashboardStats.pendingDoctors }} applications waiting for approval</p>
+          </div>
+          <a routerLink="/admin/pending-doctors" class="action-button">
+            Review Now
+            <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+
+        <div class="action-card priority-medium">
+          <div class="action-icon">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <div class="action-content">
+            <h3>Manage Doctors</h3>
+            <p>View and manage all registered doctors</p>
+          </div>
+          <a routerLink="/admin/doctors" class="action-button">
+            Manage
+            <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+
+        <div class="action-card priority-medium">
+          <div class="action-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="action-content">
+            <h3>Patient Management</h3>
+            <p>Oversee patient accounts and activities</p>
+          </div>
+          <a routerLink="/admin/patients" class="action-button">
+            View Patients
+            <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+
+        <div class="action-card priority-low">
+          <div class="action-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="action-content">
+            <h3>Appointment Overview</h3>
+            <p>Monitor and manage all appointments</p>
+          </div>
+          <a routerLink="/admin/appointments" class="action-button">
+            View Schedule
+            <i class="fas fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- System Status -->
+    <div class="status-section">
+      <h2 class="section-title">
+        <i class="fas fa-server"></i>
+        System Status
+      </h2>
+      <div class="status-grid">
+        <div class="status-item">
+          <div class="status-indicator online"></div>
+          <span class="status-label">API Service</span>
+          <span class="status-value">Online</span>
+        </div>
+        <div class="status-item">
+          <div class="status-indicator online"></div>
+          <span class="status-label">Database</span>
+          <span class="status-value">Connected</span>
+        </div>
+        <div class="status-item">
+          <div class="status-indicator online"></div>
+          <span class="status-label">Email Service</span>
+          <span class="status-value">Active</span>
+        </div>
+        <div class="status-item">
+          <div class="status-indicator warning"></div>
+          <span class="status-label">Storage</span>
+          <span class="status-value">85% Used</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

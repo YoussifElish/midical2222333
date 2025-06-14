@@ -1,17 +1,17 @@
 import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router
-} from "./chunk-QIDMVFNG.js";
-import "./chunk-6DSLT442.js";
-import "./chunk-XSAWP5YQ.js";
-import {
   animate,
   state,
   style,
   transition,
   trigger
 } from "./chunk-BEODMKZP.js";
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router
+} from "./chunk-QIDMVFNG.js";
+import "./chunk-6DSLT442.js";
+import "./chunk-XSAWP5YQ.js";
 import {
   CommonModule,
   LocationStrategy,
@@ -83,11 +83,11 @@ import {
   ɵɵsanitizeUrl,
   ɵɵtemplate
 } from "./chunk-6Y4PKORL.js";
+import "./chunk-H5RK2RKA.js";
 import {
   fromEvent,
   merge
 } from "./chunk-EVRA26WE.js";
-import "./chunk-H5RK2RKA.js";
 import {
   Subject,
   delay,

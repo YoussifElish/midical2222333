@@ -1,0 +1,58 @@
+<div class="admin-sidebar" [class.collapsed]="isCollapsed">
+  <!-- Sidebar Header -->
+  <div class="sidebar-header">
+    <div class="logo" *ngIf="!isCollapsed">
+      <i class="fas fa-heartbeat"></i>
+      <span>CureFusion Admin</span>
+    </div>
+    <div class="logo-mini" *ngIf="isCollapsed">
+      <i class="fas fa-heartbeat"></i>
+    </div>
+    <button class="toggle-btn" (click)="toggleSidebar()">
+      <i class="fas" [class]="isCollapsed ? 'fa-chevron-right' : 'fa-chevron-left'"></i>
+    </button>
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <li class="nav-item" *ngFor="let item of menuItems">
+        <a 
+          [routerLink]="item.route" 
+          class="nav-link"
+          [class.active]="isActiveRoute(item.route)"
+          routerLinkActive="active">
+          <div class="nav-icon">
+            <i [class]="item.icon"></i>
+          </div>
+          <span class="nav-label" *ngIf="!isCollapsed">{{ item.label }}</span>
+          <span class="nav-badge" *ngIf="item.badge && !isCollapsed">{{ item.badge }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Sidebar Footer -->
+  <div class="sidebar-footer" *ngIf="!isCollapsed">
+    <div class="admin-info">
+      <div class="admin-avatar">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <div class="admin-details">
+        <span class="admin-name">Admin User</span>
+        <span class="admin-role">System Administrator</span>
+      </div>
+    </div>
+    <button class="logout-btn">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+
+  <div class="sidebar-footer-mini" *ngIf="isCollapsed">
+    <button class="logout-btn-mini">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</div>
+

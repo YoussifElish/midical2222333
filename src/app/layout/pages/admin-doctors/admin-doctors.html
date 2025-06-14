@@ -1,0 +1,179 @@
+<div class="admin-doctors">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-text">
+        <h1 class="page-title">
+          <i class="fas fa-user-md"></i>
+          Doctors Management
+        </h1>
+        <p class="page-subtitle">Manage and oversee all registered medical professionals</p>
+      </div>
+      <div class="header-actions">
+        <button class="refresh-btn" (click)="refreshDoctors()" [disabled]="loading">
+          <i class="fas fa-sync-alt" [class.spinning]="loading"></i>
+          Refresh
+        </button>
+        <a routerLink="/admin/dashboard" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h3>Loading Doctors</h3>
+      <p>Please wait while we fetch the doctors list...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-card">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>Failed to Load Doctors</h3>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="refreshDoctors()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Doctors Content -->
+  <div *ngIf="!loading && !error" class="doctors-content">
+    <!-- Filters Section -->
+    <div class="filters-section">
+      <div class="filters-header">
+        <h2>
+          <i class="fas fa-filter"></i>
+          Filters & Search
+        </h2>
+        <button class="clear-filters-btn" (click)="clearFilters()" 
+                [disabled]="!searchTerm && !selectedSpecialization && !selectedStatus">
+          <i class="fas fa-times"></i>
+          Clear All
+        </button>
+      </div>
+      
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label for="search">Search Doctors</label>
+          <div class="search-input-wrapper">
+            <i class="fas fa-search"></i>
+            <input 
+              type="text" 
+              id="search"
+              placeholder="Search by name or email..."
+              [(ngModel)]="searchTerm"
+              (input)="onSearchChange()"
+              class="search-input">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label for="specialization">Specialization</label>
+          <select 
+            id="specialization"
+            [(ngModel)]="selectedSpecialization"
+            (change)="onSpecializationChange()"
+            class="filter-select">
+            <option value="">All Specializations</option>
+            <option *ngFor="let spec of specializations" [value]="spec">{{ spec }}</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="status">Status</label>
+          <select 
+            id="status"
+            [(ngModel)]="selectedStatus"
+            (change)="onStatusChange()"
+            class="filter-select">
+            <option value="">All Status</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Summary -->
+    <div class="results-summary">
+      <div class="summary-info">
+        <span class="results-count">
+          Showing {{ filteredDoctors.length }} of {{ doctors.length }} doctors
+        </span>
+      </div>
+    </div>
+
+    <!-- Doctors Grid -->
+    <div class="doctors-grid" *ngIf="filteredDoctors.length > 0">
+      <div class="doctor-card" *ngFor="let doctor of filteredDoctors">
+        <div class="doctor-header">
+          <div class="doctor-avatar">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <div class="doctor-status">
+            <span class="status-badge" [class]="doctor.isApproved ? 'approved' : 'pending'">
+              <i class="fas" [class]="doctor.isApproved ? 'fa-check-circle' : 'fa-clock'"></i>
+              {{ doctor.isApproved ? 'Approved' : 'Pending' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="doctor-info">
+          <h3 class="doctor-name">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</h3>
+          <p class="doctor-specialization">
+            <i class="fas fa-stethoscope"></i>
+            {{ doctor.specialization || 'General Practice' }}
+          </p>
+          
+      <div class="doctor-contact">
+  <div class="contact-item">
+    <i class="fas fa-envelope"></i>
+    <span>{{ doctor.email || 'N/A' }}</span>
+  </div>
+  <div class="contact-item">
+    <i class="fas fa-phone"></i>
+    <span>{{ doctor.phoneNumber || 'N/A' }}</span>
+  </div>
+</div>
+
+        <div class="doctor-actions">
+          <button class="action-btn view-btn" [routerLink]="['/admin/doctor-details', doctor.id]">
+            <i class="fas fa-eye"></i>
+            View Details
+          </button>
+        <button
+  class="action-btn edit-btn"
+  *ngIf="!doctor.isApproved"
+  (click)="approveDoctor(doctor.id)">
+  <i class="fas fa-user-check"></i>
+  Approve
+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Results -->
+    <div class="no-results" *ngIf="filteredDoctors.length === 0">
+      <div class="no-results-content">
+        <i class="fas fa-search"></i>
+        <h3>No Doctors Found</h3>
+        <p>No doctors match your current search criteria.</p>
+        <button class="clear-filters-btn" (click)="clearFilters()">
+          <i class="fas fa-times"></i>
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -8,6 +8,12 @@ import { ReSearchComponent } from './layout/pages/re-search/re-search.component'
 import { Routes } from '@angular/router';
  import { HomeComponent } from './layout/pages/home/home.component';
 import { LoginComponent } from './layout/pages/login/login.component';
+import { AdminDashboardComponent } from './layout/pages/admin-dashboard/admin-dashboard';
+import { AdminDoctorsComponent } from './layout/pages/admin-doctors/admin-doctors';
+import { AdminPendingDoctorsComponent } from './layout/pages/admin-pending-doctors/admin-pending-doctors';
+import { AdminPatientsComponent } from './layout/pages/admin-patients/admin-patients.component';
+import { AdminAppointmentsComponent } from './layout/pages/admin-appointments/admin-appointments.component';
+import { AdminLayoutComponent } from './layout/pages/admin-layout/admin-layout.component';
 import { CareersComponent } from './layout/pages/careers/careers.component';
 import { CommitmentComponent } from './layout/pages/commitment/commitment.component';
 import { SignupComponent } from './layout/pages/signup/signup.component';
@@ -36,6 +42,21 @@ export const routes: Routes = [
   {path: 'login' , component: LoginComponent },
   {path: 'signup' , component: SignupComponent },
   {path: 'profile', component: ProfileComponent, canActivate: [RoleAuthGuard] }, // Added profile route, protected by guard
+  
+  // Admin Routes with Layout
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'doctors', component: AdminDoctorsComponent },
+      { path: 'pending-doctors', component: AdminPendingDoctorsComponent },
+      { path: 'patients', component: AdminPatientsComponent },
+      { path: 'appointments', component: AdminAppointmentsComponent }
+    ]
+  },
+  
   {path: 'doctors' , component: DoctorSearchComponent },
   {path: 'doctor-appointments/:id' , component: DoctorAppointmentsComponent, canActivate: [RoleAuthGuard] },
   {path: 'patient-appointment/:id' , component: patientAppointmentsComponent, canActivate: [RoleAuthGuard] },

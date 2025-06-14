@@ -1,0 +1,147 @@
+<div class="admin-pending-doctors">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-text">
+        <h1 class="page-title">
+          <i class="fas fa-clock"></i>
+          Pending Doctor Approvals
+        </h1>
+        <p class="page-subtitle">Review and approve doctor registration applications</p>
+      </div>
+      <div class="header-actions">
+        <button class="refresh-btn" (click)="refreshPendingDoctors()" [disabled]="loading">
+          <i class="fas fa-sync-alt" [class.spinning]="loading"></i>
+          Refresh
+        </button>
+        <a routerLink="/admin/dashboard" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h3>Loading Pending Applications</h3>
+      <p>Please wait while we fetch pending doctor applications...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-card">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>Failed to Load Applications</h3>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="refreshPendingDoctors()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Pending Doctors Content -->
+  <div *ngIf="!loading && !error" class="pending-content">
+    <!-- Summary -->
+    <div class="summary-section">
+      <div class="summary-card">
+        <div class="summary-icon">
+          <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div class="summary-info">
+          <h3>{{ pendingDoctors.length }}</h3>
+          <p>Applications Pending Review</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending Doctors List -->
+    <div class="pending-doctors-list" *ngIf="pendingDoctors.length > 0">
+      <div class="list-header">
+        <h2>
+          <i class="fas fa-list"></i>
+          Pending Applications
+        </h2>
+        <p>Review each application carefully before making a decision</p>
+      </div>
+
+      <div class="doctors-grid">
+        <div class="pending-doctor-card" *ngFor="let doctor of pendingDoctors">
+          <div class="card-header">
+            <div class="doctor-avatar">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div class="pending-badge">
+              <i class="fas fa-clock"></i>
+              <span>Pending Review</span>
+            </div>
+          </div>
+
+          <div class="doctor-details">
+            <h3 class="doctor-name">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</h3>
+            
+            <div class="detail-item">
+              <i class="fas fa-stethoscope"></i>
+              <span class="label">Specialization:</span>
+              <span class="value">{{ doctor.specialization || 'General Practice' }}</span>
+            </div>
+
+            <div class="detail-item">
+              <i class="fas fa-envelope"></i>
+              <span class="label">Email:</span>
+              <span class="value">{{ doctor.email }}</span>
+            </div>
+
+            <div class="detail-item" *ngIf="doctor.phoneNumber">
+              <i class="fas fa-phone"></i>
+              <span class="label">Phone:</span>
+              <span class="value">{{ doctor.phoneNumber }}</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button 
+              class="action-btn approve-btn"
+              (click)="approveDoctor(doctor.id)"
+              [disabled]="processingDoctorId === doctor.id">
+              <i class="fas fa-check" *ngIf="processingDoctorId !== doctor.id"></i>
+              <i class="fas fa-spinner fa-spin" *ngIf="processingDoctorId === doctor.id"></i>
+              {{ processingDoctorId === doctor.id ? 'Processing...' : 'Approve' }}
+            </button>
+            
+            <button 
+              class="action-btn reject-btn"
+              (click)="rejectDoctor(doctor.id)"
+              [disabled]="processingDoctorId === doctor.id">
+              <i class="fas fa-times" *ngIf="processingDoctorId !== doctor.id"></i>
+              <i class="fas fa-spinner fa-spin" *ngIf="processingDoctorId === doctor.id"></i>
+              {{ processingDoctorId === doctor.id ? 'Processing...' : 'Reject' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Pending Doctors -->
+    <div class="no-pending" *ngIf="pendingDoctors.length === 0">
+      <div class="no-pending-content">
+        <div class="no-pending-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>All Caught Up!</h3>
+        <p>There are no pending doctor applications at the moment.</p>
+        <a routerLink="/admin/dashboard" class="back-to-dashboard-btn">
+          <i class="fas fa-tachometer-alt"></i>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
