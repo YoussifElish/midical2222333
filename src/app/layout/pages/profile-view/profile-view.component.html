@@ -1,0 +1,156 @@
+<div class="profile-view">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-text">
+        <h1 class="page-title">
+          <i class="fas fa-user" *ngIf="userType === 'patient'"></i>
+          <i class="fas fa-user-md" *ngIf="userType === 'doctor'"></i>
+          {{ userType === 'doctor' ? 'Doctor' : 'Patient' }} Profile
+        </h1>
+        <p class="page-subtitle">View comprehensive profile information</p>
+      </div>
+      <div class="header-actions">
+        <button class="back-btn" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          Back to {{ userType === 'doctor' ? 'Doctors' : 'Patients' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h3>Loading Profile</h3>
+      <p>Please wait while we fetch profile information...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-card">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>Failed to Load Profile</h3>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="loadProfile()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Profile Content -->
+  <div *ngIf="!loading && !error && profile" class="profile-content">
+    <div class="profile-card">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <img *ngIf="profile.profileImage" [src]="profile.profileImage" [alt]="profile.firstName + ' ' + profile.lastName">
+          <i *ngIf="!profile.profileImage" class="fas fa-user" [class.fa-user-md]="userType === 'doctor'"></i>
+        </div>
+        <div class="profile-info">
+          <h2 class="profile-name">
+            <span *ngIf="userType === 'doctor'">Dr. </span>{{ profile.firstName }} {{ profile.lastName }}
+          </h2>
+          <p class="profile-type" *ngIf="userType === 'doctor'">{{ profile.specialization }}</p>
+          <p class="profile-type" *ngIf="userType === 'patient'">Patient</p>
+          <div class="profile-meta">
+            <span class="age-badge">
+              <i class="fas fa-birthday-cake"></i>
+              {{ calculateAge(profile.dateOfBirth) }} years old
+            </span>
+            <span class="gender-badge">
+              <i class="fas fa-venus-mars"></i>
+              {{ profile.gender }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Details -->
+      <div class="profile-details">
+        <!-- Personal Information -->
+        <div class="details-section">
+          <h3>
+            <i class="fas fa-info-circle"></i>
+            Personal Information
+          </h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="label">Full Name:</span>
+              <span class="value">{{ profile.firstName }} {{ profile.lastName }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Email:</span>
+              <span class="value">{{ profile.email }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Phone:</span>
+              <span class="value">{{ profile.phoneNumber }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Date of Birth:</span>
+              <span class="value">{{ profile.dateOfBirth | date:'longDate' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Gender:</span>
+              <span class="value">{{ profile.gender }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Address:</span>
+              <span class="value">{{ profile.address }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctor-specific Information -->
+        <div class="details-section" *ngIf="userType === 'doctor'">
+          <h3>
+            <i class="fas fa-stethoscope"></i>
+            Professional Information
+          </h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="label">Specialization:</span>
+              <span class="value">{{ profile.specialization }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Years of Experience:</span>
+              <span class="value">{{ profile.yearsOfExperience }} years</span>
+            </div>
+          </div>
+          <div class="bio-section" *ngIf="profile.bio">
+            <h4>
+              <i class="fas fa-user-circle"></i>
+              Biography
+            </h4>
+            <p>{{ profile.bio }}</p>
+          </div>
+        </div>
+
+        <!-- Patient-specific Information -->
+        <div class="details-section" *ngIf="userType === 'patient'">
+          <h3>
+            <i class="fas fa-heartbeat"></i>
+            Medical Information
+          </h3>
+          <div class="details-grid">
+            <div class="detail-item" *ngIf="profile.bloodType">
+              <span class="label">Blood Type:</span>
+              <span class="value blood-type">{{ profile.bloodType }}</span>
+            </div>
+            <div class="detail-item" *ngIf="profile.emergencyContact">
+              <span class="label">Emergency Contact:</span>
+              <span class="value">{{ profile.emergencyContact }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

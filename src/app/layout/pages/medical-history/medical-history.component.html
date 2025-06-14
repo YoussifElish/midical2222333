@@ -1,0 +1,140 @@
+<div class="medical-history">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-text">
+        <h1 class="page-title">
+          <i class="fas fa-file-medical"></i>
+          Medical History
+        </h1>
+        <p class="page-subtitle">Patient: {{ patientName }}</p>
+      </div>
+      <div class="header-actions">
+        <button class="back-btn" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          Back to Patients
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h3>Loading Medical History</h3>
+      <p>Please wait while we fetch patient records...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-card">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>Failed to Load Medical History</h3>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="loadMedicalHistory()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Medical Records Content -->
+  <div *ngIf="!loading && !error" class="medical-content">
+    <!-- Summary -->
+    <div class="summary-section">
+      <div class="summary-card">
+        <div class="summary-icon">
+          <i class="fas fa-notes-medical"></i>
+        </div>
+        <div class="summary-info">
+          <h3>{{ medicalRecords.length }}</h3>
+          <p>Medical Records</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medical Records List -->
+    <div class="records-list" *ngIf="medicalRecords.length > 0">
+      <div class="list-header">
+        <h2>
+          <i class="fas fa-history"></i>
+          Medical Records Timeline
+        </h2>
+        <p>Chronological history of patient's medical visits and treatments</p>
+      </div>
+
+      <div class="records-timeline">
+        <div class="medical-record-card" *ngFor="let record of medicalRecords">
+          <div class="record-header">
+            <div class="record-date">
+              <i class="fas fa-calendar-alt"></i>
+              <span>{{ record.date | date:'fullDate' }}</span>
+            </div>
+            <div class="record-doctor">
+              <i class="fas fa-user-md"></i>
+              <span>{{ record.doctorName }}</span>
+            </div>
+          </div>
+
+          <div class="record-content">
+            <div class="diagnosis-section">
+              <h4>
+                <i class="fas fa-stethoscope"></i>
+                Diagnosis
+              </h4>
+              <p>{{ record.diagnosis }}</p>
+            </div>
+
+            <div class="treatment-section">
+              <h4>
+                <i class="fas fa-procedures"></i>
+                Treatment
+              </h4>
+              <p>{{ record.treatment }}</p>
+            </div>
+
+            <div class="medications-section" *ngIf="record.medications.length > 0">
+              <h4>
+                <i class="fas fa-pills"></i>
+                Medications
+              </h4>
+              <div class="medications-list">
+                <span class="medication-tag" *ngFor="let medication of record.medications">
+                  {{ medication }}
+                </span>
+              </div>
+            </div>
+
+            <div class="notes-section" *ngIf="record.notes">
+              <h4>
+                <i class="fas fa-sticky-note"></i>
+                Notes
+              </h4>
+              <p>{{ record.notes }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Records -->
+    <div class="no-records" *ngIf="medicalRecords.length === 0">
+      <div class="no-records-content">
+        <div class="no-records-icon">
+          <i class="fas fa-file-medical"></i>
+        </div>
+        <h3>No Medical Records Found</h3>
+        <p>This patient doesn't have any medical records yet.</p>
+        <button class="back-btn" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          Back to Patients
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

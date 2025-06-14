@@ -15,6 +15,8 @@ export class AdminPendingDoctorsComponent implements OnInit {
   loading = true;
   error: string | null = null;
   processingDoctorId: string | null = null;
+  showCertificateModal = false;
+  selectedCertificateImage = '';
 
   constructor(private adminService: AdminService) {}
 
@@ -43,7 +45,8 @@ loadPendingDoctors(): void {
         phoneNumber: '', // Not provided by API
         specialization: item.specialization || 'General Practice',
         status: item.status === 0 ? 'pending' : 'unknown', // All should be pending
-        isApproved: false // Pending doctors have status 0
+        isApproved: false, // Pending doctors have status 0
+        doctorCertificate: item.doctorCertificate || '' // Add certificate image
       }));
 
       this.loading = false;
@@ -88,6 +91,18 @@ loadPendingDoctors(): void {
   refreshPendingDoctors(): void {
     this.error = null;
     this.loadPendingDoctors();
+  }
+
+  viewCertificate(doctorCertificate: string): void {
+    if (doctorCertificate) {
+      this.selectedCertificateImage = doctorCertificate;
+      this.showCertificateModal = true;
+    }
+  }
+
+  closeCertificateModal(): void {
+    this.showCertificateModal = false;
+    this.selectedCertificateImage = '';
   }
 }
 

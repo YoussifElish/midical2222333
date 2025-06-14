@@ -18,6 +18,7 @@ export interface Doctor {
   specialization: string;
   status: string;
   isApproved: boolean;
+  doctorCertificate: string; // Add certificate image URL
 }
 
 export interface Patient {
@@ -66,7 +67,31 @@ export class AdminService {
 
   // Update doctor status
   updateDoctorStatus(userId: string, status: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/doctors/${userId}/status`, { status });
+    let newStatus: number;
+    let rejectionReason = '';
+    
+    // Convert string status to numeric values expected by API
+    switch (status.toLowerCase()) {
+      case 'approved':
+        newStatus = 1;
+        break;
+      case 'rejected':
+        newStatus = 2;
+        rejectionReason = 'Application rejected by admin';
+        break;
+      case 'pending':
+        newStatus = 0;
+        break;
+      default:
+        throw new Error(`Invalid status: ${status}`);
+    }
+    
+    const payload = {
+      newStatus: newStatus,
+      rejectionReason: rejectionReason
+    };
+    
+    return this.http.put(`${this.baseUrl}/doctors/${userId}/status`, payload);
   }
 
   // Get all patients

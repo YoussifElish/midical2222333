@@ -107,6 +107,23 @@
 
           <div class="card-actions">
             <button 
+              class="action-btn view-certificate-btn"
+              (click)="viewCertificate(doctor.doctorCertificate)"
+              [disabled]="!doctor.doctorCertificate"
+              title="View Doctor Certificate">
+              <i class="fas fa-certificate"></i>
+              View Certificate
+            </button>
+            
+            <button 
+              class="action-btn profile-btn"
+              [routerLink]="['/admin/profile-view', doctor.id, 'doctor']"
+              title="View Doctor Profile">
+              <i class="fas fa-user"></i>
+              View Profile
+            </button>
+            
+            <button 
               class="action-btn approve-btn"
               (click)="approveDoctor(doctor.id)"
               [disabled]="processingDoctorId === doctor.id">
@@ -141,6 +158,21 @@
           Back to Dashboard
         </a>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Certificate Modal -->
+<div class="certificate-modal" *ngIf="showCertificateModal" (click)="closeCertificateModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Doctor Certificate</h3>
+      <button class="close-btn" (click)="closeCertificateModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img [src]="selectedCertificateImage" alt="Doctor Certificate" class="certificate-image">
     </div>
   </div>
 </div>

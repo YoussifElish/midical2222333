@@ -1,0 +1,102 @@
+<div class="doctor-details">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-text">
+        <h1 class="page-title">
+          <i class="fas fa-user-md"></i>
+          Doctor Details
+        </h1>
+        <p class="page-subtitle">View comprehensive doctor information</p>
+      </div>
+      <div class="header-actions">
+        <button class="back-btn" (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          Back to Doctors
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h3>Loading Doctor Details</h3>
+      <p>Please wait while we fetch doctor information...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-card">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>Failed to Load Doctor Details</h3>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="loadDoctorDetails()">
+        <i class="fas fa-redo"></i>
+        Try Again
+      </button>
+    </div>
+  </div>
+
+  <!-- Doctor Details Content -->
+  <div *ngIf="!loading && !error && doctor" class="doctor-content">
+    <div class="doctor-profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <i class="fas fa-user-md"></i>
+        </div>
+        <div class="profile-info">
+          <h2 class="doctor-name">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</h2>
+          <p class="doctor-specialization">{{ doctor.specialization }}</p>
+          <div class="status-badge" [class.approved]="doctor.isApproved" [class.pending]="!doctor.isApproved">
+            <i class="fas fa-check-circle" *ngIf="doctor.isApproved"></i>
+            <i class="fas fa-clock" *ngIf="!doctor.isApproved"></i>
+            {{ doctor.isApproved ? 'Approved' : 'Pending' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-details">
+        <div class="details-section">
+          <h3>
+            <i class="fas fa-info-circle"></i>
+            Personal Information
+          </h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="label">Email:</span>
+              <span class="value">{{ doctor.email || 'Not provided' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Phone:</span>
+              <span class="value">{{ doctor.phoneNumber || 'Not provided' }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Specialization:</span>
+              <span class="value">{{ doctor.specialization }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label">Status:</span>
+              <span class="value">{{ doctor.status }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="details-section" *ngIf="doctor.certificateImage">
+          <h3>
+            <i class="fas fa-certificate"></i>
+            Medical Certificate
+          </h3>
+          <div class="certificate-preview">
+            <img [src]="doctor.certificateImage" alt="Medical Certificate" class="certificate-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
