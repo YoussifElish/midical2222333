@@ -34,7 +34,7 @@ export class AdminSidebarComponent {
       icon: 'fas fa-clock',
       label: 'Pending Doctors',
       route: '/admin/pending-doctors',
-      badge: 3
+   
     },
     {
       icon: 'fas fa-users',
