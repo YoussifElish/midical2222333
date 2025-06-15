@@ -102,8 +102,9 @@ private updateHospitalMarkers() {
   // ✅ تأكيد أن layers مصفوفة قبل استخدامها
   const layers = this.markersLayer.getLayers();
   if (Array.isArray(layers) && layers.length > 0) {
-    const group = L.featureGroup(layers);
-    this.map.fitBounds(group.getBounds().pad(0.1));
+ const group = this.L.featureGroup(this.markersLayer.getLayers());
+this.map.fitBounds(group.getBounds().pad(0.1));
+
   }
 }
 
