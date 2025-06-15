@@ -57,5 +57,9 @@ export class AdminSidebarComponent {
   isActiveRoute(route: string): boolean {
     return this.router.url === route;
   }
+  goHome() {
+  this.router.navigate(['/home']);
+}
+
 }
 

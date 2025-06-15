@@ -43,14 +43,14 @@
         <span class="admin-role">System Administrator</span>
       </div>
     </div>
-    <button class="logout-btn">
+    <button class="logout-btn" (onclick)=" goHome() " routerLink="/home">
       <i class="fas fa-sign-out-alt"></i>
       <span>Logout</span>
     </button>
   </div>
 
   <div class="sidebar-footer-mini" *ngIf="isCollapsed">
-    <button class="logout-btn-mini">
+    <button class="logout-btn-mini"  (onclick)=" goHome() " routerLink="/home">
       <i class="fas fa-sign-out-alt"></i>
     </button>
   </div>
