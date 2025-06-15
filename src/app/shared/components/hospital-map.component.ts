@@ -15,17 +15,25 @@ export class HospitalMapComponent implements OnInit, AfterViewInit, OnChanges {
   private L: any; // متغير لتخزين leaflet بعد التحميل
   private markersLayer: any;
 
-  async ngOnInit() {
-    if (typeof window !== 'undefined') {
+async ngOnInit() {
+  if (typeof window !== 'undefined') {
+    try {
       this.L = await import('leaflet');
-      delete (this.L.Icon.Default.prototype as any)._getIconUrl;
-      this.L.Icon.Default.mergeOptions({
-        iconRetinaUrl: 'assets/marker-icon-2x.png',
-        iconUrl: 'assets/marker-icon.png',
-        shadowUrl: 'assets/marker-shadow.png',
-      });
+
+      if (this.L?.Icon?.Default) {
+        delete (this.L.Icon.Default.prototype as any)._getIconUrl;
+        this.L.Icon.Default.mergeOptions({
+          iconRetinaUrl: 'assets/marker-icon-2x.png',
+          iconUrl: 'assets/marker-icon.png',
+          shadowUrl: 'assets/marker-shadow.png',
+        });
+      }
+    } catch (error) {
+      console.warn('Leaflet import failed:', error);
     }
   }
+}
+
 
   async ngAfterViewInit() {
     if (typeof window !== 'undefined') {
@@ -109,7 +117,8 @@ export class HospitalMapComponent implements OnInit, AfterViewInit, OnChanges {
     });
 
     if (this.hospitals.length > 0) {
-      const group = this.L.featureGroup(this.markersLayer.getLayers());
+   const layers = this.markersLayer?.getLayers?.() || [];
+const group = this.L.featureGroup(layers);
       this.map.fitBounds(group.getBounds().pad(0.1));
     }
   }
