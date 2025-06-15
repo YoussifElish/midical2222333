@@ -3,22 +3,22 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Hospital {
-  id: string;
   name: string;
   address: string;
-  latitude: number;
-  longitude: number;
-  phone?: string;
-  website?: string;
-  rating?: number;
-  distance?: number;
+  zone: string;
+  distance: number;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface HospitalResponse {
-  data: Hospital[];
-  totalCount: number;
+  items: Hospital[];
   pageNumber: number;
-  pageSize: number;
+  totalPages: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 }
 
 @Injectable({

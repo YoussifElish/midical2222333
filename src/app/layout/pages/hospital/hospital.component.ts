@@ -1,16 +1,19 @@
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HospitalService, Hospital } from '../../../shared/services/hospital.service';
+import { HospitalMapComponent } from '../../../shared/components/hospital-map.component';
 
 @Component({
   selector: 'app-hospital',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, HospitalMapComponent],
   templateUrl: './hospital.component.html',
   styleUrl: './hospital.component.css'
 })
 export class HospitalComponent implements OnInit {
+  @ViewChild(HospitalMapComponent) mapComponent!: HospitalMapComponent;
+  
   HospitalForm: FormGroup = new FormGroup({
     SearchInput: new FormControl('', [Validators.required])
   });
@@ -20,6 +23,7 @@ export class HospitalComponent implements OnInit {
   errorMessage = '';
   currentLocation = '';
   showResults = false;
+  userLocation: { lat: number; lng: number } | null = null;
 
   constructor(private hospitalService: HospitalService) {}
 
@@ -32,6 +36,9 @@ export class HospitalComponent implements OnInit {
     try {
       const position = await this.hospitalService.getCurrentLocation();
       const { latitude, longitude } = position.coords;
+      
+      // Store user location for map
+      this.userLocation = { lat: latitude, lng: longitude };
       
       this.hospitalService.reverseGeocode(latitude, longitude).subscribe({
         next: (result) => {
@@ -69,7 +76,7 @@ export class HospitalComponent implements OnInit {
 
     this.hospitalService.searchNearbyHospitals(zone.trim()).subscribe({
       next: (response) => {
-        this.hospitals = response.data || [];
+        this.hospitals = response.items || [];
         this.isLoading = false;
         
         if (this.hospitals.length === 0) {
@@ -106,14 +113,14 @@ export class HospitalComponent implements OnInit {
    * تتبع المستشفيات لتحسين الأداء
    */
   trackByHospitalId(index: number, hospital: Hospital): string {
-    return hospital.id;
+    return hospital.name + hospital.zone;
   }
 
   /**
    * فتح الموقع في خرائط جوجل
    */
   openInGoogleMaps(hospital: Hospital) {
-    const url = `https://www.google.com/maps/search/?api=1&query=${hospital.latitude},${hospital.longitude}`;
+    const url = `https://www.google.com/maps/search/?api=1&query=${hospital.location.latitude},${hospital.location.longitude}`;
     window.open(url, '_blank');
   }
 
@@ -126,9 +133,20 @@ export class HospitalComponent implements OnInit {
   }
 
   /**
-   * فتح موقع المستشفى الإلكتروني
+   * التوسيط على الموقع الحالي في الخريطة
    */
-  openWebsite(website: string) {
-    window.open(website, '_blank');
+  centerMapOnUserLocation() {
+    if (this.mapComponent) {
+      this.mapComponent.centerOnUserLocation();
+    }
+  }
+
+  /**
+   * إظهار جميع المستشفيات في الخريطة
+   */
+  fitAllMarkersInMap() {
+    if (this.mapComponent) {
+      this.mapComponent.fitAllMarkers();
+    }
   }
 }

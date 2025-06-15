@@ -1,122 +1,166 @@
-<section id="hospital">
-  <div class="position-relative">
-    <img class="vh-100 w-100" src="assets/images/Hospital - abstract background.jpg" alt="">
+<section id="hospital" class="hospital-section">
+  <div class="hero-container">
+    <div class="hero-background">
+      <img class="hero-image" src="assets/images/Hospital - abstract background.jpg" alt="Hospital Background">
+      <div class="hero-overlay"></div>
+    </div>
     
-    <form [formGroup]="HospitalForm" class="position-absolute top-50 start-50 translate-middle w-50">
-      <h6 class="text-white fw-bold">Find Nearby Hospitals</h6>
-      
-       <div class="position-relative">
-        <input 
-          type="text" 
-          formControlName="SearchInput"
-          placeholder="Search By Writing The Area..." 
-          class="form-control border-0"
-          (input)="onInputChange($event)"
-          (focus)="showResults = true"
-          (blur)="hideResults()"
-          autocomplete="off"
-        >
-        
-         <button 
-          type="button" 
-          class="btn btn-link position-absolute top-50 end-0 translate-middle-y me-2 p-0"
-          (click)="getCurrentLocationName()"
-          title="Use of the current site"
-        >
-          <i class="fas fa-location-arrow text-primary"></i>
-        </button>
-      </div>
+    <div class="search-container">
+      <div class="search-card">
+        <div class="search-header">
+          <h2 class="search-title">
+            <i class="fas fa-hospital me-3"></i>
+            ابحث عن المستشفيات القريبة
+          </h2>
+          <p class="search-subtitle">اعثر على أفضل المستشفيات في منطقتك</p>
+        </div>
 
-       <div 
-        *ngIf="showResults" 
-        class="position-absolute top-100 start-0 w-100 bg-white shadow rounded mt-2 p-3"
-        style="max-height: 400px; overflow-y: auto; z-index: 1000;"
-      >
-         <div *ngIf="isLoading" class="text-center py-3">
-          <div class="spinner-border spinner-border-sm text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <form [formGroup]="HospitalForm" class="search-form">
+          <div class="input-group-container">
+            <div class="input-wrapper">
+              <i class="fas fa-search input-icon"></i>
+              <input 
+                type="text" 
+                formControlName="SearchInput"
+                placeholder="ابحث بكتابة اسم المنطقة..." 
+                class="search-input"
+                (input)="onInputChange($event)"
+                (focus)="showResults = true"
+                (blur)="hideResults()"
+                autocomplete="off"
+              >
+              <button 
+                type="button" 
+                class="location-btn"
+                (click)="getCurrentLocationName()"
+                title="استخدام الموقع الحالي"
+              >
+                <i class="fas fa-location-arrow"></i>
+              </button>
+            </div>
           </div>
-          <p class="mt-2 mb-0 text-muted">Searching for hospitals ...</p>
-        </div>
 
-         <div *ngIf="errorMessage && !isLoading" class="alert alert-warning py-2 mb-0">
-          <i class="fas fa-exclamation-triangle me-2"></i>
-          {{ errorMessage }}
-        </div>
-
-         <div *ngIf="hospitals.length > 0 && !isLoading" class="hospital-results">
-          <h6 class="text-primary mb-3">
-            <i class="fas fa-hospital me-2"></i>
-             Near Hospitals ({{ hospitals.length }})
-          </h6>
-          
+          <!-- نتائج البحث -->
           <div 
-            *ngFor="let hospital of hospitals; trackBy: trackByHospitalId" 
-            class="hospital-item border rounded p-3 mb-2 cursor-pointer hover-shadow"
-            (click)="selectHospital(hospital)"
+            *ngIf="showResults" 
+            class="search-results"
           >
-            <div class="d-flex justify-content-between align-items-start">
-              <div class="flex-grow-1">
-                <h6 class="mb-1 text-dark">
-                  <i class="fas fa-hospital text-primary me-2"></i>
-                  {{ hospital.name }}
+            <!-- حالة التحميل -->
+            <div *ngIf="isLoading" class="loading-state">
+              <div class="spinner"></div>
+              <p class="loading-text">جاري البحث عن المستشفيات...</p>
+            </div>
+
+            <!-- رسالة الخطأ -->
+            <div *ngIf="errorMessage && !isLoading" class="error-state">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>{{ errorMessage }}</p>
+            </div>
+
+            <!-- النتائج -->
+            <div *ngIf="hospitals.length > 0 && !isLoading" class="results-container">
+              <div class="results-header">
+                <h6 class="results-title">
+                  <i class="fas fa-hospital me-2"></i>
+                  المستشفيات القريبة ({{ hospitals.length }})
                 </h6>
-                
-                <p class="mb-1 text-muted small">
-                  <i class="fas fa-map-marker-alt me-1"></i>
-                  {{ hospital.address }}
-                </p>
-                
-                <div class="d-flex align-items-center gap-3">
-                  <span *ngIf="hospital.phone" class="text-muted small">
-                    <i class="fas fa-phone me-1"></i>
-                    {{ hospital.phone }}
-                  </span>
-                  
-                  <span *ngIf="hospital.rating" class="text-warning small">
-                    <i class="fas fa-star me-1"></i>
-                    {{ hospital.rating }}/5
-                  </span>
-                  
-                  <span *ngIf="hospital.distance" class="text-info small">
-                    <i class="fas fa-route me-1"></i>
-                    {{ (hospital.distance / 1000).toFixed(1) }}  KM
-                  </span>
+                <div class="map-controls">
+                  <button 
+                    type="button"
+                    class="control-btn"
+                    (click)="centerMapOnUserLocation()"
+                    title="التوسيط على موقعي"
+                  >
+                    <i class="fas fa-crosshairs"></i>
+                  </button>
+                  <button 
+                    type="button"
+                    class="control-btn"
+                    (click)="fitAllMarkersInMap()"
+                    title="إظهار جميع المستشفيات"
+                  >
+                    <i class="fas fa-expand-arrows-alt"></i>
+                  </button>
                 </div>
               </div>
               
-              <div class="d-flex flex-column gap-1">
-                <button 
-                  type="button"
-                  class="btn btn-outline-primary btn-sm"
-                  (click)="openInGoogleMaps(hospital); $event.stopPropagation()"
-                  title="Open in Google Maps"
+              <div class="hospitals-grid">
+                <div 
+                  *ngFor="let hospital of hospitals; trackBy: trackByHospitalId" 
+                  class="hospital-card"
+                  (click)="selectHospital(hospital)"
                 >
-                  <i class="fas fa-directions"></i>
-                </button>
-                
-                <button 
-                  *ngIf="hospital.website"
-                  type="button"
-                  class="btn btn-outline-secondary btn-sm"
-                  (click)="openWebsite(hospital.website); $event.stopPropagation()"
-                  title="Visit the website"
-                >
-                  <i class="fas fa-globe"></i>
-                </button>
+                  <div class="hospital-content">
+                    <div class="hospital-info">
+                      <h6 class="hospital-name">
+                        <i class="fas fa-hospital hospital-icon"></i>
+                        {{ hospital.name }}
+                      </h6>
+                      
+                      <p class="hospital-address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ hospital.address }}
+                      </p>
+                      
+                      <div class="hospital-details">
+                        <span class="hospital-zone">
+                          <i class="fas fa-map"></i>
+                          {{ hospital.zone }}
+                        </span>
+                        
+                        <span class="hospital-distance">
+                          <i class="fas fa-route"></i>
+                          {{ (hospital.distance).toFixed(1) }} كم
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div class="hospital-actions">
+                      <button 
+                        type="button"
+                        class="action-btn primary"
+                        (click)="openInGoogleMaps(hospital); $event.stopPropagation()"
+                        title="فتح في خرائط جوجل"
+                      >
+                        <i class="fas fa-directions"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- رسالة عدم وجود نتائج -->
-        <div *ngIf="hospitals.length === 0 && !isLoading && !errorMessage && HospitalForm.get('SearchInput')?.value" 
-             class="text-center py-3 text-muted">
-          <i class="fas fa-search mb-2 d-block" style="font-size: 2rem; opacity: 0.5;"></i>
-          <p class="mb-0">No hospitals found in "{{ HospitalForm.get('SearchInput')?.value }}"</p>
-          <small>Try searching in another area or confirm the name is correct.</small>
-        </div>
+            <!-- رسالة عدم وجود نتائج -->
+            <div *ngIf="hospitals.length === 0 && !isLoading && !errorMessage && HospitalForm.get('SearchInput')?.value" 
+                 class="no-results">
+              <i class="fas fa-search-location"></i>
+              <h6>لم يتم العثور على مستشفيات</h6>
+              <p>لم يتم العثور على مستشفيات في "{{ HospitalForm.get('SearchInput')?.value }}"</p>
+              <small>جرب البحث في منطقة أخرى أو تأكد من صحة الاسم</small>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
+  </div>
+
+  <!-- خريطة المستشفيات -->
+  <div class="map-section" *ngIf="hospitals.length > 0">
+    <div class="container">
+      <div class="map-header">
+        <h3 class="map-title">
+          <i class="fas fa-map-marked-alt me-3"></i>
+          خريطة المستشفيات
+        </h3>
+        <p class="map-subtitle">اعرض المستشفيات على الخريطة للحصول على اتجاهات دقيقة</p>
+      </div>
+      
+      <div class="map-container">
+        <app-hospital-map 
+          [hospitals]="hospitals" 
+          [userLocation]="userLocation">
+        </app-hospital-map>
+      </div>
+    </div>
   </div>
 </section>
