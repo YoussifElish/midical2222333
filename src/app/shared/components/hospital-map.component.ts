@@ -86,6 +86,10 @@ private updateHospitalMarkers() {
     iconSize: [25, 25],
     className: 'custom-div-icon'
   });
+if (!Array.isArray(this.hospitals)) {
+  console.warn('⚠️ hospitals ليست Array:', this.hospitals);
+  return;
+}
 
   this.hospitals.forEach(hospital => {
     const marker = L.marker(
@@ -100,12 +104,19 @@ private updateHospitalMarkers() {
   });
 
   // ✅ تأكيد أن layers مصفوفة قبل استخدامها
-  const layers = this.markersLayer.getLayers();
-  if (Array.isArray(layers) && layers.length > 0) {
- const group = this.L.featureGroup(this.markersLayer.getLayers());
-this.map.fitBounds(group.getBounds().pad(0.1));
+ const layers = this.markersLayer?.getLayers?.();
+if (Array.isArray(layers) && layers.length > 0) {
+  const group = this.L.featureGroup(layers);
+  this.map.fitBounds(group.getBounds().pad(0.1));
+} else {
+  console.warn('⚠️ Leaflet layers غير متاحة أو ليست Array', layers);
+}
 
-  }
+console.log('✅ this.hospitals:', this.hospitals);
+console.log('✅ this.markersLayer:', this.markersLayer);
+console.log('✅ this.markersLayer.getLayers:', this.markersLayer?.getLayers?.());
+
+  
 }
 
 
