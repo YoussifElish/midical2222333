@@ -13,7 +13,8 @@ import { HospitalMapComponent } from '../../../shared/components/hospital-map.co
 })
 export class HospitalComponent implements OnInit {
   @ViewChild(HospitalMapComponent) mapComponent!: HospitalMapComponent;
-  
+  isBrowser = typeof window !== 'undefined';
+
   HospitalForm: FormGroup = new FormGroup({
     SearchInput: new FormControl('', [Validators.required])
   });
@@ -29,6 +30,7 @@ export class HospitalComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentLocationName();
+    
   }
 
   
