@@ -1,0 +1,32 @@
+{
+  "routes": [
+    "/",
+    "/Add-drug",
+    "/admin",
+    "/admin/appointments",
+    "/admin/dashboard",
+    "/admin/doctors",
+    "/admin/patients",
+    "/admin/pending-doctors",
+    "/article",
+    "/article/add",
+    "/Careers",
+    "/Commitment",
+    "/consultations",
+    "/consultations/ask",
+    "/Contact_Us",
+    "/doctors",
+    "/doctorsignup",
+    "/drug-reminder",
+    "/ForgotPassword",
+    "/home",
+    "/hospital",
+    "/login",
+    "/Medicines",
+    "/profile",
+    "/Research",
+    "/resetPass",
+    "/signup",
+    "/signupinfo"
+  ]
+}

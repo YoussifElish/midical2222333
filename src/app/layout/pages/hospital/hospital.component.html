@@ -4,15 +4,15 @@
       <img class="hero-image" src="assets/images/Hospital - abstract background.jpg" alt="Hospital Background">
       <div class="hero-overlay"></div>
     </div>
-    
+
     <div class="search-container">
       <div class="search-card">
         <div class="search-header">
           <h2 class="search-title">
             <i class="fas fa-hospital me-3"></i>
-            ابحث عن المستشفيات القريبة
+            Search for Nearby Hospitals
           </h2>
-          <p class="search-subtitle">اعثر على أفضل المستشفيات في منطقتك</p>
+          <p class="search-subtitle">Find the best hospitals in your area</p>
         </div>
 
         <form [formGroup]="HospitalForm" class="search-form">
@@ -22,7 +22,7 @@
               <input 
                 type="text" 
                 formControlName="SearchInput"
-                placeholder="ابحث بكتابة اسم المنطقة..." 
+                placeholder="Search by entering zone name..." 
                 class="search-input"
                 (input)="onInputChange($event)"
                 (focus)="showResults = true"
@@ -33,43 +33,43 @@
                 type="button" 
                 class="location-btn"
                 (click)="getCurrentLocationName()"
-                title="استخدام الموقع الحالي"
+                title="Use current location"
               >
                 <i class="fas fa-location-arrow"></i>
               </button>
             </div>
           </div>
 
-          <!-- نتائج البحث -->
+          <!-- Search results -->
           <div 
             *ngIf="showResults" 
             class="search-results"
           >
-            <!-- حالة التحميل -->
+            <!-- Loading state -->
             <div *ngIf="isLoading" class="loading-state">
               <div class="spinner"></div>
-              <p class="loading-text">جاري البحث عن المستشفيات...</p>
+              <p class="loading-text">Searching for hospitals...</p>
             </div>
 
-            <!-- رسالة الخطأ -->
+            <!-- Error message -->
             <div *ngIf="errorMessage && !isLoading" class="error-state">
               <i class="fas fa-exclamation-triangle"></i>
               <p>{{ errorMessage }}</p>
             </div>
 
-            <!-- النتائج -->
+            <!-- Results -->
             <div *ngIf="hospitals.length > 0 && !isLoading" class="results-container">
               <div class="results-header">
                 <h6 class="results-title">
                   <i class="fas fa-hospital me-2"></i>
-                  المستشفيات القريبة ({{ hospitals.length }})
+                  Nearby Hospitals ({{ hospitals.length }})
                 </h6>
                 <div class="map-controls">
                   <button 
                     type="button"
                     class="control-btn"
                     (click)="centerMapOnUserLocation()"
-                    title="التوسيط على موقعي"
+                    title="Center on my location"
                   >
                     <i class="fas fa-crosshairs"></i>
                   </button>
@@ -77,13 +77,13 @@
                     type="button"
                     class="control-btn"
                     (click)="fitAllMarkersInMap()"
-                    title="إظهار جميع المستشفيات"
+                    title="Show all hospitals"
                   >
                     <i class="fas fa-expand-arrows-alt"></i>
                   </button>
                 </div>
               </div>
-              
+
               <div class="hospitals-grid">
                 <div 
                   *ngFor="let hospital of hospitals; trackBy: trackByHospitalId" 
@@ -96,31 +96,31 @@
                         <i class="fas fa-hospital hospital-icon"></i>
                         {{ hospital.name }}
                       </h6>
-                      
+
                       <p class="hospital-address">
                         <i class="fas fa-map-marker-alt"></i>
                         {{ hospital.address }}
                       </p>
-                      
+
                       <div class="hospital-details">
                         <span class="hospital-zone">
                           <i class="fas fa-map"></i>
                           {{ hospital.zone }}
                         </span>
-                        
+
                         <span class="hospital-distance">
                           <i class="fas fa-route"></i>
-                          {{ (hospital.distance).toFixed(1) }} كم
+                          {{ (hospital.distance).toFixed(1) }} km
                         </span>
                       </div>
                     </div>
-                    
+
                     <div class="hospital-actions">
                       <button 
                         type="button"
                         class="action-btn primary"
                         (click)="openInGoogleMaps(hospital); $event.stopPropagation()"
-                        title="فتح في خرائط جوجل"
+                        title="Open in Google Maps"
                       >
                         <i class="fas fa-directions"></i>
                       </button>
@@ -130,13 +130,13 @@
               </div>
             </div>
 
-            <!-- رسالة عدم وجود نتائج -->
+            <!-- No results message -->
             <div *ngIf="hospitals.length === 0 && !isLoading && !errorMessage && HospitalForm.get('SearchInput')?.value" 
                  class="no-results">
               <i class="fas fa-search-location"></i>
-              <h6>لم يتم العثور على مستشفيات</h6>
-              <p>لم يتم العثور على مستشفيات في "{{ HospitalForm.get('SearchInput')?.value }}"</p>
-              <small>جرب البحث في منطقة أخرى أو تأكد من صحة الاسم</small>
+              <h6>No hospitals found</h6>
+              <p>No hospitals found in "{{ HospitalForm.get('SearchInput')?.value }}"</p>
+              <small>Try searching another area or check the spelling</small>
             </div>
           </div>
         </form>
@@ -144,24 +144,23 @@
     </div>
   </div>
 
-  <!-- خريطة المستشفيات -->
+  <!-- Hospital map -->
   <div class="map-section" *ngIf="hospitals.length > 0">
     <div class="container">
       <div class="map-header">
         <h3 class="map-title">
           <i class="fas fa-map-marked-alt me-3"></i>
-          خريطة المستشفيات
+          Hospital Map
         </h3>
-        <p class="map-subtitle">اعرض المستشفيات على الخريطة للحصول على اتجاهات دقيقة</p>
+        <p class="map-subtitle">View hospitals on the map for accurate directions</p>
       </div>
-      
-      <div class="map-container">
-      <app-hospital-map
-  *ngIf="isBrowser"
-  [hospitals]="hospitals"
-  [userLocation]="userLocation">
-</app-hospital-map>
 
+      <div class="map-container">
+        <app-hospital-map
+          *ngIf="isBrowser"
+          [hospitals]="hospitals"
+          [userLocation]="userLocation">
+        </app-hospital-map>
       </div>
     </div>
   </div>
