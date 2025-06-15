@@ -1,9 +1,9 @@
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HospitalService, Hospital } from '../../../shared/services/hospital.service';
 import { HospitalMapComponent } from '../../../shared/components/hospital-map.component';
-
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-hospital',
   standalone: true,
@@ -13,7 +13,7 @@ import { HospitalMapComponent } from '../../../shared/components/hospital-map.co
 })
 export class HospitalComponent implements OnInit {
   @ViewChild(HospitalMapComponent) mapComponent!: HospitalMapComponent;
-  isBrowser = typeof window !== 'undefined';
+  isBrowser = isPlatformBrowser(this.platformId);
 
   HospitalForm: FormGroup = new FormGroup({
     SearchInput: new FormControl('', [Validators.required])
@@ -26,8 +26,10 @@ export class HospitalComponent implements OnInit {
   showResults = false;
   userLocation: { lat: number; lng: number } | null = null;
 
-  constructor(private hospitalService: HospitalService) {}
-
+constructor(
+    private hospitalService: HospitalService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
   ngOnInit() {
     this.getCurrentLocationName();
     

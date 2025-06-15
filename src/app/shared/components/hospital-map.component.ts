@@ -15,18 +15,19 @@ export class HospitalMapComponent implements OnInit, AfterViewInit, OnChanges {
   private map: any;
   private L: any;
   private markersLayer: any;
-constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
-async ngOnInit() {
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  async ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       try {
-        
         this.L = await import('leaflet');
         if (this.L?.Icon?.Default) {
           delete (this.L.Icon.Default.prototype as any)._getIconUrl;
           this.L.Icon.Default.mergeOptions({
-            iconRetinaUrl: 'assets/marker-icon-2x.png',
-            iconUrl: 'assets/marker-icon.png',
-            shadowUrl: 'assets/marker-shadow.png',
+            iconRetinaUrl: '/assets/marker-icon-2x.png',
+            iconUrl: '/assets/marker-icon.png',
+            shadowUrl: '/assets/marker-shadow.png',
           });
         }
       } catch (error) {
@@ -35,35 +36,40 @@ async ngOnInit() {
     }
   }
 
- async ngAfterViewInit() {
-  if (isPlatformBrowser(this.platformId)) {
-    setTimeout(async () => {
-      await this.initMap();
-    }, 0);
+  async ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(async () => {
+        await this.initMap();
+      }, 0); // Ensure DOM is ready
+    }
   }
-}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['hospitals'] && this.map) {
-      this.updateHospitalMarkers();
-    }
-    if (changes['userLocation'] && this.map && this.userLocation) {
-      this.addUserLocationMarker();
+    if (isPlatformBrowser(this.platformId) && this.map) {
+      if (changes['hospitals']) {
+        this.updateHospitalMarkers();
+      }
+      if (changes['userLocation'] && this.userLocation) {
+        this.addUserLocationMarker();
+      }
     }
   }
 
   private async initMap() {
+    if (!isPlatformBrowser(this.platformId) || !document.getElementById('hospitalMap')) {
+      console.warn('Cannot initialize map: Not in browser or DOM element missing');
+      return;
+    }
+
     if (!this.L) {
+      console.log('Leaflet not loaded, importing...');
       this.L = await import('leaflet');
     }
 
-   
-
-   console.log('Leaflet:', this.L);
-  console.log('DOM element:', document.getElementById('hospitalMap'));
-  const L = this.L;
-  const defaultCenter: [number, number] = [30.0444, 31.2357];
-  this.map = L.map('hospitalMap').setView(defaultCenter, 12);
+    console.log('Leaflet:', this.L);
+    const L = this.L;
+    const defaultCenter: [number, number] = [30.0444, 31.2357];
+    this.map = L.map('hospitalMap').setView(defaultCenter, 12);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
@@ -78,67 +84,54 @@ async ngOnInit() {
     if (this.userLocation) {
       this.addUserLocationMarker();
     }
-
-
-    
   }
 
-private updateHospitalMarkers() {
-  const L = this.L;
-  if (!L || !this.markersLayer) return;
+  private updateHospitalMarkers() {
+    if (!isPlatformBrowser(this.platformId) || !this.L || !this.markersLayer) return;
 
-  this.markersLayer.clearLayers();
+    this.markersLayer.clearLayers();
 
-  const hospitalIcon = L.divIcon({
-    html: '<i class="fas fa-hospital" style="color: #dc3545; font-size: 20px;"></i>',
-    iconSize: [25, 25],
-    className: 'custom-div-icon'
-  });
-if (!Array.isArray(this.hospitals)) {
-  console.warn('⚠️ hospitals ليست Array:', this.hospitals);
-  return;
-}
+    const hospitalIcon = this.L.divIcon({
+      html: '<i class="fas fa-hospital" style="color: #dc3545; font-size: 20px;"></i>',
+      iconSize: [25, 25],
+      className: 'custom-div-icon'
+    });
 
-  this.hospitals.forEach(hospital => {
-    const marker = L.marker(
-      [hospital.location.latitude, hospital.location.longitude],
-      { icon: hospitalIcon }
-    );
+    if (!Array.isArray(this.hospitals)) {
+      console.warn('hospitals is not an array:', this.hospitals);
+      return;
+    }
 
-    const popupContent = `...`; // (نفس الكود السابق)
+    this.hospitals.forEach(hospital => {
+      const marker = this.L.marker(
+        [hospital.location.latitude, hospital.location.longitude],
+        { icon: hospitalIcon }
+      );
 
-    marker.bindPopup(popupContent);
-    this.markersLayer.addLayer(marker);
-  });
+      const popupContent = `...`; // Your existing popup content
+      marker.bindPopup(popupContent);
+      this.markersLayer.addLayer(marker);
+    });
 
-  // ✅ تأكيد أن layers مصفوفة قبل استخدامها
- const layers = this.markersLayer?.getLayers?.();
-if (Array.isArray(layers) && layers.length > 0) {
-  const group = this.L.featureGroup(layers);
-  this.map.fitBounds(group.getBounds().pad(0.1));
-} else {
-  console.warn('⚠️ Leaflet layers غير متاحة أو ليست Array', layers);
-}
-
-console.log('✅ this.hospitals:', this.hospitals);
-console.log('✅ this.markersLayer:', this.markersLayer);
-console.log('✅ this.markersLayer.getLayers:', this.markersLayer?.getLayers?.());
-
-  
-}
-
+    const layers = this.markersLayer?.getLayers?.();
+    if (Array.isArray(layers) && layers.length > 0) {
+      const group = this.L.featureGroup(layers);
+      this.map.fitBounds(group.getBounds().pad(0.1));
+    } else {
+      console.warn('No valid layers to fit bounds:', layers);
+    }
+  }
 
   private addUserLocationMarker() {
-    const L = this.L;
-    if (!this.userLocation) return;
+    if (!isPlatformBrowser(this.platformId) || !this.L || !this.userLocation) return;
 
-    const userIcon = L.divIcon({
+    const userIcon = this.L.divIcon({
       html: '<i class="fas fa-user-circle" style="color: #28a745; font-size: 20px;"></i>',
       iconSize: [25, 25],
       className: 'custom-div-icon'
     });
 
-    const userMarker = L.marker(
+    const userMarker = this.L.marker(
       [this.userLocation.lat, this.userLocation.lng],
       { icon: userIcon }
     );
@@ -155,13 +148,13 @@ console.log('✅ this.markersLayer.getLayers:', this.markersLayer?.getLayers?.()
   }
 
   centerOnUserLocation() {
-    if (this.userLocation && this.map) {
+    if (isPlatformBrowser(this.platformId) && this.userLocation && this.map) {
       this.map.setView([this.userLocation.lat, this.userLocation.lng], 14);
     }
   }
 
   fitAllMarkers() {
-    if (this.markersLayer.getLayers().length > 0) {
+    if (isPlatformBrowser(this.platformId) && this.markersLayer?.getLayers().length > 0) {
       const group = this.L.featureGroup(this.markersLayer.getLayers());
       this.map.fitBounds(group.getBounds().pad(0.1));
     }
