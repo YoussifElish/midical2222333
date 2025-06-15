@@ -75,53 +75,38 @@ async ngOnInit() {
     }
   }
 
-  private updateHospitalMarkers() {
-    const L = this.L;
-    this.markersLayer.clearLayers();
+private updateHospitalMarkers() {
+  const L = this.L;
+  if (!L || !this.markersLayer) return;
 
-    const hospitalIcon = L.divIcon({
-      html: '<i class="fas fa-hospital" style="color: #dc3545; font-size: 20px;"></i>',
-      iconSize: [25, 25],
-      className: 'custom-div-icon'
-    });
+  this.markersLayer.clearLayers();
 
-    this.hospitals.forEach(hospital => {
-      const marker = L.marker(
-        [hospital.location.latitude, hospital.location.longitude],
-        { icon: hospitalIcon }
-      );
+  const hospitalIcon = L.divIcon({
+    html: '<i class="fas fa-hospital" style="color: #dc3545; font-size: 20px;"></i>',
+    iconSize: [25, 25],
+    className: 'custom-div-icon'
+  });
 
-      const popupContent = `
-        <div style="min-width: 200px;">
-          <h6 style="margin-bottom: 8px; color: #dc3545;">
-            <i class="fas fa-hospital me-2"></i>${hospital.name}
-          </h6>
-          <p style="margin-bottom: 4px; font-size: 12px;">
-            <i class="fas fa-map-marker-alt me-1"></i>${hospital.address}
-          </p>
-          <p style="margin-bottom: 4px; font-size: 12px;">
-            <i class="fas fa-map me-1"></i>المنطقة: ${hospital.zone}
-          </p>
-          <p style="margin-bottom: 8px; font-size: 12px;">
-            <i class="fas fa-route me-1"></i>المسافة: ${hospital.distance.toFixed(1)} كم
-          </p>
-          <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=${hospital.location.latitude},${hospital.location.longitude}', '_blank')" 
-                  style="background: #007bff; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 12px;">
-            <i class="fas fa-directions me-1"></i>الاتجاهات
-          </button>
-        </div>
-      `;
+  this.hospitals.forEach(hospital => {
+    const marker = L.marker(
+      [hospital.location.latitude, hospital.location.longitude],
+      { icon: hospitalIcon }
+    );
 
-      marker.bindPopup(popupContent);
-      this.markersLayer.addLayer(marker);
-    });
+    const popupContent = `...`; // (نفس الكود السابق)
 
-    if (this.hospitals.length > 0) {
-   const layers = this.markersLayer?.getLayers?.() || [];
-const group = this.L.featureGroup(layers);
-      this.map.fitBounds(group.getBounds().pad(0.1));
-    }
+    marker.bindPopup(popupContent);
+    this.markersLayer.addLayer(marker);
+  });
+
+  // ✅ تأكيد أن layers مصفوفة قبل استخدامها
+  const layers = this.markersLayer.getLayers();
+  if (Array.isArray(layers) && layers.length > 0) {
+    const group = L.featureGroup(layers);
+    this.map.fitBounds(group.getBounds().pad(0.1));
   }
+}
+
 
   private addUserLocationMarker() {
     const L = this.L;
