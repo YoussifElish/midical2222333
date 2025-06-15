@@ -38,8 +38,7 @@ export interface ReminderPayload {
 })
 export class DrugService {
   private drugApiUrl = `${environment.apiUrl}/api/Drug`;
-  private reminderApiUrl = `${environment.apiUrl}/api/Reminder`;
-
+private reminderApiUrl = `${environment.apiUrl}/DrugReminder`;
   constructor(private http: HttpClient) { }
 
   // Method to get drugs with pagination and search - returns 'any' to allow component flexibility
@@ -75,7 +74,7 @@ export class DrugService {
 
   // Method to add a reminder (Placeholder - adjust endpoint and response structure)
   addReminder(payload: ReminderPayload): Observable<any> {
-    return this.http.post<any>(`${this.reminderApiUrl}/Add`, payload);
+    return this.http.post<any>(`${this.reminderApiUrl}/AddReminder`, payload);
   }
   
 }

@@ -1,24 +1,111 @@
- 
 input[type="text"] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-   background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-position: 10px 10px;  
   background-size: 20px 20px;  
   padding-left: 35px;  
   box-sizing: border-box; 
-
 }
- .icon {
+
+.icon {
   position: absolute;
   left: 10px;
   top: 10px;
- }
+}
 
-
- #hospital input::placeholder {
+#hospital input::placeholder {
   color: #999;
+}
+
+/* تحسينات للنتائج */
+.hospital-results {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.hospital-item {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.hospital-item:hover {
+  background-color: #f8f9fa;
+  border-color: #007bff !important;
+  transform: translateY(-1px);
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* تحسينات للأزرار */
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* تحسينات للتمرير */
+.hospital-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.hospital-results::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.hospital-results::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.hospital-results::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* تحسينات للنصوص */
+.text-muted {
+  color: #6c757d !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.text-info {
+  color: #17a2b8 !important;
+}
+
+/* تحسينات للتباعد */
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-3 {
+  gap: 1rem;
+}
+
+/* تحسينات للتنبيهات */
+.alert-warning {
+  background-color: #fff3cd;
+  border-color: #ffeaa7;
+  color: #856404;
+}
+
+/* تحسينات للسبينر */
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
 }
