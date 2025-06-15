@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, OnChanges, SimpleChanges, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Hospital } from '../../shared/services/hospital.service';
 
 @Component({
@@ -12,34 +13,35 @@ export class HospitalMapComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() userLocation: { lat: number; lng: number } | null = null;
 
   private map: any;
-  private L: any; // متغير لتخزين leaflet بعد التحميل
+  private L: any;
   private markersLayer: any;
-
+constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 async ngOnInit() {
-  if (typeof window !== 'undefined') {
-    try {
-      this.L = await import('leaflet');
-
-      if (this.L?.Icon?.Default) {
-        delete (this.L.Icon.Default.prototype as any)._getIconUrl;
-        this.L.Icon.Default.mergeOptions({
-          iconRetinaUrl: 'assets/marker-icon-2x.png',
-          iconUrl: 'assets/marker-icon.png',
-          shadowUrl: 'assets/marker-shadow.png',
-        });
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        
+        this.L = await import('leaflet');
+        if (this.L?.Icon?.Default) {
+          delete (this.L.Icon.Default.prototype as any)._getIconUrl;
+          this.L.Icon.Default.mergeOptions({
+            iconRetinaUrl: 'assets/marker-icon-2x.png',
+            iconUrl: 'assets/marker-icon.png',
+            shadowUrl: 'assets/marker-shadow.png',
+          });
+        }
+      } catch (error) {
+        console.warn('Leaflet import failed:', error);
       }
-    } catch (error) {
-      console.warn('Leaflet import failed:', error);
     }
+  }
+
+ async ngAfterViewInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    setTimeout(async () => {
+      await this.initMap();
+    }, 0);
   }
 }
-
-
-  async ngAfterViewInit() {
-    if (typeof window !== 'undefined') {
-      await this.initMap();
-    }
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['hospitals'] && this.map) {
@@ -55,10 +57,13 @@ async ngOnInit() {
       this.L = await import('leaflet');
     }
 
-    const L = this.L;
+   
 
-    const defaultCenter: [number, number] = [30.0444, 31.2357];
-    this.map = L.map('hospitalMap').setView(defaultCenter, 12);
+   console.log('Leaflet:', this.L);
+  console.log('DOM element:', document.getElementById('hospitalMap'));
+  const L = this.L;
+  const defaultCenter: [number, number] = [30.0444, 31.2357];
+  this.map = L.map('hospitalMap').setView(defaultCenter, 12);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
@@ -73,6 +78,9 @@ async ngOnInit() {
     if (this.userLocation) {
       this.addUserLocationMarker();
     }
+
+
+    
   }
 
 private updateHospitalMarkers() {
